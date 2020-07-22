@@ -1,0 +1,127 @@
+% This LaTeX file uses the class impletter.cls to format
+% the new Imperial College letter to be printed on blank paper.
+% LdC Foulkes Jan. 2003.
+
+\documentclass[blank]{impletter}
+\usepackage{graphicx}
+\usepackage{microtype} % Improves typography
+
+\usepackage[sort&compress]{natbib}
+
+\let\OLDthebibliography\thebibliography
+\renewcommand\thebibliography[1]{
+  \OLDthebibliography{#1}
+  \setlength{\parskip}{0pt}
+  \setlength{\itemsep}{0pt plus 0.3ex}
+}
+\renewcommand*{\bibfont}{\footnotesize}
+% \renewcommand*{\bibsection}{}
+
+%%%%%%%%%%%%%%%% Adjustment Parameters %%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The letter has to have have the following (measured from the top):
+%	The bottom of the word 'Imperial' in the logo at 15mm
+%	The bottom of the date at 51mm
+%	The bottom of the 1st address line at 63mm
+%	The bottom of the salutation at 105mm
+%	The bottom of the department line (top right) at 12mm
+%	The bottom of the statutory footer 5.5mm from the bottom
+% 	The bottom of the first line of text on the second page at 51mm
+%	The margin at the left of the text should be 25mm
+%	The sender's detail (top right block) should be 90mm from the
+%	right edge.
+
+% The following are adjustable parameters to account for printer
+% differences. The values can be given in mm or pt
+% (a point is about .35 of a mm).
+
+% To move the printed page up (minus value) or down (plus value):
+\addtolength{\topmargin}{0mm}
+
+% To move the printed text to the right (plus) or left (minus).
+\addtolength{\evensidemargin}{0pt}
+\addtolength{\oddsidemargin}{0pt}
+
+% To move the statutory footer up (minus) or down (plus) - useful
+% if the printer will not print so close to the bottom of the page
+\addtolength{\footskip}{0mm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\headers{
+% Replace with the addressee details but DO NOT remove the \\ even if empty
+The Editor\\
+\textit{Ecology}\\
+}
+% Replace with the salutation for this letter
+{
+Dear Editor,
+}
+% Replace with your department, address, telephone, fax and e-mail.
+% Do not remove the blank lines.
+{School of Public Health\\
+Imperial College London (St Mary's Campus)\\
+Norfolk Place, London\\
+W2 1PG, UK\\
+%Telephone +44 (0)20 7594 2213\\
+thomas.smallwood14@imperial.ac.uk\\
+%www.imperial.ac.uk/people/s.pawar\\
+}
+% Replace with your name
+{
+Thomas Smallwood
+}
+%% Replace with your qualifications
+% {
+% BA, MS, PhD, CPhys, MinstP\\
+% }
+% Replace with your job title. A second line can be added if necessary.
+{
+Doctoral Candidate\\
+Science and Solutions for a Changing Planet Doctoral\\Training Programme
+% Director, Masters in Computational Methods in Ecology \& Evolution\\
+}
+\informal
+
+% The text of the letter starts here
+
+We are submitting a manuscript titled {\it Sensitivity of the thermal niche of disease vectors to phsiological mismatches between life stages}, for consideration as a Report in {\it Ecology}. 
+
+%Temperature has pervasive effects across cells, individuals, populations, and ecosystems. Rising concerns about global climate change make it critical to understand variation in the temperature response of species and its consequences for biodiversity and ecosystem function. In particular, the sensitivity of photosynthesis and respiration rates of individual autotrophs to changing environmental temperature plays a key role in the effect of climatic fluctuations on the carbon balance of ecosystems through the flux of carbon dioxide (CO$_2$) between ecosystems and the atmosphere \cite{Ciais2013,Friedlingstein2014}. Current ecosystem models typically assume that the respiratory release of $CO_2$ by autotrophs responds more rapidly (greater thermal sensitivity) than photosynthetic fixation of carbon, leading to predictions of an increase in net loss (efflux) of carbon to the atmosphere with climatic warming \cite{Allen2005,Friedlingstein2006,Sitch2008}. However these predictions, and the assumed mismatch between the thermal sensitivities of Photosynthesis and Respiration are based on data on the mean trend across species (interspecific), and lack a theoretical framework for linking daily fluctuations in temperature to carbon flux at the level of individual or single species' levels. 
+
+In this study, %we develop a new model for individual-level daily Net Carbon Flux (NCF), and test it with a new global database on intraspecific thermal responses of respiration and net photosynthesis from both aquatic and terrestrial habitats from 285 species (86 aquatic; 199 terrestrial). Our theory correctly predicts that mismatches in activation energy ($E$) can be compensated by acclimation or adaptation of either photosynthesis or respiration to maintain positive carbon balance (net in-flux of carbon) on a daily basis. This also helps explain why we find that respiration does not consistently show greater thermal sensitivity than photosynthesis as has been previously assumed \cite{Enquist2003a, Allen2005, Yvon-Durocher2010}. 
+
+Our study provides %the first empirical evidence of how species-level respiration and photosynthesis rates respond to temperature across aquatic and terrestrial ecosystems, and provides a theoretical basis for developing more accurate models for predicting the future effects of climatic warming on carbon balance in ecosystems from local to global scales. Perhaps more importantly, by revealing widespread evidence for potential for physiological compensation across both aquatic and terrestrial autotrophs, our results suggest that the future decrease in net carbon in-flux in ecosystems in response to climate warming may be smaller than previously predicted. 
+
+We believe our novel findings will %not only have a strong impact on climate change research, but also on the ecological and evolutionary effects of global warming on autotrophs, and is likely to attract interest from a broad audience. 
+
+We suggest the following potential reviewers for our manuscript
+:
+
+%Brian Enquist (University of Arizona), benquist@email.arizona.edu\\
+%Mridul Thomas (DTU AQUA), mrit@aqua.dtu.dk\\
+%Peter Reich (University of Minnesota), preich@umn.edu\\
+%Christopher Klausmeier (Michigan State University), klausme1@msu.edu\\
+%Elena Litchman (Michigan State University), litchman@msu.edu
+
+We confirm that this manuscript is not under consideration for publication in any other journal and we declare no conflicts of interest. 
+
+% Leave the name field blank if you don't want your name to be
+% printed at the bottom, but do not remove the {}.
+\close{
+Yours sincerely,
+}
+{
+% \includegraphics[width=0.3\linewidth]{graphics/samsig.pdf}\\
+\vspace{-40pt}
+
+Thomas Smallwood\\
+Lauren Cator\\
+Samr\={a}t Pawar
+}
+
+{\footnotesize
+\bibliography{PR_Metanalysis}
+\bibliographystyle{nature}}
+
+\end{document}
