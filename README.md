@@ -1,1 +1,3 @@
-# Git repository for the Vector-mismatch - Niche-width paper
+# Git repository for the mismatch - thermal niche paper
+
+This repository contains all data and code for the manuscript on the effects of thermal mismatches on arthopod fitness. This includes the manuscript's Latex source code. The Manyscript can be edited locally on your computer after cloning this repository (provided you have write/push access), or "locally" on Overleaf [here](https://www.overleaf.com/project/5cd07a4680045054bb2c9b90), where it is synced bidirectionally (you might want to [read this](https://www.overleaf.com/learn/how-to/Using_Git_and_GitHub#Synchronizing_with_GitHub)). Please make sure that you git checkout or pull before making changes in any local.
