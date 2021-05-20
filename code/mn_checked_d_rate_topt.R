@@ -2422,6 +2422,8 @@ dev_topts <- rbind(topt1,topt2,topt3,topt4,topt5,topt6,topt7,topt8,topt9, topt10
                topt17, topt18, topt19, topt21, topt26)
 #________________________________________________________________
 
+#write.csv(dev_topts,'../data/dev_topts.csv')
+
 tpklab <- expression(italic(T)[opt])
 
 ggplot(dev_topts, aes(estimate, species, fill=species))+
