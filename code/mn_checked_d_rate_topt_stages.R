@@ -190,8 +190,12 @@ ggplot(d_preds) +
   theme_bw(base_size = 10)+
   theme(legend.position = "none")
 
+<<<<<<< HEAD
 new_d_rate <- filter(d_rate, conc== 'Aphis gossypii _ ')
 #write.csv(new_d_rate, '../data/Aphis_gossypii.csv')
+=======
+
+>>>>>>> origin
 
 # stack models and calculate extra params
 d_params <- pivot_longer(d_fits, names_to = 'model_name', values_to = 'fit', c(sharpeschoolhigh)) %>%
