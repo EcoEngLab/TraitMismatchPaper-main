@@ -14,17 +14,18 @@ require('patchwork')
 rm(list=ls())
 graphics.off()
 
-setwd("~/Dropbox/ph_thesis/Topt_paper/data")
+# setwd("~/Dropbox/ph_thesis/Topt_paper/data")
 
 #read in the Topt data
 
-alpha  <- as_tibble(read.csv('dvrate_topts.csv', header = TRUE))
+alpha  <- as_tibble(read.csv('alpha_Tpks.csv', header = TRUE))
 alpha  <- alpha %>% filter(X <= 38)
-zj     <- as_tibble(read.csv('jmortrate_topts.csv', header = TRUE))
-z      <- as_tibble(read.csv('fmortrate_topts.csv', header = TRUE))
-bpk    <- as_tibble(read.csv('fecundity_topts.csv', header = TRUE))
+zj     <- as_tibble(read.csv('zj_Tpks.csv', header = TRUE))
+z      <- as_tibble(read.csv('z_Tpks.csv', header = TRUE))
+bpk    <- as_tibble(read.csv('bpk_Tpks.csv', header = TRUE))
 
 toptz  <- rbind(alpha,zj,z,bpk)
+toptz <- subset(toptz, toptz$param=="topt")
   
 toptz$species <- as.factor(toptz$species)
 toptz$trait   <- as.factor(toptz$trait)
@@ -35,18 +36,31 @@ toptz$trait <- fct_relevel(toptz$trait, "juvenile mortality rate")
 
 toptz <- toptz %>% filter(param!= "rmax")
 
+# 
+# toptz$species <- fct_relevel(toptz$species, "Aedes aegypti", after = Inf)
+# toptz$species <- fct_relevel(toptz$species, "Helicoverpa armigera", after = Inf)
+# toptz$species <- fct_relevel(toptz$species, "Anopheles gambiae s.s.", after = Inf)
+# toptz$species <- fct_relevel(toptz$species, "Tetraneura nigriabdominalis") 
+# toptz$species <- fct_relevel(toptz$species, "Rhopalosiphum maidis", after = 7)
+# toptz$species <- fct_relevel(toptz$species, "Liposcelis bostrychophila", after = 9)
+# toptz$species <- fct_relevel(toptz$species, "Aphis nasturtii", after = Inf)
+# toptz$species <- fct_relevel(toptz$species, "Bemisia tabaci", after = 12)
+# toptz$species <- fct_relevel(toptz$species, "Aphis gossypii", after = 9)
+# toptz$species <- fct_relevel(toptz$species, "Aedes albopictus", after = Inf)
+# toptz$species <- fct_relevel(toptz$species, "Aedes krombeini", after = 9)
 
-toptz$species <- fct_relevel(toptz$species, "Aedes aegypti", after = Inf)
-toptz$species <- fct_relevel(toptz$species, "Helicoverpa armigera", after = Inf)
-toptz$species <- fct_relevel(toptz$species, "Anopheles gambiae s.s.", after = Inf)
-toptz$species <- fct_relevel(toptz$species, "Tetraneura nigriabdominalis") 
-toptz$species <- fct_relevel(toptz$species, "Rhopalosiphum maidis", after = 7)
-toptz$species <- fct_relevel(toptz$species, "Liposcelis bostrychophila", after = 9)
-toptz$species <- fct_relevel(toptz$species, "Aphis nasturtii", after = Inf)
-toptz$species <- fct_relevel(toptz$species, "Bemisia tabaci", after = 12)
-toptz$species <- fct_relevel(toptz$species, "Aphis gossypii", after = 9)
-toptz$species <- fct_relevel(toptz$species, "Aedes albopictus", after = Inf)
-toptz$species <- fct_relevel(toptz$species, "Aedes krombeini", after = 9)
+#order by developement alpha
+alp <- subset(toptz, toptz$trait == "juvenile development rate")
+SPorder <- alp$species[order(alp$estimate)]
+toptz$species <- as.character(toptz$species)
+toptz$species <- factor(toptz$species, levels=SPorder)
+
+#Oder by funnel shape --> max to min max diff
+Diff <- toptz %>% group_by(species) %>%
+        summarise(diff = max(estimate)-min(estimate))
+SPorder <- Diff$species[order(Diff$diff)]
+toptz$species <- as.character(toptz$species)
+toptz$species <- factor(toptz$species, levels=SPorder)
 
 # All traits
 
@@ -80,12 +94,10 @@ fig3a <- ggplot(toptz, aes(estimate, species, shape=trait, colour=trait,fill=tra
   theme(legend.position = c(0.35,-0.1),legend.text = element_text(size = 8.5),
         axis.text.y = element_text(face = 'italic'))+
   theme(text=element_text(family="Times"))+
-  geom_text(aes(x = 12, y = 18.75,label = "A"), 
-            parse = TRUE, size = 6, colour = "black")+
   theme(legend.margin=margin(t = -0.4, unit='cm'))
   
-
-#ggsave("fig1.pdf",fig1a, width = 20, height = 15, units = "cm")
+fig3a
+ggsave("../results/Fig4.pdf",fig3a, width = 20, height = 15, units = "cm")
 
 #%%%%%%%%%%%%%%%%%%%%%%%% zj versus z 
 zjz <- zj  %>% filter(trait == "juvenile mortality rate")

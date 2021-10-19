@@ -36,7 +36,8 @@ fig5a <-  ggplot(rmpredictions, aes(temp,estimate,colour=species))+
   geom_text(aes(x = 35, y = 0.245,label = "A"), 
             parse = TRUE, size = 6, colour = "black")+
   theme(legend.title = element_blank())+
-  theme(legend.margin=margin(t = -0.2, b = 0.1,r=0.1,l = 0.1, unit='cm'))+
+  theme(legend.margin=margin(t = -0.2, b = 0.1,r=0.1,l = 0.1, unit='cm'),
+        aspect.ratio = 1)+
   geom_point(data= rmPeakdata, aes(x=temp, y=rmax), size=3)
 
 # fig5a
@@ -104,7 +105,7 @@ Alp_rmax <- ggplot(AlpPlot, aes(x=estimate, y=rmax)) +
                      expand = c(0, 0),
                      breaks=seq(0,1, by=0.1))+
   theme(legend.position = 'none',legend.text = element_text(size = 10),
-        axis.text.y = element_text(face = 'italic'))+
+        axis.text.y = element_text(face = 'italic'),aspect.ratio = 1)+
   theme(text=element_text(family="Times"))+
   geom_text(aes(x = 34, y = 0.33,label = "B"), 
             parse = TRUE, size = 6, colour = "black") +
@@ -134,7 +135,7 @@ Var_rmax<- ggplot(VarPlot, aes(x=variance, y=rmax)) +
                      expand = c(0, 0),
                      breaks=seq(0,1, by=0.1))+
   theme(legend.position = 'none',legend.text = element_text(size = 10),
-        axis.text.y = element_text(face = 'italic'))+
+        axis.text.y = element_text(face = 'italic'),aspect.ratio = 1)+
   theme(text=element_text(family="Times"))+
   geom_text(aes(x = 85, y = 0.28,label = "C"), 
             parse = TRUE, size = 6, colour = "black") +
@@ -163,7 +164,7 @@ Sum_rmax <- ggplot(SumPlot, aes(x=sum, y=rmax)) +
                      expand = c(0, 0),
                      breaks=seq(0,1, by=0.05))+
   theme(legend.position = 'none',legend.text = element_text(size = 10),
-        axis.text.y = element_text(face = 'italic'))+
+        axis.text.y = element_text(face = 'italic'),aspect.ratio = 1)+
   theme(text=element_text(family="Times"))+
   geom_text(aes(x = 104, y = 0.26,label = "D"), 
             parse = TRUE, size = 6, colour = "black") +
@@ -175,6 +176,6 @@ fig5 <- ggarrange(fig5a,Alp_rmax,Var_rmax,Sum_rmax,nrow=2,ncol=2,
                   common.legend = T, legend="right")
 fig5
 
-ggsave("../results/Fig5.pdf",fig5, width = 20, height =20, 
+ggsave("../results/Fig5.pdf",fig5, width = 20, height =18, 
        units = "cm",device = cairo_pdf)
   
