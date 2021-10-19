@@ -14,10 +14,10 @@ require('patchwork')
 rm(list=ls())
 graphics.off()
 
-setwd("~/Dropbox/ph_thesis/Topt_paper/data")
+# setwd("~/Dropbox/ph_thesis/Topt_paper/data")
+
 
 #read in the trait TPC data for Fig 4
-
 alpha  <- as_tibble(read.csv('alpha_Tpks.csv', header = TRUE))
 zj     <- as_tibble(read.csv('zj_Tpks.csv', header = TRUE))
 z      <- as_tibble(read.csv('z_Tpks.csv', header = TRUE))
@@ -263,7 +263,7 @@ fig4b <- ggplot(juvz, aes(alphaminuszj, species, shape=trait, colour=trait,fill=
 
 p1 <-  fig4a | fig4b / fig4c; p1
  
-ggsave("~/Dropbox/ph_thesis/Topt_paper/results/Fig4.pdf",
+ggsave("../results/Fig4.pdf",
        p1, width = 24, height = 17, units = "cm",device = cairo_pdf)
 
 
@@ -468,8 +468,63 @@ fig1d <- ggplot(zjzregression, aes(temp, log(Bpk), shape=trait, colour=trait,fil
 
 fig1cd <- fig1c + fig1d; fig1cd
 
-ggsave("~/Dropbox/ph_thesis/Topt_paper/results/Fig1cd.pdf",fig1cd, width = 15, height =8, 
+ggsave("../results/Fig1cd.pdf",fig1cd, width = 15, height =8, 
        units = "cm",device = cairo_pdf)
+
+
+###### Alex joins the party ######
+##1. Hotter is not better for fecundity
+fig1e <- ggplot(bpkBpks, aes(temp, log(estimate), shape=trait, colour=trait,fill=trait)) +
+  geom_errorbar(aes(ymin = log(conf_lower), ymax = log(conf_upper)),width=0.15,size=0.15) +
+  geom_errorbar(aes(xmin = temp_lwr, xmax = temp_upr),width=0.05,size=0.15) +
+  geom_point(size = 1.5, col="#000000",stroke=0.1)+
+  theme_bw(base_size = 12.5) +
+  scale_y_continuous(expression(plain(paste("ln (", italic(B)[pk],")"))),
+                     limits =c(0,4),
+                     expand = c(0, 0),
+                     breaks=seq(-4,4, by=1))+
+  scale_x_continuous(expression(plain(paste("", italic(T)[pk]))),
+                     limits =c(22,30),
+                     expand = c(0, 0),
+                     breaks=seq(22,36, by=2))+
+  scale_fill_manual(values = c("#e66101","#ebb434"),
+                    name=expression(bold("")),
+                    guide = guide_legend(nrow=1,ncol=1,
+                                         direction = "vertical",
+                                         title.position = "top",
+                                         title.hjust=0.5))+
+  scale_colour_manual(values = c("#e66101", "#ebb434"),
+                      name=expression(bold("")),
+                      guide = guide_legend(nrow=1,ncol=1,
+                                           direction = "vertical",
+                                           title.position = "top",
+                                           title.hjust=0.5))+
+  scale_shape_manual(values = c(24,23),
+                     name=expression(bold("")),
+                     guide = guide_legend(nrow=1,ncol =1,
+                                          direction = "vertical",
+                                          title.position = "top",
+                                          title.hjust=0.5))+
+  theme(legend.position = c(0.2,0.9), 
+        legend.background = element_rect(fill=alpha("#FFFFFF",1), colour = "#636363", size = 0.1),
+        legend.text = element_text(size = 10))+
+  theme(text=element_text(family="Times"))+
+  geom_line(aes(temp, fit),bpkBpks,size=0.35,col="#636363")+
+  geom_ribbon(aes(ymin=lwr, ymax=upr),bpkBpks,alpha = 0.25,show.legend = NA, col="#e66101",fill="#e66101",lwd=0.1)+
+  theme(legend.margin=margin(t = -0.2, b = 0.1,r=0.1,l = 0.1, unit='cm'))+
+  #fecundity:
+  annotate("text", x = 24, y = 0.5,label = "slope = -0.08 ± 0.23 (95% CI)",
+           alpha = 1, family="Times", size = 2)+
+  annotate("text", x = 28, y = 0.5,label = "paste(italic(R) ^ 2, \" = 0.08\")", parse = TRUE,
+           alpha = 1, family="Times", size = 2)+
+    geom_text(aes(x = 29, y = 3.5,label = "E"), 
+            parse = TRUE, size = 4, colour = "black")
+# fig1e
+
+ggsave("../results/Fig1e.pdf",fig1e, width = 8, height =8, 
+       units = "cm",device = cairo_pdf)
+
+
 
 
 

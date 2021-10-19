@@ -1,0 +1,30 @@
+"","species","RearTemp","RearTemp_upper","RearTemp_lower"
+"1","Anopheles gambiae s.s.","26","25","27"
+"2","Telenomus isis","25","24","26"
+"3","Triticum aestivum L.","30",NA,NA
+"4","Aedes aegypti","25",NA,NA
+"5","Aedes albopictus","27.5","26.5","28.5"
+"6","Anthonomus grandis","27","26","28"
+"7","Aphis gossypii","26","24","28"
+"8","Bactrocera  correcta","27.5","25","30"
+"9","Corythucha ciliata","26","25.5","26.5"
+"10","Culex annulirostris","27","26","28"
+"11","Pseudaletia sequax","21","20","22"
+"12","Lepinotus reticulatus","30",NA,NA
+"13","Macrocentrus iridescens","25",NA,NA
+"14","Moina macrocopa","25",NA,NA
+"15","Planococcus citri","24","22","26"
+"16","Sitona discoideus","24","22","26"
+"17","Stethorus punctillum","24",NA,NA
+"18","Telenomus chrysopae","24","23","25"
+"19","Telenomus lobatus","24","23","25"
+"20","Tetraneura nigriabdominalis ","25",NA,NA
+"21","Theocolax elegans","25",NA,NA
+"22","Helicoverpa armigera","25",NA,NA
+"23","Anopheles gambiae","26","25","27"
+"24","Aphis nasturtii","24","23","25"
+"25","Muscidifurax zaraptor","25",NA,NA
+"26","Paracoccus marginatus","25","24","26"
+"27","Rhopalosiphum maidis ","25",NA,NA
+"28","Tetranychus mcdanieli","24",NA,NA
+"29","Trichogramma bruni","16.6","10.1","23"

@@ -13,7 +13,7 @@ require('boot')
 rm(list=ls())
 graphics.off()
 
-setwd("~/Dropbox/ph_thesis/Topt_paper/data")
+# setwd("~/Dropbox/ph_thesis/Topt_paper/data")
 
 #read in the trait data
 
@@ -516,7 +516,7 @@ tenaz <- tenaz %>%
          rmax_lwr = replace(rmax_lwr, rmax_lwr < -0.1, -0.1),
          rmax_upr = replace(rmax_upr, rmax_upr < -0.1, -0.1))
 
-ter_max <- select(tenaz, temp, species, rmax)
+ter_max <- select(tenaz, temp, species, rmax, rmax_upr, rmax_lwr)
 ter_max <- ter_max %>% rename(estimate=rmax)
 ter_max <- filter(ter_max,temp > 15)
 ter_max <- filter(ter_max,temp < 34)
@@ -1031,7 +1031,7 @@ agaz <- agaz %>%
          rmax_lwr = replace(rmax_lwr, rmax_lwr < -0.1, -0.1),
          rmax_upr = replace(rmax_upr, rmax_upr < -0.1, -0.1))
 
-ag_max <- select(agaz, temp, species, rmax)
+ag_max <- select(agaz, temp, species, rmax, rmax_upr, rmax_lwr)
 ag_max <- ag_max %>% rename(estimate=rmax)
 ag_max <- filter(ag_max,temp > 12.8)
 ag_max <- filter(ag_max,temp < 37)
@@ -1548,7 +1548,7 @@ rhaz <- rhaz %>%
          rmax_lwr = replace(rmax_lwr, rmax_lwr < -0.1, -0.1),
          rmax_upr = replace(rmax_upr, rmax_upr < -0.1, -0.1))
 
-rm_max <- select(rhaz, temp, species, rmax)
+rm_max <- select(rhaz, temp, species, rmax, rmax_upr,rmax_lwr)
 rm_max <- rm_max %>% rename(estimate=rmax)
 rm_max <- filter(rm_max,temp < 32.5)
 
@@ -2064,7 +2064,7 @@ mhaz <- mhaz %>%
          rmax_lwr = replace(rmax_lwr, rmax_lwr < -0.1, -0.1),
          rmax_upr = replace(rmax_upr, rmax_upr < -0.1, -0.1))
 
-mz_max <- select(mhaz, temp, species, rmax)
+mz_max <- select(mhaz, temp, species, rmax, rmax_upr,rmax_lwr)
 mz_max <- mz_max %>% rename(estimate=rmax)
 mz_max <- mz_max %>% filter(temp < 37.7)
 
@@ -2589,7 +2589,7 @@ anaz <- anaz %>%
          rmax_lwr = replace(rmax_lwr, rmax_lwr < -0.1, -0.1),
          rmax_upr = replace(rmax_upr, rmax_upr < -0.1, -0.1))
 
-an_max <- select(anaz, temp, species, rmax)
+an_max <- select(anaz, temp, species, rmax, rmax_lwr,rmax_upr)
 an_max <- an_max %>% rename(estimate=rmax)
 
 
@@ -3108,7 +3108,7 @@ pmaz <- pmaz %>%
          rmax_lwr = replace(rmax_lwr, rmax_lwr < -0.1, -0.1),
          rmax_upr = replace(rmax_upr, rmax_upr < -0.1, -0.1))
 
-pm_max <- select(pmaz, temp, species, rmax)
+pm_max <- select(pmaz, temp, species, rmax,rmax_upr,rmax_lwr)
 pm_max <- pm_max %>% rename(estimate=rmax)
 pm_max <- pm_max %>% filter(temp > 15.3)
 
@@ -3192,8 +3192,10 @@ rmestimates <-  ggplot(rmpredictions, aes(temp,estimate,colour=species))+
   theme(legend.title = element_blank())+
   theme(legend.margin=margin(t = -0.2, b = 0.1,r=0.1,l = 0.1, unit='cm'))
 
-ggsave("~/Dropbox/ph_thesis/Topt_paper/results/rmestimates.pdf",
+ggsave("../results/rmestimates.pdf",
        rmestimates, width = 10, height = 10, units = "cm",device = cairo_pdf)
+
+write.csv(rmpredictions, "rmprediction.csv")
 
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -3302,13 +3304,4 @@ mortz$zjminusz_upr <- mortz$zj_upr-mortz$z_upr
 
 
 mortz <- arrange(mortz, desc(zjminusz))
-
-
-
-
-
-
-
-
-
 
