@@ -115,7 +115,8 @@ ggplot() +
 # calculate params with CIs
 
 extra_params1 <- calc_params(fit_nlsLM1) %>%
-  pivot_longer(everything(), names_to =  'param', values_to = 'estimate')
+  pivot_longer(everything(), names_to =  'param', values_to = 'estimate')%>%
+  mutate(trait="alp")
 
 ci_extra_params1 <- Boot(fit_nlsLM1, f = function(x){unlist(calc_params(x))}, labels = names(calc_params(fit_nlsLM1)), R = 200, method = 'residual') %>%
   confint(., method = 'bca') %>%
@@ -229,7 +230,8 @@ ggplot() +
 # calculate params with CIs
 
 extra_params2 <- calc_params(fit_nlsLM2) %>%
-  pivot_longer(everything(), names_to =  'param', values_to = 'estimate')
+  pivot_longer(everything(), names_to =  'param', values_to = 'estimate')%>%
+  mutate(trait="zj")
 
 ci_extra_params2 <- Boot(fit_nlsLM2, f = function(x){unlist(calc_params(x))}, 
                     labels = names(calc_params(fit_nlsLM2)), R = 200, method = 'residual') %>%
@@ -346,7 +348,8 @@ boot3_conf_preds <- group_by(boot3_preds, temp) %>%
 
 # calculate params with CIs
 extra_params3 <- calc_params(fit_nlsLM3) %>%
-  pivot_longer(everything(), names_to =  'param', values_to = 'estimate')
+  pivot_longer(everything(), names_to =  'param', values_to = 'estimate')%>%
+  mutate(trait="z")
 
 ci_extra_params3 <- Boot(fit_nlsLM3, f = function(x){unlist(calc_params(x))}, labels = names(calc_params(fit_nlsLM3)), R = 200, method = 'residual') %>%
   confint(., method = 'bca') %>%
@@ -454,7 +457,8 @@ ggplot() +
 
 # calculate params with CIs
 extra_params4 <- calc_params(fit_nlsLM4) %>%
-  pivot_longer(everything(), names_to =  'param', values_to = 'estimate')
+  pivot_longer(everything(), names_to =  'param', values_to = 'estimate')%>%
+  mutate(trait="bpk")
 
 ci_extra_params4 <- Boot(fit_nlsLM4, f = function(x){unlist(calc_params(x))}, labels = names(calc_params(fit_nlsLM4)), R = 200, method = 'residual') %>%
   confint(., method = 'bca') %>%
@@ -621,7 +625,8 @@ ggplot() +
 # calculate params with CIs
 
 extra_params5 <- calc_params(fit_nlsLM5) %>%
-  pivot_longer(everything(), names_to =  'param', values_to = 'estimate')
+  pivot_longer(everything(), names_to =  'param', values_to = 'estimate')%>%
+  mutate(trait="alp")
 
 ci_extra_params5 <- Boot(fit_nlsLM5, f = function(x){unlist(calc_params(x))}, labels = names(calc_params(fit_nlsLM5)), R = 200, method = 'residual') %>%
   confint(., method = 'bca') %>%
@@ -731,7 +736,8 @@ ggplot() +
 # calculate params with CIs
 
 extra_params6 <- calc_params(fit_nlsLM6) %>%
-  pivot_longer(everything(), names_to =  'param', values_to = 'estimate')
+  pivot_longer(everything(), names_to =  'param', values_to = 'estimate')%>%
+  mutate(trait="zj")
 
 ci_extra_params6 <- Boot(fit_nlsLM6, f = function(x){unlist(calc_params(x))}, 
                          labels = names(calc_params(fit_nlsLM6)), R = 200, method = 'residual') %>%
@@ -849,7 +855,8 @@ ggplot() +
 # calculate params with CIs
 
 extra_params7 <- calc_params(fit_nlsLM7) %>%
-  pivot_longer(everything(), names_to =  'param', values_to = 'estimate')
+  pivot_longer(everything(), names_to =  'param', values_to = 'estimate')%>%
+  mutate(trait="z")
 
 ci_extra_params7 <- Boot(fit_nlsLM7, f = function(x){unlist(calc_params(x))}, 
                          labels = names(calc_params(fit_nlsLM7)), R = 200, method = 'residual') %>%
@@ -968,7 +975,8 @@ ggplot() +
 
 # calculate params with CIs
 extra_params8 <- calc_params(fit_nlsLM8) %>%
-  pivot_longer(everything(), names_to =  'param', values_to = 'estimate')
+  pivot_longer(everything(), names_to =  'param', values_to = 'estimate')%>%
+  mutate(trait="bpk")
 
 ci_extra_params8 <- Boot(fit_nlsLM8, f = function(x){unlist(calc_params(x))}, 
                          labels = names(calc_params(fit_nlsLM8)), R = 200, method = 'residual') %>%
@@ -1136,7 +1144,8 @@ ggplot() +
 
 # calculate params with CIs
 extra_params9 <- calc_params(fit_nlsLM9) %>%
-  pivot_longer(everything(), names_to =  'param', values_to = 'estimate')
+  pivot_longer(everything(), names_to =  'param', values_to = 'estimate')%>%
+  mutate(trait="alp")
 
 ci_extra_params9 <- Boot(fit_nlsLM9, f = function(x){unlist(calc_params(x))}, 
                          labels = names(calc_params(fit_nlsLM9)), R = 200, method = 'residual') %>%
@@ -1251,7 +1260,8 @@ ggplot() +
 # calculate params with CIs
 
 extra_params10 <- calc_params(fit_nlsLM10) %>%
-  pivot_longer(everything(), names_to =  'param', values_to = 'estimate')
+  pivot_longer(everything(), names_to =  'param', values_to = 'estimate')%>%
+  mutate(trait="zj")
 
 ci_extra_params10 <- Boot(fit_nlsLM10, f = function(x){unlist(calc_params(x))}, 
                           labels = names(calc_params(fit_nlsLM10)), R = 200, method = 'residual') %>%
@@ -1369,7 +1379,8 @@ ggplot() +
 # calculate params with CIs
 
 extra_params12 <- calc_params(fit_nlsLM12) %>%
-  pivot_longer(everything(), names_to =  'param', values_to = 'estimate')
+  pivot_longer(everything(), names_to =  'param', values_to = 'estimate')%>%
+  mutate(trait="z")
 
 ci_extra_params12 <- Boot(fit_nlsLM12, f = function(x){unlist(calc_params(x))}, 
                           labels = names(calc_params(fit_nlsLM12)), R = 200, method = 'residual') %>%
@@ -1485,7 +1496,8 @@ ggplot() +
 # calculate params with CIs
 
 extra_params13 <- calc_params(fit_nlsLM13) %>%
-  pivot_longer(everything(), names_to =  'param', values_to = 'estimate')
+  pivot_longer(everything(), names_to =  'param', values_to = 'estimate')%>%
+  mutate(trait="bpk")
 
 ci_extra_params13 <- Boot(fit_nlsLM13, f = function(x){unlist(calc_params(x))}, 
                           labels = names(calc_params(fit_nlsLM13)), R = 200, method = 'residual') %>%
@@ -1653,7 +1665,8 @@ ggplot() +
 # calculate params with CIs
 
 extra_params14 <- calc_params(fit_nlsLM14) %>%
-  pivot_longer(everything(), names_to =  'param', values_to = 'estimate')
+  pivot_longer(everything(), names_to =  'param', values_to = 'estimate')%>%
+  mutate(trait="alp")
 
 ci_extra_params14 <- Boot(fit_nlsLM14, f = function(x){unlist(calc_params(x))}, labels = names(calc_params(fit_nlsLM14)), R = 200, method = 'residual') %>%
   confint(., method = 'bca') %>%
@@ -1767,7 +1780,8 @@ ggplot() +
 # calculate params with CIs
 
 extra_params15 <- calc_params(fit_nlsLM15) %>%
-  pivot_longer(everything(), names_to =  'param', values_to = 'estimate')
+  pivot_longer(everything(), names_to =  'param', values_to = 'estimate')%>%
+  mutate(trait="zj")
 
 ci_extra_params15 <- Boot(fit_nlsLM15, f = function(x){unlist(calc_params(x))}, 
                           labels = names(calc_params(fit_nlsLM15)), R = 200, method = 'residual') %>%
@@ -1886,7 +1900,8 @@ ggplot() +
 # calculate params with CIs
 
 extra_params16 <- calc_params(fit_nlsLM16) %>%
-  pivot_longer(everything(), names_to =  'param', values_to = 'estimate')
+  pivot_longer(everything(), names_to =  'param', values_to = 'estimate')%>%
+  mutate(trait="z")
 
 ci_extra_params16 <- Boot(fit_nlsLM16, f = function(x){unlist(calc_params(x))}, 
                           labels = names(calc_params(fit_nlsLM16)), R = 200, method = 'residual') %>%
@@ -2001,7 +2016,8 @@ ggplot() +
 # calculate params with CIs
 
 extra_params17 <- calc_params(fit_nlsLM17) %>%
-  pivot_longer(everything(), names_to =  'param', values_to = 'estimate')
+  pivot_longer(everything(), names_to =  'param', values_to = 'estimate')%>%
+  mutate(trait="bpk")
 
 ci_extra_params17 <- Boot(fit_nlsLM17, f = function(x){unlist(calc_params(x))}, 
                           labels = names(calc_params(fit_nlsLM17)), R = 200, method = 'residual') %>%
@@ -2172,7 +2188,8 @@ ggplot() +
 # calculate params with CIs
 
 extra_params18 <- calc_params(fit_nlsLM18) %>%
-  pivot_longer(everything(), names_to =  'param', values_to = 'estimate')
+  pivot_longer(everything(), names_to =  'param', values_to = 'estimate')%>%
+  mutate(trait="alp")
 
 ci_extra_params18 <- Boot(fit_nlsLM18, f = function(x){unlist(calc_params(x))}, labels = names(calc_params(fit_nlsLM18)), R = 200, method = 'residual') %>%
   confint(., method = 'bca') %>%
@@ -2286,7 +2303,8 @@ ggplot() +
 # calculate params with CIs
 
 extra_params19 <- calc_params(fit_nlsLM19) %>%
-  pivot_longer(everything(), names_to =  'param', values_to = 'estimate')
+  pivot_longer(everything(), names_to =  'param', values_to = 'estimate')%>%
+  mutate(trait="zj")
 
 ci_extra_params19 <- Boot(fit_nlsLM19, f = function(x){unlist(calc_params(x))}, 
                           labels = names(calc_params(fit_nlsLM19)), R = 200, method = 'residual') %>%
@@ -2405,7 +2423,8 @@ ggplot() +
 # calculate params with CIs
 
 extra_params20 <- calc_params(fit_nlsLM20) %>%
-  pivot_longer(everything(), names_to =  'param', values_to = 'estimate')
+  pivot_longer(everything(), names_to =  'param', values_to = 'estimate')%>%
+  mutate(trait="z")
 
 ci_extra_params20 <- Boot(fit_nlsLM20, f = function(x){unlist(calc_params(x))}, 
                           labels = names(calc_params(fit_nlsLM20)), R = 200, method = 'residual') %>%
@@ -2526,7 +2545,8 @@ ggplot() +
 # calculate params with CIs
 
 extra_params21 <- calc_params(fit_nlsLM21) %>%
-  pivot_longer(everything(), names_to =  'param', values_to = 'estimate')
+  pivot_longer(everything(), names_to =  'param', values_to = 'estimate')%>%
+  mutate(trait="bpk")
 
 ci_extra_params21 <- Boot(fit_nlsLM21, f = function(x){unlist(calc_params(x))}, 
                           labels = names(calc_params(fit_nlsLM21)), R = 200, method = 'residual') %>%
@@ -2695,7 +2715,8 @@ ggplot() +
 # calculate params with CIs
 
 extra_params22 <- calc_params(fit_nlsLM22) %>%
-  pivot_longer(everything(), names_to =  'param', values_to = 'estimate')
+  pivot_longer(everything(), names_to =  'param', values_to = 'estimate')%>%
+  mutate(trait="alp")
 
 ci_extra_params22 <- Boot(fit_nlsLM22, f = function(x){unlist(calc_params(x))}, labels = names(calc_params(fit_nlsLM22)), R = 200, method = 'residual') %>%
   confint(., method = 'bca') %>%
@@ -2809,7 +2830,8 @@ ggplot() +
 # calculate params with CIs
 
 extra_params23 <- calc_params(fit_nlsLM23) %>%
-  pivot_longer(everything(), names_to =  'param', values_to = 'estimate')
+  pivot_longer(everything(), names_to =  'param', values_to = 'estimate')%>%
+  mutate(trait="zj")
 
 ci_extra_params23 <- Boot(fit_nlsLM23, f = function(x){unlist(calc_params(x))}, 
                           labels = names(calc_params(fit_nlsLM23)), R = 200, method = 'residual') %>%
@@ -2929,7 +2951,8 @@ ggplot() +
 # calculate params with CIs
 
 extra_params24 <- calc_params(fit_nlsLM24) %>%
-  pivot_longer(everything(), names_to =  'param', values_to = 'estimate')
+  pivot_longer(everything(), names_to =  'param', values_to = 'estimate')%>%
+  mutate(trait="z")
 
 ci_extra_params24 <- Boot(fit_nlsLM24, f = function(x){unlist(calc_params(x))}, 
                           labels = names(calc_params(fit_nlsLM24)), R = 240, method = 'residual') %>%
@@ -3045,7 +3068,8 @@ ggplot() +
 # calculate params with CIs
 
 extra_params25 <- calc_params(fit_nlsLM25) %>%
-  pivot_longer(everything(), names_to =  'param', values_to = 'estimate')
+  pivot_longer(everything(), names_to =  'param', values_to = 'estimate')%>%
+  mutate(trait="bpk")
 
 ci_extra_params25 <- Boot(fit_nlsLM25, f = function(x){unlist(calc_params(x))}, 
                      labels = names(calc_params(fit_nlsLM25)), R = 200, method = 'residual') %>%
@@ -3235,6 +3259,58 @@ ropt_mzmtch <- as_tibble(rbind(tpk,agpk,rpk,mpk,apk,ppk))
 ropt_mzmtch <- ropt_mzmtch %>% select(temp,species,rmax,rmax_lwr,rmax_upr)
 
 ropt_mzmtch <- arrange(ropt_mzmtch, desc(rmax))
+ontinuous(expression(plain(paste("Variance of ", italic(T)[pk]))),
+          limits =c(20,90),
+          expand = c(0, 0),
+          breaks=seq(20,90, by=10))+
+  scale_y_continuous(expression(plain(paste(" Population growth rate ("~italic(r)[m]~")"))),
+                     limits =c(0,0.31),
+                     expand = c(0, 0),
+                     breaks=seq(0,1, by=0.1))+
+  theme(legend.position = 'none',legend.text = element_text(size = 10),
+        axis.text.y = element_text(face = 'italic'),aspect.ratio = 1)+
+  theme(text=element_text(family="Times"))+
+  geom_text(aes(x = 85, y = 0.28,label = "C"), 
+            parse = TRUE, size = 6, colour = "black") +
+  geom_line(aes(variance,fit),VarPlot,size=0.35,col="#636363")
+Var_rmax
+
+
+##### 3. Sum of Topts #### 
+SumPlot <- left_join(rmPeakdata, OptSum)
+SumLM <- lm(SumPlot$rmax~ SumPlot$sum)
+
+SumLMData <- predict(SumLM, interval = "confidence")
+SumPlot <- cbind(SumPlot,SumLMData)
+
+Sum_rmax <- ggplot(SumPlot, aes(x=sum, y=rmax)) +
+  geom_errorbar(aes(ymin = rmax_lwr, ymax = rmax_upr),col="#000000") +
+  geom_point(size = 2.5, col=c("#d9d9d9","#bdbdbd","#969696","#737373","#525252","#252525"),stroke=0.2)+
+  theme_bw(base_size = 12.5) +
+  # theme(axis.title.y = element_blank())+
+  scale_x_continuous(expression(plain(paste("Sum of ", italic(T)[pk]))),
+                     limits =c(90,105),
+                     expand = c(0, 0),
+                     breaks=seq(20,200, by=5))+
+  scale_y_continuous(expression(plain(paste(" Population growth rate ("~italic(r)[m]~")"))),
+                     limits =c(0,0.31),
+                     expand = c(0, 0),
+                     breaks=seq(0,1, by=0.05))+
+  theme(legend.position = 'none',legend.text = element_text(size = 10),
+        axis.text.y = element_text(face = 'italic'),aspect.ratio = 1)+
+  theme(text=element_text(family="Times"))+
+  geom_text(aes(x = 104, y = 0.26,label = "D"), 
+            parse = TRUE, size = 6, colour = "black") +
+  geom_line(aes(sum,fit),SumPlot,size=0.35,col="#636363")
+
+Sum_rmax
+
+fig5 <- ggarrange(fig5a,Alp_rmax,Var_rmax,Sum_rmax,nrow=2,ncol=2,
+                  common.legend = T, legend="right")
+fig5
+
+ggsave("../results/Fig5.pdf",fig5, width = 20, height =18, 
+       units = "cm",device = cairo_pdf)
 
 # compile temp mismatch datasets
 
@@ -3305,3 +3381,8 @@ mortz$zjminusz_upr <- mortz$zj_upr-mortz$z_upr
 
 mortz <- arrange(mortz, desc(zjminusz))
 
+
+####Getting activation energy(e) from all)###
+dfs <- lapply(ls(pattern="^extra_params+[0-9]"), get) #get all extra params
+All_extra_params <- rbindlist(dfs)
+Activation <- subset(All_extra_params, All_extra_params$param=="e")

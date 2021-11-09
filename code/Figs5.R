@@ -5,6 +5,7 @@ library(ggplot2)
 library(ggpubr)
 library(tidyverse)
 
+##reading data
 rmpredictions <- read.csv("rmprediction.csv")
 
 rmPeak <- rmpredictions %>% group_by(species) %>%
@@ -12,8 +13,15 @@ rmPeak <- rmpredictions %>% group_by(species) %>%
 
 rmPeakdata <- rmpredictions[rmPeak$`which(rmpredictions$estimate == max(estimate))`, ]
 rmPeakdata <- rmPeakdata %>% rename(rmax = estimate)
+
+
+##changing order of df for plotting
+colors <- c("#d9d9d9","#bdbdbd","#969696","#737373","#525252","#252525")
+OrderCol <- colors[order(rmPeakdata$rmax)]
+SPorder <- rmPeakdata$species[order(rmPeakdata$rmax)]
+
 ##Fig 5a: Rm Curves##
-fig5a <-  ggplot(rmpredictions, aes(temp,estimate,colour=species))+
+fig5a <-  ggplot(rmpredictions, aes(temp,estimate,colour=factor(species, levels=SPorder)))+
   scale_x_continuous(expression(plain(paste(" Temperature, ",degree,"C"))))+
   scale_y_continuous(expression(plain(paste(" Population growth rate ("~italic(r)[m]~")"))),
                      limits=c(-0.001,0.255),
@@ -22,10 +30,9 @@ fig5a <-  ggplot(rmpredictions, aes(temp,estimate,colour=species))+
   theme_bw(base_size = 12)+
   geom_line(size=0.85)+
   # geom_hline(aes(yintercept = 0), linetype = 2, show.legend = FALSE)+
-  scale_colour_manual(values = c("#d9d9d9","#bdbdbd","#969696","#737373","#525252","#252525"),
+  scale_colour_manual(values = colors,
                       name=expression(bold("species")),
-                      labels = c("A. grandis","A. nasturtii","P. marginatu",
-                                 "M. zaraptor","T. nigriabdominalis","R. maidis"),
+                      labels =SPorder,
                       guide = guide_legend(nrow = 6,ncol =1 ,
                                            direction = "horizontal",
                                            title.position = "top",
@@ -40,7 +47,7 @@ fig5a <-  ggplot(rmpredictions, aes(temp,estimate,colour=species))+
         aspect.ratio = 1)+
   geom_point(data= rmPeakdata, aes(x=temp, y=rmax), size=3)
 
-# fig5a
+fig5a
 
 
 ###Fig 5b###
@@ -89,11 +96,12 @@ AlpLM <- lm(AlpPlot$rmax~AlpPlot$estimate)
 AlpLMData <- predict(AlpLM, interval = "confidence")
 AlpPlot <- cbind(AlpPlot,AlpLMData)
 
-plot(AlpPlot$estimate, AlpPlot$Max)
+AlpPlot$species <- as.character(AlpPlot$species)
+AlpPlot$species <- factor(AlpPlot$species, levels=SPorder)
 
-Alp_rmax <- ggplot(AlpPlot, aes(x=estimate, y=rmax)) +
+Alp_rmax <- ggplot(AlpPlot, aes(x=estimate, y=rmax, col=factor(species, levels=SPorder))) +
   geom_errorbar(aes(ymin = rmax_lwr, ymax = rmax_upr),col="#000000") +
-  geom_point(size = 2.5, col=c("#d9d9d9","#bdbdbd","#969696","#737373","#525252","#252525"),stroke=0.2)+
+  geom_point(size = 2.5,stroke=0.2)+
   theme_bw(base_size = 12.5) +
   # theme(axis.title.y = element_blank())+
   scale_x_continuous(expression(plain(paste("Peak Juvenile Development Rate (", italic(T)[opt]^alpha,")"))),
@@ -104,6 +112,9 @@ Alp_rmax <- ggplot(AlpPlot, aes(x=estimate, y=rmax)) +
                      limits =c(0,0.35),
                      expand = c(0, 0),
                      breaks=seq(0,1, by=0.1))+
+  scale_colour_manual(values = colors,
+                      name=expression(bold("species")),
+                      labels =SPorder)+
   theme(legend.position = 'none',legend.text = element_text(size = 10),
         axis.text.y = element_text(face = 'italic'),aspect.ratio = 1)+
   theme(text=element_text(family="Times"))+
@@ -120,10 +131,9 @@ VarLM <- lm(VarPlot$rmax~VarPlot$variance)
 VarLMData <- predict(VarLM, interval = "confidence")
 VarPlot <- cbind(VarPlot,VarLMData)
 
-
-Var_rmax<- ggplot(VarPlot, aes(x=variance, y=rmax)) +
+Var_rmax<- ggplot(VarPlot, aes(x=variance, y=rmax, col=factor(species, levels=SPorder))) +
   geom_errorbar(aes(ymin = rmax_lwr, ymax = rmax_upr),col="#000000") +
-  geom_point(size = 2.5, col=c("#d9d9d9","#bdbdbd","#969696","#737373","#525252","#252525"),stroke=0.2)+
+  geom_point(size = 2.5, stroke=0.2)+
   theme_bw(base_size = 12.5) +
   # theme(axis.title.y = element_blank())+
   scale_x_continuous(expression(plain(paste("Variance of ", italic(T)[pk]))),
@@ -134,6 +144,9 @@ Var_rmax<- ggplot(VarPlot, aes(x=variance, y=rmax)) +
                      limits =c(0,0.31),
                      expand = c(0, 0),
                      breaks=seq(0,1, by=0.1))+
+  scale_colour_manual(values = colors,
+                      name=expression(bold("species")),
+                      labels =SPorder)+
   theme(legend.position = 'none',legend.text = element_text(size = 10),
         axis.text.y = element_text(face = 'italic'),aspect.ratio = 1)+
   theme(text=element_text(family="Times"))+
@@ -150,26 +163,29 @@ SumLM <- lm(SumPlot$rmax~ SumPlot$sum)
 SumLMData <- predict(SumLM, interval = "confidence")
 SumPlot <- cbind(SumPlot,SumLMData)
 
-Sum_rmax <- ggplot(SumPlot, aes(x=sum, y=rmax)) +
+
+Sum_rmax<- ggplot(SumPlot, aes(x=sum, y=rmax, col=factor(species, levels=SPorder))) +
   geom_errorbar(aes(ymin = rmax_lwr, ymax = rmax_upr),col="#000000") +
-  geom_point(size = 2.5, col=c("#d9d9d9","#bdbdbd","#969696","#737373","#525252","#252525"),stroke=0.2)+
+  geom_point(size = 2.5, stroke=0.2)+
   theme_bw(base_size = 12.5) +
   # theme(axis.title.y = element_blank())+
   scale_x_continuous(expression(plain(paste("Sum of ", italic(T)[pk]))),
                      limits =c(90,105),
                      expand = c(0, 0),
-                     breaks=seq(20,200, by=5))+
+                     breaks=seq(20,120, by=5))+
   scale_y_continuous(expression(plain(paste(" Population growth rate ("~italic(r)[m]~")"))),
                      limits =c(0,0.31),
                      expand = c(0, 0),
-                     breaks=seq(0,1, by=0.05))+
+                     breaks=seq(0,1, by=0.1))+
+  scale_colour_manual(values = colors,
+                      name=expression(bold("species")),
+                      labels =SPorder)+
   theme(legend.position = 'none',legend.text = element_text(size = 10),
         axis.text.y = element_text(face = 'italic'),aspect.ratio = 1)+
   theme(text=element_text(family="Times"))+
-  geom_text(aes(x = 104, y = 0.26,label = "D"), 
+  geom_text(aes(x = 104, y = 0.28,label = "D"), 
             parse = TRUE, size = 6, colour = "black") +
   geom_line(aes(sum,fit),SumPlot,size=0.35,col="#636363")
-
 Sum_rmax
 
 fig5 <- ggarrange(fig5a,Alp_rmax,Var_rmax,Sum_rmax,nrow=2,ncol=2,
@@ -178,4 +194,3 @@ fig5
 
 ggsave("../results/Fig5.pdf",fig5, width = 20, height =18, 
        units = "cm",device = cairo_pdf)
-  

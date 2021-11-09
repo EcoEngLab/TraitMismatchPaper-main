@@ -2,10 +2,11 @@
 rm(list=ls())
 library(tidyverse)
 
-setwd("~/Documents/TraitMismatchPaper-main/data/")
+# setwd("~/Documents/TraitMismatchPaper-main/data/")
 
 ##Get publication list
 VecTrait <- read.csv("old/Final_Traitofinterest_ph.csv")
+# VecTrait <- read.csv("mismatch_dat.csv")
 Refs <- unique(VecTrait$citation)
 print(Refs)
 

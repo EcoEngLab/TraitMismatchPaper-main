@@ -32,7 +32,7 @@ levels(toptz$species)
 
 toptz$trait <- fct_relevel(toptz$trait, "juvenile mortality rate")
 
-toptz <- toptz %>% filter(param!= "rmax")
+toptz <- toptz %>% filter(param== "topt")
 
 # remove species with TPCs for only one trait
 toptz <- toptz %>% filter(species!= "Trichogramma sp. nr. Lutea"

@@ -18,15 +18,16 @@ graphics.off()
 
 #read in the Topt data
 
-alpha  <- as_tibble(read.csv('alpha_Tpks.csv', header = TRUE))
-alpha  <- alpha %>% filter(X <= 38)
-zj     <- as_tibble(read.csv('zj_Tpks.csv', header = TRUE))
-z      <- as_tibble(read.csv('z_Tpks.csv', header = TRUE))
-bpk    <- as_tibble(read.csv('bpk_Tpks.csv', header = TRUE))
+alpha  <- as_tibble(read.csv('alpha_Tpks_AllParams.csv', header = TRUE))
+# alpha  <- alpha %>% filter(X <= 38)
+zj     <- as_tibble(read.csv('zj_Tpks_AllParams.csv', header = TRUE))
+z      <- as_tibble(read.csv('z_Tpks_AllParams.csv', header = TRUE))
+bpk    <- as_tibble(read.csv('bpk_Tpks_AllParams.csv', header = TRUE))
 
 toptz  <- rbind(alpha,zj,z,bpk)
 toptz <- subset(toptz, toptz$param=="topt")
-  
+# toptz <- rename(toptz, trait=Trait)  
+
 toptz$species <- as.factor(toptz$species)
 toptz$trait   <- as.factor(toptz$trait)
 
@@ -35,6 +36,11 @@ levels(toptz$species)
 toptz$trait <- fct_relevel(toptz$trait, "juvenile mortality rate")
 
 toptz <- toptz %>% filter(param!= "rmax")
+
+SpCount <- table(toptz$species)
+RmSp <- names(SpCount)[which(SpCount==1)]
+
+toptz <- filter(toptz, !(species %in% RmSp))
 
 # 
 # toptz$species <- fct_relevel(toptz$species, "Aedes aegypti", after = Inf)
@@ -50,17 +56,11 @@ toptz <- toptz %>% filter(param!= "rmax")
 # toptz$species <- fct_relevel(toptz$species, "Aedes krombeini", after = 9)
 
 #order by developement alpha
-alp <- subset(toptz, toptz$trait == "juvenile development rate")
+alp <- subset(toptz, toptz$trait=="juvenile development rate")
 SPorder <- alp$species[order(alp$estimate)]
 toptz$species <- as.character(toptz$species)
 toptz$species <- factor(toptz$species, levels=SPorder)
 
-#Oder by funnel shape --> max to min max diff
-Diff <- toptz %>% group_by(species) %>%
-        summarise(diff = max(estimate)-min(estimate))
-SPorder <- Diff$species[order(Diff$diff)]
-toptz$species <- as.character(toptz$species)
-toptz$species <- factor(toptz$species, levels=SPorder)
 
 # All traits
 
@@ -148,7 +148,7 @@ fig3b <- ggplot(mortz, aes(zjminusz, species, shape=trait, colour=trait,fill=tra
   theme_bw(base_size = 12.5) +
   theme(axis.title.y = element_blank())+
   scale_x_continuous(expression(plain(paste(" Temperature Mismatch, ",degree,"C (",
-                                italic(z[J]),", ",italic(T)[opt],
+                                            italic(z[J]),", ",italic(T)[opt],
                                             " \u2212 ",italic(z),", ",italic(T)[opt],")"))),
                      limits =c(-16,18),
                      expand = c(0, 0),
@@ -180,11 +180,11 @@ fig3b <- ggplot(mortz, aes(zjminusz, species, shape=trait, colour=trait,fill=tra
   theme(text=element_text(family="Times"))+
   geom_text(aes(x = -12, y = 13,label = "B"), 
             parse = TRUE, size = 6, colour = "black")
-  
+
 
 p1 <- fig3a+fig3b
 
-ggsave("~/Dropbox/ph_thesis/Topt_paper/results/Traitmismatch.pdf",p1, width = 30, height = 16.5, units = "cm",device = cairo_pdf)
+ggsave("../results/Traitmismatch.pdf",p1, width = 30, height = 16.5, units = "cm",device = cairo_pdf)
 
 
 #%%%%%%%%%%%%%%%%%%%%%%%% rm across temps
@@ -281,7 +281,7 @@ si_1 <- ggplot(traitBpk, aes(temp, log(estimate), shape=trait, colour=trait,fill
   theme(legend.position = c(0.5,0.89), 
         legend.background = element_rect(fill=alpha("#FFFFFF",1), colour = "#636363", size = 0.1),
         legend.text = element_text(size = 6))+
-        theme(text=element_text(family="Times"))+
+  theme(text=element_text(family="Times"))+
   geom_line(aes(temp, fit),z,size=0.35,col="#636363")+
   geom_ribbon(aes(ymin=lwr, ymax=upr),z,alpha = 0.25,show.legend = NA, col="#a6cee3",fill="#a6cee3",lwd=0.1)+
   geom_line(aes(temp, fit),zj,size=0.35,col="#636363")+
@@ -343,10 +343,10 @@ si_2 <- ggplot(dv, aes(temp, log(estimate), shape=trait, colour=trait,fill=trait
   annotate("text", x = 33, y = -3.85,label = "paste(italic(r) ^ 2, \" = 0.01\")", parse = TRUE,
            alpha = 1, family="Times", size = 2)+
   theme(legend.key.size = unit(0.1, 'cm'))
-  
+
 si <- si_1 + si_2; si
 
-ggsave("~/Dropbox/ph_thesis/Topt_paper/results/SI_weakhotbetter.pdf",si, width = 15, height =8, 
+ggsave("../results/SI_weakhotbetter.pdf",si, width = 15, height =8, 
        units = "cm",device = cairo_pdf)
 
 

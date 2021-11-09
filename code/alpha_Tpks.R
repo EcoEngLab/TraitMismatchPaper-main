@@ -9,11 +9,13 @@ require('car')
 require('patchwork')
 require('minpack.lm')
 require('boot')
-
+require('doMC')
+require('foreach')
+  
 rm(list=ls())
 graphics.off()
 
-setwd("~/Dropbox/ph_thesis/Topt_paper/data")
+# setwd("~/Dropbox/ph_thesis/Topt_paper/data")
 
 #read in and prepare the trait data
 
@@ -42,6 +44,9 @@ dv <- dv %>% arrange(dv, curve_ID)
 # fit TPC model for each species
 
 start_vals <- get_start_vals(dv$temp, dv$rate, model_name = 'pawar_2018')
+low_lims <- get_lower_lims(dv$temp, dv$rate, model_name = 'pawar_2018')
+upper_lims <- get_upper_lims(dv$temp, dv$rate, model_name = 'pawar_2018')
+
 
 dv_fits <- nest(dv, data = c(temp, rate)) %>%
            mutate(fit = map(data, ~nls_multstart(rate~pawar_2018(temp = temp, r_tref,e,eh,topt, tref = 15),
@@ -49,6 +54,8 @@ dv_fits <- nest(dv, data = c(temp, rate)) %>%
                                           iter = c(3,3,3,3),
                                           start_lower = start_vals - 10,
                                           start_upper = start_vals + 10,
+                                          lower = low_lims,
+                                          upper=upper_lims,
                                           supp_errors = 'Y',
                                           convergence_count = FALSE)))
 
@@ -76,7 +83,6 @@ ggplot(dv_preds) +
   theme(legend.position = 'none')
 
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 #€€€€€ Aedes aegypti
 
 a.e <- dv %>% filter(curve_ID == 1)
@@ -87,7 +93,6 @@ A_e <- minpack.lm::nlsLM(rate~pawar_2018(temp = temp, r_tref,e,eh,topt, tref = 1
                                lower = get_lower_lims(a.e$temp, a.e$rate, model_name = 'pawar_2018'),
                                upper = get_upper_lims(a.e$temp, a.e$rate, model_name = 'pawar_2018'),
                                weights = rep(1, times = nrow(a.e)))
-
 
 extra_params1 <- calc_params(A_e) %>%
   pivot_longer(everything(), names_to =  'param', values_to = 'estimate')
@@ -101,8 +106,29 @@ ci_extra_params1 <- Boot(A_e, f = function(x){unlist(calc_params(x))}, labels = 
 
 ci_extra_params1 <- left_join(ci_extra_params1, extra_params1)
 
-topt1 <- as_tibble(rbind(ci_extra_params1[1,],ci_extra_params1[2,]))
+
+##Get other parameters
+params1 <- broom::tidy(A_e) %>% select(param = term, estimate)
+params1_cis <- Boot(A_e, method = 'residual') %>%
+  confint(., method = 'bca') %>%
+  as.data.frame() %>%
+  rename(conf_lower = 1, conf_upper = 2) %>%
+  rownames_to_column(., var = 'param') %>%
+  mutate(method = 'residual bootstrap')
+
+params1_cis <- bind_rows(params1_cis) %>%
+  left_join(., params1)
+
+topt1 <- as_tibble(rbind(ci_extra_params1[1,],ci_extra_params1[2,],params1_cis[2,] ))
 topt1$species <- as.character("Aedes aegypti")
+
+ggplot() +
+  geom_line(aes(temp, .fitted), d_preds, col = 'blue') +
+  geom_ribbon(aes(temp, ymin = conf_lower, ymax = conf_upper), boot1_conf_preds, fill = 'blue', alpha = 0.3) +
+  geom_point(aes(temp, rate), te.nidv, size = 2, alpha = 0.5) +
+  theme_bw(base_size = 12)
+
+
 
 #€€€€€ Aedes albopictus
 
@@ -128,7 +154,8 @@ ci_extra_params2 <- Boot(A_b, f = function(x){unlist(calc_params(x))}, labels = 
 
 ci_extra_params2 <- left_join(ci_extra_params2, extra_params2)
 
-topt2 <- as_tibble(rbind(ci_extra_params2[1,],ci_extra_params2[2,]))
+
+topt2 <- as_tibble(rbind(ci_extra_params2,ci_extra_params2))
 topt2$species <- as.character("Aedes albopictus")
 
 

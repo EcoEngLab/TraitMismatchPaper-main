@@ -9,11 +9,13 @@ require('car')
 require('patchwork')
 require('minpack.lm')
 require('boot')
+require('doMC')
+require('foreach')
 
 rm(list=ls())
 graphics.off()
 
-setwd("~/Dropbox/ph_thesis/Topt_paper/data")
+# setwd("~/Dropbox/ph_thesis/Topt_paper/data")
 
 #read in the trait data 
 
@@ -32,11 +34,14 @@ dv$rate <- 1/dv$rate
 
 dv <- dv %>% arrange(dv, curve_ID)
 
+
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 # fit TPC model for each species
 
 start_vals <- get_start_vals(dv$temp, dv$rate, model_name = 'pawar_2018')
+low_lims <- get_lower_lims(dv$temp, dv$rate, model_name = 'pawar_2018')
+upper_lims <- get_upper_lims(dv$temp, dv$rate, model_name = 'pawar_2018')
 
 dv_fits <- nest(dv, data = c(temp, rate)) %>%
            mutate(fit = map(data, ~nls_multstart(rate~pawar_2018(temp = temp, r_tref,e,eh,topt, tref = 15),
@@ -44,6 +49,8 @@ dv_fits <- nest(dv, data = c(temp, rate)) %>%
                                           iter = c(3,3,3,3),
                                           start_lower = start_vals - 10,
                                           start_upper = start_vals + 10,
+                                          lower = low_lims,
+                                          upper=upper_lims,
                                           supp_errors = 'Y',
                                           convergence_count = FALSE)))
 
@@ -71,9 +78,6 @@ ggplot(dv_preds) +
   theme(legend.position = 'none')
 
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-# Bootstrap by species to estimate CIs for Tpks and Bpks
-
 #€€€€€ Aedes aegypti
 
 a.e <- dv %>% filter(curve_ID == 1)
