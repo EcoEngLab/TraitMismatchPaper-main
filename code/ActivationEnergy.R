@@ -44,7 +44,7 @@ topte$trait <- factor(topte$trait, levels = TraitLevel)
 ##remove species with 1 trait
 SpCount <- table(topte$species)
 RmSp <- names(SpCount)[which(SpCount==1)]
-toptz <- filter(toptz, !(species %in% RmSp))
+topte <- filter(topte, !(species %in% RmSp))
 
 
 fig3a <- ggplot(topte, aes(estimate, species, shape=trait, colour=trait,fill=trait)) +
