@@ -35,9 +35,17 @@ eplot
 
 ggsave("../results/eHist.pdf",eplot, width = 20, height = 10, units = "cm")
 
+###mistmatch fig
+
 TraitLevel <- c("Juvenile Mortality Rate", "Adult Mortality Rate","Peak Fecundity","Development Rate" )
 topte$trait <- as.character(topte$trait)
-topte$trait <- factor(topte$trait, levels = )
+topte$trait <- factor(topte$trait, levels = TraitLevel)
+
+##remove species with 1 trait
+SpCount <- table(topte$species)
+RmSp <- names(SpCount)[which(SpCount==1)]
+toptz <- filter(toptz, !(species %in% RmSp))
+
 
 fig3a <- ggplot(topte, aes(estimate, species, shape=trait, colour=trait,fill=trait)) +
   geom_errorbar(aes(xmin = conf_lower, xmax = conf_upper),width=0.35,size=0.35) +
@@ -45,7 +53,7 @@ fig3a <- ggplot(topte, aes(estimate, species, shape=trait, colour=trait,fill=tra
   theme_bw(base_size = 12.5) +
   theme(axis.title.y = element_blank())+
   scale_x_continuous(expression(plain("Activation Energy")),
-                     limits =c(-20,30),
+                     limits =c(0,8),
                      expand = c(0, 0),
                      breaks=seq(-20,36, by=4))+
   scale_fill_manual(values = c("#1f78b4","#a6cee3","#fdb863","#e66101"),
