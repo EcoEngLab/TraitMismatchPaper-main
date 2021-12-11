@@ -11,7 +11,9 @@ require('minpack.lm')
 require('boot')
 require('doMC')
 require('foreach')
-
+require('ggpubr')
+require('ggtext')
+require('cowplot')
 
 ###Fitting TPC for all species for all traits
 
@@ -82,6 +84,9 @@ ggplot(dv_preds) +
   facet_wrap(~species, scales = 'free_y', ncol = 6) +
   theme_bw() +
   theme(legend.position = 'none')
+
+#get good names with line break
+dv$GoodName <- str_replace(pattern = " ",replacement =  "\n", dv$species)
 
 #fit models
 FitModel <- function(ID){
@@ -154,6 +159,10 @@ FitModel <- function(ID){
     ungroup()
   
   
+  ##plot
+  counter <- which(dv_fits$curve_ID==ID)
+  print(counter)
+  
   plotData <- filter(dv_preds, dv_preds$curve_ID==ID)
   plot <- ggplot(data=df, aes(x=temp, y=rate))+
     geom_point()+
@@ -161,25 +170,41 @@ FitModel <- function(ID){
     geom_ribbon(aes(temp, ymin=conf_lower, ymax=conf_upper), boot_conf_preds, fill="#e66101",alpha=0.3,
                 inherit.aes = F)+
     theme_bw()+
-    labs(title=paste(df$species[1],", e =", round(topt$estimate[which(topt$param=="e")],digits = 2),
-                     ", Topt= ", round(topt$estimate[which(topt$param=="topt")],digits = 2), sep=""),
+    theme(text = element_text(size=10))+
+    labs(title=paste(df$GoodName[1], sep=""),
          y="Development rate", x=expression(plain(paste(" Temperature, ",degree,"C"))))
   
   ggsave(plot,file=paste("../results/TPC/Alpha_",ID,".pdf",sep=""), 
          height=10,width=15,units="cm")
   
+  AlphaPlots[[counter]] <<- plot
+  
   return(topt)
 }
 
 ##Run everything:
-# ModelOut <- sapply(unique(dv$curve_ID), FitModel)
-# ModelOutDFList <- apply(ModelOut, 2, function(x) as.data.frame(do.call(cbind, x)))
-doMC::registerDoMC(cores = 4)  
-ModelOutList <- foreach(ID = unique(dv$curve_ID)) %dopar%{ FitModel(ID)}
+#run using apply:
+AlphaPlots <- vector(mode="list", length=length(unique(dv$curve_ID)))
 
-ModelOutDF <- do.call(rbind, ModelOutList)
+ModelOut <- sapply(unique(dv$curve_ID), FitModel)
+# ModelOutDFList <- apply(ModelOut, 2, function(x) as.data.frame(do.call(cbind, x)))
+ModelOutDF <- do.call(rbind, ModelOut)
 ModelOutDF$trait <- "juvenile development rate"
-write.csv(ModelOutDF, "../data/alpha_Tpks_AllParams.csv")
+
+#run in parallel:
+# doMC::registerDoMC(cores = 4)
+# ModelOutList <- foreach(ID = unique(dv$curve_ID)) %dopar%{ FitModel(ID)}
+# 
+# ModelOutDF <- do.call(rbind, ModelOutList)
+# ModelOutDF$trait <- "juvenile development rate"
+
+##Get plots:
+alphaPlot <- plot_grid(plotlist = AlphaPlots)
+
+save_plot(alphaPlot, file="../results/AlphaFits.pdf", 
+          base_height=28, base_asp = 1,units="cm")
+
+
 
 
 ##### Peak fecundity #####
@@ -247,6 +272,9 @@ ggplot(dv_preds) +
   facet_wrap(~species, scales = 'free_y', ncol = 6) +
   theme_bw() +
   theme(legend.position = 'none')
+
+#name with line break
+dv$GoodName <- str_replace(pattern = " ",replacement =  "\n", dv$species)
 
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -330,9 +358,14 @@ FitModel <- function(ID){
     geom_ribbon(aes(temp, ymin=conf_lower, ymax=conf_upper), boot_conf_preds, fill="#fdb863",alpha=0.3,
                 inherit.aes = F)+
     theme_bw()+
-    labs(title=paste(df$species[1],", e =", round(topt$estimate[which(topt$param=="e")],digits = 2),
-                     ", Topt= ", round(topt$estimate[which(topt$param=="topt")],digits = 2), sep=""),         
+    theme(text = element_text(size=10))+
+    labs(title=paste(df$GoodName[1], sep=""),         
          y="Fecundity",x=expression(plain(paste(" Temperature, ",degree,"C"))))
+  
+  counter <- which(dv_fits$curve_ID==ID)
+  print(counter)
+  BetaPlots[[counter]] <<- plot
+  
   
   ggsave(plot,file=paste("../results/TPC/Bopt_",ID,".pdf",sep=""), 
          height=10,width=15,units="cm")
@@ -341,10 +374,19 @@ FitModel <- function(ID){
 }
 
 ##Run everything:
-doMC::registerDoMC(cores = 4)  
-ModelOut <- foreach(ID = unique(dv$curve_ID)) %dopar%{ FitModel(ID)}
+# doMC::registerDoMC(cores = 4)  
+# ModelOut <- foreach(ID = unique(dv$curve_ID)) %dopar%{ FitModel(ID)}
+BetaPlots <- vector(mode="list", length=length(unique(dv$curve_ID)))
 
-# ModelOut <- sapply(unique(dv$curve_ID), FitModel)
+ModelOut <- sapply(unique(dv$curve_ID), FitModel)
+
+##Get plots:
+BetaPlot <- plot_grid(plotlist = BetaPlots, ncol=5)
+
+save_plot(BetaPlot, file="../results/BetaFits.pdf", 
+          base_height=14, base_width = 28,units="cm")
+
+
 
 # ModelOutDFList <- apply(ModelOut, 2, function(x) as.data.frame(do.call(cbind, x)))
 ModelOutDF <- do.call(rbind, ModelOut)
@@ -416,6 +458,11 @@ ggplot(dv_preds) +
   facet_wrap(~species, scales = 'free_y', ncol = 6) +
   theme_bw() +
   theme(legend.position = 'none')
+
+
+#name with line break
+dv$GoodName <- str_replace(pattern = " ",replacement =  "\n", dv$species)
+
 
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -499,8 +546,8 @@ FitModel <- function(ID){
     geom_ribbon(aes(temp, ymin=conf_lower, ymax=conf_upper), boot_conf_preds, fill="#a6cee3",alpha=0.3,
                 inherit.aes = F)+
     theme_bw()+
-    labs(title=paste(df$species[1],", e =", round(topt$estimate[which(topt$param=="e")],digits = 2),
-                     ", Topt= ", round(topt$estimate[which(topt$param=="topt")],digits = 2), sep=""),         
+    theme(text = element_text(size=10))+
+    labs(title=paste(df$GoodName[1], sep=""),         
          y="1/Adult Mortality",x=expression(plain(paste(" Temperature, ",degree,"C"))))
   
   ggsave(plot,file=paste("../results/TPC/z_",ID,".pdf",sep=""), 
@@ -514,9 +561,15 @@ FitModel <- function(ID){
     geom_ribbon(aes(temp, ymin=1/conf_lower, ymax=1/conf_upper), boot_conf_preds, fill="#a6cee3",alpha=0.3,
                 inherit.aes = F)+
     theme_bw()+
-    labs(title=paste(df$species[1],", e =", round(topt$estimate[which(topt$param=="e")],digits = 2),
+    labs(title=paste(df$GoodName[1],", e =", round(topt$estimate[which(topt$param=="e")],digits = 2),
                      ", Topt= ", round(topt$estimate[which(topt$param=="topt")],digits = 2), sep=""),         
          y="Adult Mortality",x=expression(plain(paste(" Temperature, ",degree,"C"))))
+  
+  
+  counter <- which(dv_fits$curve_ID==ID)
+  print(counter)
+  ZetaPlots[[counter]] <<- plot
+  
   
   ggsave(plotIN,file=paste("../results/TPC/IN_z_",ID,".pdf",sep=""), 
          height=10,width=15,units="cm")
@@ -525,10 +578,22 @@ FitModel <- function(ID){
 }
 
 ##Run everything:
+ZetaPlots <- vector(mode="list", length=length(unique(dv$curve_ID)))
+
+ModelOut <- sapply(unique(dv$curve_ID), FitModel)
+
+##Get plots:
+ZetaPlot <- plot_grid(plotlist = ZetaPlots, ncol=5)
+
+save_plot(ZetaPlot, file="../results/ZetaFits.pdf", 
+          base_height=21, base_width = 28,units="cm")
+
+
+
 # ModelOut <- sapply(unique(dv$curve_ID), FitModel)
 # ModelOutDFList <- apply(ModelOut, 2, function(x) as.data.frame(do.call(cbind, x)))
-doMC::registerDoMC(cores = 4)  
-ModelOutDFList <- foreach(ID = unique(dv$curve_ID)) %dopar%{ FitModel(ID)}
+# doMC::registerDoMC(cores = 4)  
+# ModelOutDFList <- foreach(ID = unique(dv$curve_ID)) %dopar%{ FitModel(ID)}
 
 ModelOutDF <- do.call(rbind, ModelOutDFList)
 ModelOutDF$trait <- "adult mortality rate"
@@ -599,6 +664,11 @@ ggplot(dv_preds) +
   facet_wrap(~species, scales = 'free_y', ncol = 6) +
   theme_bw() +
   theme(legend.position = 'none')
+
+
+#name with line break
+dv$GoodName <- str_replace(pattern = " ",replacement =  "\n", dv$species)
+
 
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -682,8 +752,7 @@ FitModel <- function(ID){
     geom_ribbon(aes(temp, ymin=conf_lower, ymax=conf_upper), boot_conf_preds, fill="#1f78b4",alpha=0.3,
                 inherit.aes = F)+
     theme_bw()+
-    labs(title=paste(df$species[1],", e =", round(topt$estimate[which(topt$param=="e")],digits = 2),
-                     ", Topt= ", round(topt$estimate[which(topt$param=="topt")],digits = 2), sep=""),         
+    labs(title=paste(df$GoodName[1],sep=""),         
          y="1/Juvenlie Mortality",x=expression(plain(paste(" Temperature, ",degree,"C"))))
   
   ggsave(plot,file=paste("../results/TPC/zj_",ID,".pdf",sep=""), 
@@ -696,22 +765,35 @@ FitModel <- function(ID){
     geom_ribbon(aes(temp, ymin=1/conf_lower, ymax=1/conf_upper), boot_conf_preds, fill="#a6cee3",alpha=0.3,
                 inherit.aes = F)+
     theme_bw()+
-    labs(title=paste(df$species[1],", e =", round(topt$estimate[which(topt$param=="e")],digits = 2),
-                     ", Topt= ", round(topt$estimate[which(topt$param=="topt")],digits = 2), sep=""),         
+    theme(text = element_text(size=10))+
+    labs(title=paste(df$GoodName[1],sep=""),         
          y="Adult Mortality",x=expression(plain(paste(" Temperature, ",degree,"C"))))
   
   ggsave(plotIN,file=paste("../results/TPC/IN_zj_",ID,".pdf",sep=""), 
          height=10,width=15,units="cm")
   
+  counter <- which(dv_fits$curve_ID==ID)
+  print(counter)
+  ZetaJPlots[[counter]] <<- plot
   
   return(topt)
 }
 
 ##Run everything:
+ZetaJPlots <- vector(mode="list", length=length(unique(dv$curve_ID)))
+
+ModelOut <- sapply(unique(dv$curve_ID), FitModel)
+
+##Get plots:
+ZetaJPlot <- plot_grid(plotlist = ZetaJPlots, ncol=5)
+
+save_plot(ZetaJPlot, file="../results/ZetaJFits.pdf", 
+          base_height=21, base_width = 28,units="cm")
+
 # ModelOut <- sapply(unique(dv$curve_ID), FitModel)
 # ModelOutDFList <- apply(ModelOut, 2, function(x) as.data.frame(do.call(cbind, x)))
-doMC::registerDoMC(cores = 4)  
-ModelOutDFList <- foreach(ID = unique(dv$curve_ID)) %dopar%{ FitModel(ID)}
+# doMC::registerDoMC(cores = 4)  
+# ModelOutDFList <- foreach(ID = unique(dv$curve_ID)) %dopar%{ FitModel(ID)}
 
 ModelOutDF <- do.call(rbind, ModelOutDFList)
 ModelOutDF$trait <- "juvenile mortality rate"

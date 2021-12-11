@@ -27,7 +27,7 @@ topte <- mutate(topte, trait = case_when(trait =="adult mortality rate" ~ "Adult
 
 eplot <- ggplot(topte, aes(x=estimate))+
   theme_bw()+
-  labs(x="Activation Energy")+
+  labs(x="Activation Energy", y="Density")+
   geom_histogram(position="identity", binwidth=1)+
   geom_density()+
   facet_grid(.~trait)
