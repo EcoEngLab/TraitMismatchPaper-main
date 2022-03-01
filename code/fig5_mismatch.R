@@ -11,6 +11,7 @@ require('ggplot2')
 require('ggpubr')
 require('patchwork')
 require('cowplot')
+require('ggtext')
 
 
 rm(list=ls())
@@ -42,13 +43,20 @@ RmSp <- names(SpCount)[which(SpCount==1)]
 
 toptz <- filter(toptz, !(species %in% RmSp))
 
+####Change name to add asterisk to match next fig
+toptz$species <- as.character(toptz$species)
+toptz$species[which(toptz$species=="Anthonomus grandis")] <- "**Anthonomus grandis***"
+toptz$species[which(toptz$species=="Paracoccus marginatu")] <- "**Paracoccus marginatu***"
+toptz$species[which(toptz$species=="Aphis nasturtii")] <- "**Aphis nasturtii***"
+toptz$species[which(toptz$species=="Tetraneura nigriabdominalis")] <- "**Tetraneura nigriabdominalis***"
+toptz$species[which(toptz$species=="Muscidifurax zaraptor")] <- "**Muscidifurax zaraptor***"
+toptz$species[which(toptz$species=="Rhopalosiphum maidis")] <- "**Rhopalosiphum maidis***"
+
 
 #order by developement alpha
 alp <- subset(toptz, toptz$trait=="juvenile development rate")
 SPorder <- alp$species[order(alp$estimate)]
-toptz$species <- as.character(toptz$species)
 toptz$species <- factor(toptz$species, levels=SPorder)
-
 
 # All traits
 
@@ -92,16 +100,32 @@ fig5a <- ggplot(toptz, aes(estimate, species, shape=trait, colour=trait,fill=tra
                                           title.position = "top",
                                           title.hjust=0.5))+
   theme(legend.position = c(0.35,-0.1),legend.text = element_text(size = 10),
-        axis.text.y = element_text(face = 'italic'))+
+        axis.text.y = element_markdown(face = 'italic'))+
   theme(text=element_text(family="Times"))+
   theme(legend.margin=margin(t = -0.4, unit='cm'))+
-  coord_fixed(ratio = 1.5)
+  # coord_fixed(ratio = 1.5)
+  theme(aspect.ratio=2)+
+  ggtitle("A")+
+  theme(plot.title=element_text(face="bold", size = 15, vjust = -1))
 
-# fig5a
+fig5a
 
 
 ###e mismatch ###
 topte <- filter(topt, param =="e" )
+
+#Add asterisk
+topte$species <- as.character(topte$species)
+topte$species[which(topte$species=="Anthonomus grandis")] <- "**Anthonomus grandis***"
+topte$species[which(topte$species=="Paracoccus marginatu")] <- "**Paracoccus marginatu***"
+topte$species[which(topte$species=="Aphis nasturtii")] <- "**Aphis nasturtii***"
+topte$species[which(topte$species=="Tetraneura nigriabdominalis")] <- "**Tetraneura nigriabdominalis***"
+topte$species[which(topte$species=="Muscidifurax zaraptor")] <- "**Muscidifurax zaraptor***"
+topte$species[which(topte$species=="Rhopalosiphum maidis")] <- "**Rhopalosiphum maidis***"
+
+
+
+
 topte <- mutate(topte, trait = case_when(trait =="adult mortality rate" ~ "Adult Mortality Rate",
                                          trait == "fecundity" ~ "Peak Fecundity",
                                          trait == "juvenile development rate" ~ "Development Rate",
@@ -145,18 +169,24 @@ fig5b <- ggplot(topte, aes(estimate, species, shape=trait, colour=trait,fill=tra
                                           title.position = "top",
                                           title.hjust=0.5))+
   theme(legend.position = c(0.35,-0.1),legend.text = element_text(size = 8.5),
-        axis.text.y = element_text(face = 'italic'))+
+        axis.text.y = element_markdown(face = 'italic'))+
   theme(text=element_text(family="Times"))+
   theme(legend.margin=margin(t = -0.4, unit='cm'))+
   theme(axis.text.y=element_blank())+
   theme(plot.margin=margin(l=-4,unit="cm"))+
-  coord_fixed(ratio = 1.5)
+  # coord_fixed(ratio = 1.5)
+  theme(aspect.ratio=2)+
+  ggtitle("B")+
+  theme(plot.title=element_text(face="bold", size = 15, vjust = -1))
 
-# fig5b
+fig5b
 
-plotMain <- plot_grid(fig5a+theme(legend.position="none")
-                  ,fig5b+theme(legend.position="none")
-                  , ncol=2, align="h")
+# plotMain <- plot_grid(fig5a+theme(legend.position="none")
+#                   ,fig5b+theme(legend.position="none")
+#                   , ncol=2)
+
+plotMain <- fig5a+theme(legend.position="none")+fig5b+theme(legend.position="none")
+# plotMain
 legend <- get_legend(fig5a+theme(legend.position = "bottom"))
 
 #custom legend for fig1
@@ -166,10 +196,11 @@ legend <- get_legend(fig5a+theme(legend.position = "bottom"))
 #                              shape=guide_legend(nrow=2,byrow=TRUE)))
 # save(legend, file="../results/legend.rda")
 
-fig5 <- plot_grid(plotMain, legend, ncol = 1, rel_heights = c(1, 0.1))
+plotMain <- plot_grid(plotMain, NULL, rel_widths = c(1,0.2))
+  
+fig5 <- plot_grid(plotMain, legend,ncol = 1, rel_heights = c(1, 0.1))
 
 # 
 save_plot(fig5, file="../results/Fig5.pdf",
           base_height=15,base_asp=1.5, units="cm")
-
 
