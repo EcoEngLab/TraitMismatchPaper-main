@@ -371,7 +371,7 @@ fig1c <- ggplot(dv, aes(temp, log(estimate), shape=trait, colour=trait,fill=trai
   geom_errorbar(aes(xmin = temp_lwr, xmax = temp_upr),width=0.05,size=0.15) +
   geom_point(size = 1.5, col="#000000",stroke=0.1)+
   theme_bw(base_size = 12.5) +
-  scale_y_continuous(expression(plain(paste("Juvenile Development Rate (", alpha,")"))),
+  scale_y_continuous(expression(plain(paste("Log Juvenile Development Rate (",alpha,")"))),
                      limits =c(-4,-1),
                      expand = c(0, 0),
                      breaks=seq(-4,0, by=1))+
@@ -400,8 +400,9 @@ fig1c <- ggplot(dv, aes(temp, log(estimate), shape=trait, colour=trait,fill=trai
   # theme(legend.position = c(0.3,0.86), 
   #       legend.background = element_rect(fill=alpha("#FFFFFF",1), colour = "#636363", size = 0.1),
   #       legend.text = element_text(size = 6))+
-  theme(text=element_text(family="Times",size=16),
+  theme(text=element_text(family="Times", size=17),
         axis.title = element_text(face="bold"))+
+  theme(axis.text = element_text(size=18))+
   geom_line(aes(temp, fit),dv,size=0.35,col="#636363")+
   geom_ribbon(aes(ymin=lwr, ymax=upr),dv,alpha = 0.25,show.legend = NA, col="#e66101",fill="#e66101",lwd=0.1)+
   theme(legend.margin=margin(t = -0.2, b = 0.1,r=0.1,l = 0.1, unit='cm'))+
@@ -425,7 +426,7 @@ fig1d <- ggplot(bpkBpks, aes(temp, log(estimate), shape=trait, colour=trait,fill
   geom_errorbar(aes(xmin = temp_lwr, xmax = temp_upr),width=0.05,size=0.15) +
   geom_point(size = 1.5, col="#000000",stroke=0.1)+
   theme_bw(base_size = 12.5) +
-  scale_y_continuous(expression(plain(paste("Fecundity (", beta,")"))),
+  scale_y_continuous(expression(plain(paste("Log Fecundity (", beta,")"))),
                      limits =c(0,4),
                      expand = c(0, 0),
                      breaks=seq(-4,4, by=1))+
@@ -454,8 +455,9 @@ fig1d <- ggplot(bpkBpks, aes(temp, log(estimate), shape=trait, colour=trait,fill
   # theme(legend.position = c(0.2,0.9), 
   #       legend.background = element_rect(fill=alpha("#FFFFFF",1), colour = "#636363", size = 0.1),
   #       legend.text = element_text(size = 10))+
-  theme(text=element_text(family="Times",size=16),
+  theme(text=element_text(family="Times",size=17),
         axis.title = element_text(face="bold"))+
+  theme(axis.text = element_text(size=18))+
   geom_line(aes(temp, fit),bpkBpks,size=0.35,col="#636363")+
   geom_ribbon(aes(ymin=lwr, ymax=upr),bpkBpks,alpha = 0.25,show.legend = NA, col="#e69201",fill="#e69201",lwd=0.1)+
   theme(legend.margin=margin(t = -0.2, b = 0.1,r=0.1,l = 0.1, unit='cm'))+
@@ -481,14 +483,14 @@ fig1e <- ggplot(z, aes(temp, log(estimate), shape=trait, colour=trait,fill=trait
   geom_errorbar(aes(xmin = temp_lwr, xmax = temp_upr),width=0.05,size=0.15) +
   geom_point(size = 1.5, col="#000000",stroke=0.1)+
   theme_bw(base_size = 12.5) +
-  scale_y_continuous(expression(plain(paste("Adult Mortality Rate (", italic(z),")"))),
+  scale_y_continuous(expression(plain(paste("Log Adult Mortality Rate (", italic(z),")"))),
                      limits =c(-5,-2),
                      expand = c(0, 0),
                      breaks=seq(-10,0, by=1))+
   scale_x_continuous(expression(plain(paste("", italic(T)[pk]))),
                      limits =c(10,31),
                      expand = c(0, 0),
-                     breaks=seq(0,36, by=2))+
+                     breaks=seq(0,36, by=4))+
   scale_fill_manual(values = c("#a6cee3"),
                     name=expression(bold("")),
                     guide = guide_legend(nrow=1,ncol=1,
@@ -510,8 +512,9 @@ fig1e <- ggplot(z, aes(temp, log(estimate), shape=trait, colour=trait,fill=trait
   # theme(legend.position = c(0.3,0.86), 
   #       legend.background = element_rect(fill=alpha("#FFFFFF",1), colour = "#636363", size = 0.1),
   #       legend.text = element_text(size = 6))+
-  theme(text=element_text(family="Times",size=16),
+  theme(text=element_text(family="Times",size=17),
         axis.title = element_text(face="bold"))+
+  theme(axis.text = element_text(size=18))+
   geom_line(aes(temp, linearfit),z,size=0.35,col="#636363")+
   geom_ribbon(aes(ymin=linear_lwr, ymax=linear_upr),z,alpha = 0.5,show.legend = NA, col="#a6cee3",fill="#a6cee3",lwd=0.1)+
   theme(legend.margin=margin(t = -0.2, b = 0.1,r=0.1,l = 0.1, unit='cm'))+
@@ -535,14 +538,14 @@ fig1f <- ggplot(zj, aes(temp, log(estimate), shape=trait, colour=trait,fill=trai
   geom_errorbar(aes(xmin = temp_lwr, xmax = temp_upr),width=0.05,size=0.15) +
   geom_point(size = 1.5, col="#000000",stroke=0.1)+
   theme_bw(base_size = 12.5) +
-  scale_y_continuous(expression(plain(paste("Juvenile Mortality Rate (", italic(z)[j],")"))),
+  scale_y_continuous(expression(plain(paste("Log Juvenile Mortality Rate (", italic(z)[j],")"))),
                      limits =c(-9,-3),
                      expand = c(0, 0),
                      breaks=seq(-10,0, by=1))+
   scale_x_continuous(expression(plain(paste("", italic(T)[pk]))),
                      limits =c(10,35),
                      expand = c(0, 0),
-                     breaks=seq(0,36, by=2))+
+                     breaks=seq(0,36, by=4))+
   scale_fill_manual(values = c("#1f78b4"),
                     name=expression(bold("")),
                     guide = guide_legend(nrow=1,ncol=1,
@@ -564,8 +567,9 @@ fig1f <- ggplot(zj, aes(temp, log(estimate), shape=trait, colour=trait,fill=trai
   # theme(legend.position = c(0.3,0.86), 
   #       legend.background = element_rect(fill=alpha("#FFFFFF",1), colour = "#636363", size = 0.1),
   #       legend.text = element_text(size = 6))+
-  theme(text=element_text(family="Times",size=16),
-        axis.title = element_text(face="bold"))+
+  theme(text=element_text(family="Times",size=19))+
+  theme(axis.title = element_text(face="bold"))+
+  theme(axis.text = element_text(size=18))+
   geom_line(aes(temp, linearfit),zj,size=0.35,col="#636363")+
   geom_ribbon(aes(ymin=linear_lwr, ymax=linear_upr),zj,alpha = 0.25,show.legend = NA, col="#1f78b4",fill="#1f78b4",lwd=0.1)+  theme(legend.margin=margin(t = -0.2, b = 0.1,r=0.1,l = 0.1, unit='cm'))+
   # annotate("text", x = 28, y = -3.85,label = "slope = 0.12 ± 0.10 (95% CI)",
@@ -577,15 +581,17 @@ fig1f <- ggplot(zj, aes(temp, log(estimate), shape=trait, colour=trait,fill=trai
   geom_text(aes(x = -Inf, y = Inf,hjust = -0.5,vjust=1.4,
                 label = "F"),size = 5, colour = "black")
   # theme(plot.margin=margin(l=-4,t=0.5,unit="cm"))
-  
 
 
-
-
-# fig1f
+fig1f
 
 ##plots
-fig1 <- plot_grid(fig1c, fig1d,fig1e,fig1f,align="hv",nrow=2,ncol=2)
+fig1 <- plot_grid(fig1c,NULL, fig1d,fig1e,NULL,fig1f,
+                  align="hv",nrow=2,ncol=3,rel_widths = c(1,0.15,1),scale = 1.1)+
+  theme(plot.margin=unit(c(1,1,1,1), "cm"))
+
+fig1 <- ggarrange(fig1c,fig1d,fig1e,fig1f, nrow=2,ncol = 2, align="hv")+
+  theme(plot.margin=unit(c(1,1,1,1), "cm"))
 #load legend from mismatch plot
 # load("../results/legend.rda")
 

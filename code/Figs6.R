@@ -108,7 +108,7 @@ Sum_rmax<- ggplot(SumPlot, aes(x=sum, y=rmax, col=factor(species, levels=SPorder
                       name=expression(bold("species")),
                       labels =SPorder)+
   theme(legend.position = 'none',legend.text = element_text(size = 10),
-        axis.text.y = element_text(face = 'italic'),aspect.ratio = 1)+
+        aspect.ratio = 1)+
   theme(text=element_text(family="Times"))+
   geom_text(aes(x = -Inf, y = Inf,hjust = -0.5,vjust=1.4,
                 label = "B"),size = 5, colour = "black")+

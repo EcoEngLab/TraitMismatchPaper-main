@@ -150,7 +150,7 @@ fig5b <- ggplot(topte, aes(estimate, species, shape=trait, colour=trait,fill=tra
   geom_point(size = 2.5, col="#000000",stroke=0.1)+
   theme_bw(base_size = 12.5) +
   theme(axis.title.y = element_blank())+
-  scale_x_continuous(expression(plain(paste("Activation Energy (",e,")"))),
+  scale_x_continuous(expression(plain(paste("Activation Energy (",E,")"))),
                      limits =c(0,11),
                      expand = c(0, 0),
                      breaks=seq(-20,36, by=2))+
