@@ -20,7 +20,7 @@ require('cowplot')
 rm(list=ls())
 graphics.off()
 
-######Alpha######
+######1. Alpha######
 
 df <- as_tibble(read.csv('mismatch_dat.csv'))
 
@@ -207,7 +207,7 @@ save_plot(alphaPlot, file="../results/AlphaFits.pdf",
 
 
 
-##### Peak fecundity #####
+##### 2. Peak fecundity #####
 rm(list=ls())
 graphics.off() 
 
@@ -393,7 +393,7 @@ ModelOutDF <- do.call(rbind, ModelOut)
 ModelOutDF$trait <- "fecundity"
 write.csv(ModelOutDF, "../data/bpk_Tpks_AllParams.csv")
 
-##### Adult Mortality #####
+##### 3. Adult Mortality #####
 rm(list=ls())
 graphics.off()
 
@@ -599,7 +599,7 @@ ModelOutDF <- do.call(rbind, ModelOutDFList)
 ModelOutDF$trait <- "adult mortality rate"
 write.csv(ModelOutDF, "../data/z_Tpks_AllParams.csv")
 
-##### Juvenile Mortality #####
+##### 4. Juvenile Mortality #####
 rm(list=ls())
 graphics.off()
 
