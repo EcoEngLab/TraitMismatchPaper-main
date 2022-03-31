@@ -4,6 +4,7 @@
 ##Packages##
 library(ggplot2)
 library(tidyverse)
+library(ggpubr)
 
 
 ##########1. Varaince + Development rate against fitness #######
@@ -242,7 +243,7 @@ Rear_alp <- ggplot(alp, aes(x=RearTemp, y=estimate)) +
                      expand = c(0, 0),
                      breaks=seq(0,50, by=1)
   )+
-  scale_y_continuous(expression(plain(paste("Peak Juvenile Development Rate (", italic(T)[pk]^alpha,")"))),
+  scale_y_continuous(expression(plain(paste(italic(T)[pk], " of Juvenile Development Rate (", alpha,")"))),
                      limits =c(23,38),
                      expand = c(0, 0),
                      breaks=seq(0,50, by=2)
@@ -277,7 +278,7 @@ Rear_Bopt <- ggplot(Bopt, aes(x=RearTemp, y=estimate)) +
                      expand = c(0, 0),
                      breaks=seq(0,50, by=1)
   )+
-  scale_y_continuous(expression(plain(paste("Peak Fecundity (", italic(T)[pk]^B[pk],")"))),
+  scale_y_continuous(expression(plain(paste(italic(T)[pk], " of Fecundity (", B[pk],")"))),
                      limits =c(20,32),
                      expand = c(0, 0),
                      breaks=seq(0,50, by=2)
@@ -310,7 +311,7 @@ Rear_Z <- ggplot(Z, aes(x=RearTemp, y=estimate)) +
                      expand = c(0, 0),
                      breaks=seq(0,50, by=1)
   )+
-  scale_y_continuous(expression(plain(paste("Peak Adult Mortality Rate (", italic(T)[pk]^Z,")"))),
+  scale_y_continuous(expression(plain(paste(italic(T)[pk], " of Adult Mortality Rate (",Z,")"))),
                      limits =c(13,32),
                      expand = c(0, 0),
                      breaks=seq(0,50, by=2)
@@ -345,7 +346,7 @@ Rear_Zj <- ggplot(Zj, aes(x=RearTemp, y=estimate)) +
                      expand = c(0, 0),
                      breaks=seq(0,50, by=1)
   )+
-  scale_y_continuous(expression(plain(paste("Peak Juvenile Mortality Rate (", italic(T)[pk]^Z[j],")"))),
+  scale_y_continuous(expression(plain(paste(italic(T)[pk], " of Juvenile Mortality Rate (", Z[j],")"))),
                      limits =c(20,32),
                      expand = c(0, 0),
                      breaks=seq(0,50, by=2)
@@ -365,13 +366,4 @@ fig6 <- ggarrange(Rear_alp,Rear_Bopt,Rear_Z, Rear_Zj,nrow=2,ncol=2)
 
 ggsave("../results/RearTemp.pdf",fig6, width = 20, height =20, 
        units = "cm",device = cairo_pdf)
-
-
-
-
-
-
-
-
-
 
