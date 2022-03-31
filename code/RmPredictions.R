@@ -1,4 +1,4 @@
-######Growth rate prediction data for 6 species with all traits #######
+######Growth rate prediction modelling for 6 species with all traits #######
 
 
 # load packages

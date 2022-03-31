@@ -12,6 +12,7 @@ require('ggplot2')
 require('ggpubr')
 require('patchwork')
 require('cowplot')
+require('ggtext')
 
 rm(list=ls())
 graphics.off()
@@ -111,7 +112,7 @@ fig1c <- ggplot(dv, aes(temp, log(estimate), shape=trait, colour=trait,fill=trai
   geom_errorbar(aes(xmin = temp_lwr, xmax = temp_upr),width=0.05,size=0.15) +
   geom_point(size = 1.5, col="#000000",stroke=0.1)+
   theme_bw(base_size = 12.5) +
-  scale_y_continuous(expression(plain(paste("Log Juvenile Development Rate (",alpha,")"))),
+  scale_y_continuous(expression(plain(paste("Log Juvenile Development Rate (",italic(alpha),")"))),
                      limits =c(-4,-1),
                      expand = c(0, 0),
                      breaks=seq(-4,0, by=1))+
@@ -158,7 +159,7 @@ fig1d <- ggplot(bpkBpks, aes(temp, log(estimate), shape=trait, colour=trait,fill
   geom_errorbar(aes(xmin = temp_lwr, xmax = temp_upr),width=0.05,size=0.15) +
   geom_point(size = 1.5, col="#000000",stroke=0.1)+
   theme_bw(base_size = 12.5) +
-  scale_y_continuous(expression(plain(paste("Log Fecundity (", beta,")"))),
+  scale_y_continuous(expression(plain(paste("Log Fecundity (", italic(b[max]),")"))),
                      limits =c(0,4),
                      expand = c(0, 0),
                      breaks=seq(-4,4, by=1))+
@@ -253,7 +254,7 @@ fig1f <- ggplot(zj, aes(temp, log(estimate), shape=trait, colour=trait,fill=trai
   geom_errorbar(aes(xmin = temp_lwr, xmax = temp_upr),width=0.05,size=0.15) +
   geom_point(size = 1.5, col="#000000",stroke=0.1)+
   theme_bw(base_size = 12.5) +
-  scale_y_continuous(expression(plain(paste("Log Juvenile Mortality Rate (", italic(z)[j],")"))),
+  scale_y_continuous(expression(plain(paste("Log Juvenile Mortality Rate (", italic(z[J]),")"))),
                      limits =c(-9,-3),
                      expand = c(0, 0),
                      breaks=seq(-10,0, by=1))+
@@ -358,30 +359,30 @@ fig5a <- ggplot(toptz, aes(estimate, species, shape=trait, colour=trait,fill=tra
                      limits =c(9,37),
                      expand = c(0, 0),
                      breaks=seq(12,36, by=4))+
-  scale_fill_manual(labels = c(expression(plain(paste("Juvenile Mortality Rate (",z[j],")"))),
-                               expression(plain(paste("Adult Mortality Rate (",z,")"))),
-                               expression(plain(paste("Fecundity (",beta,")"))),
-                               expression(plain(paste("Juvenile Development Rate (",alpha,")")))),
+  scale_fill_manual(labels = c(expression(plain(paste("Juvenile Mortality Rate (",italic(z[j]),")"))),
+                               expression(plain(paste("Adult Mortality Rate (",italic(z),")"))),
+                               expression(plain(paste("Fecundity (",italic(b[max]),")"))),
+                               expression(plain(paste("Juvenile Development Rate (",italic(alpha),")")))),
                     values = c("#1f78b4","#a6cee3","#fdb863","#e66101"),
                     name=expression(bold("")),
                     guide = guide_legend(nrow = 1,ncol =4,
                                          direction = "vertical",
                                          title.position = "top",
                                          title.hjust=0.5))+
-  scale_colour_manual(labels = c(expression(plain(paste("Juvenile Mortality Rate (",z[j],")"))),
-                                 expression(plain(paste("Adult Mortality Rate (",z,")"))),
-                                 expression(plain(paste("Fecundity (",beta,")"))),
-                                 expression(plain(paste("Juvenile Development Rate (",alpha,")")))),
+  scale_colour_manual(labels = c(expression(plain(paste("Juvenile Mortality Rate (",italic(z[j]),")"))),
+                                 expression(plain(paste("Adult Mortality Rate (",italic(z),")"))),
+                                 expression(plain(paste("Fecundity (",italic(b[max]),")"))),
+                                 expression(plain(paste("Juvenile Development Rate (",italic(alpha),")")))),
                       values = c("#1f78b4","#a6cee3","#fdb863","#e66101"),
                       name=expression(bold("")),
                       guide = guide_legend(nrow=1,ncol=4,
                                            direction = "vertical",
                                            title.position = "top",
                                            title.hjust=0.5))+
-  scale_shape_manual(labels = c(expression(plain(paste("Juvenile Mortality Rate (",z[j],")"))),
-                                expression(plain(paste("Adult Mortality Rate (",z,")"))),
-                                expression(plain(paste("Fecundity (",beta,")"))),
-                                expression(plain(paste("Juvenile Development Rate (",alpha,")")))),
+  scale_shape_manual(labels = c(expression(plain(paste("Juvenile Mortality Rate (",italic(z[j]),")"))),
+                                expression(plain(paste("Adult Mortality Rate (",italic(z),")"))),
+                                expression(plain(paste("Fecundity (",italic(b[max]),")"))),
+                                expression(plain(paste("Juvenile Development Rate (",italic(alpha),")")))),
                      values = c(21,22,23,24),
                      name=expression(bold("")),
                      guide = guide_legend(nrow = 1,ncol =4,
@@ -433,7 +434,7 @@ fig5b <- ggplot(topte, aes(estimate, species, shape=trait, colour=trait,fill=tra
   geom_point(size = 2.5, col="#000000",stroke=0.1)+
   theme_bw(base_size = 12.5) +
   theme(axis.title.y = element_blank())+
-  scale_x_continuous(expression(plain(paste("Activation Energy (",E,")"))),
+  scale_x_continuous(expression(plain(paste("Activation Energy (",italic(E),")"))),
                      limits =c(0,11),
                      expand = c(0, 0),
                      breaks=seq(-20,36, by=2))+
@@ -469,9 +470,9 @@ plotMain <- fig5a+theme(legend.position="none")+fig5b+theme(legend.position="non
 legend <- get_legend(fig5a+theme(legend.position = "bottom"))
 
 
-plotMain <- plot_grid(plotMain, NULL, rel_widths = c(1,0.2))
+# plotMain <- plot_grid(plotMain, NULL, rel_widths = c(1,0))
 
-fig5 <- plot_grid(plotMain, legend,ncol = 1, rel_heights = c(1, 0.1))
+fig5 <- plot_grid(plotMain, legend,ncol = 1, rel_heights = c(1, 0.05))
 
 # 
 save_plot(fig5, file="../results/Fig5.pdf",
@@ -532,7 +533,7 @@ SPorder <- rmPeakdata$species[order(rmPeakdata$rmax)]
 ##Fig 5a: Rm Curves##
 fig6a <-  ggplot(rmpredictions, aes(temp,estimate,colour=factor(species, levels=SPorder)))+
   scale_x_continuous(expression(plain(paste(" Temperature (",degree,"C)"))))+
-  scale_y_continuous(expression(plain(paste(" Population growth rate ("~italic(r)[m]~")"))),
+  scale_y_continuous(expression(plain(paste("Maximal population growth rate (",italic(r[m]), ")"))),
                      limits=c(-0.001,0.255),
                      expand = c(0.01, 0),
                      breaks=seq(0,0.25, by=0.05))+
@@ -571,11 +572,11 @@ Sum_rmax<- ggplot(SumPlot, aes(x=sum, y=rmax, col=factor(species, levels=SPorder
   geom_point(size = 2.5, stroke=0.2)+
   theme_bw(base_size = 12.5) +
   # theme(axis.title.y = element_blank())+
-  scale_x_continuous(expression(plain(paste("Sum of ", italic(T)[pk]))),
+  scale_x_continuous(expression(plain(paste("Sum of ", italic(T[pk]),"'s"))),
                      limits =c(90,105),
                      expand = c(0, 0),
                      breaks=seq(20,120, by=5))+
-  scale_y_continuous(expression(plain(paste("Peak Population growth rate ("~italic(r)[m]~")"))),
+  scale_y_continuous(expression(plain(paste(italic(r[m])," at Optimal Temperature (",italic(r[paste(m,",", opt)]), ")"))),
                      limits =c(0,0.31),
                      expand = c(0, 0),
                      breaks=seq(0,1, by=0.1))+

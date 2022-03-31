@@ -72,11 +72,11 @@ Alp_rmax <- ggplot(AlpPlot, aes(x=estimate, y=rmax, col=factor(species, levels=S
   geom_point(size = 2.5,stroke=0.2)+
   theme_bw(base_size = 12.5) +
   # theme(axis.title.y = element_blank())+
-  scale_x_continuous(expression(plain(paste("Peak Juvenile Development Rate (", italic(T)[pk]^alpha,")"))),
+  scale_x_continuous(expression(plain(paste(italic(T)[pk], " of Juvenile Development Rate (", italic(alpha),")"))),
                      limits =c(26,35),
                      expand = c(0, 0),
                      breaks=seq(26,35, by=1))+
-  scale_y_continuous(expression(plain(paste("Peak Population growth rate ("~italic(r)[m]~")"))),
+  scale_y_continuous(expression(plain(paste(italic(r[m])," at Optimal Temperature (",italic(r[paste(m,",", opt)]), ")"))),
                      limits =c(0,0.35),
                      expand = c(0, 0),
                      breaks=seq(0,1, by=0.1))+
@@ -90,7 +90,8 @@ Alp_rmax <- ggplot(AlpPlot, aes(x=estimate, y=rmax, col=factor(species, levels=S
                 label = "A"),size = 5, colour = "black")+
   theme(legend.title = element_blank())+
   geom_line(aes(estimate,fit),AlpPlot,size=0.35,col="#636363")+
-  theme(axis.title.x = element_text(size=10))
+  theme(axis.title.x = element_text(size=10),
+        axis.title.y = element_text(size=10))
 
 Alp_rmax
 
@@ -110,7 +111,7 @@ Var_rmax<- ggplot(VarPlot, aes(x=variance, y=rmax, col=factor(species, levels=SP
                      limits =c(20,90),
                      expand = c(0, 0),
                      breaks=seq(20,90, by=10))+
-  scale_y_continuous(expression(plain(paste("Peak Population growth rate ("~italic(r)[m]~")"))),
+  scale_y_continuous(expression(plain(paste(italic(r[m])," at Optimal Temperature (",italic(r[paste(m,",", opt)]), ")"))),
                      limits =c(0,0.31),
                      expand = c(0, 0),
                      breaks=seq(0,1, by=0.1))+
@@ -123,7 +124,9 @@ Var_rmax<- ggplot(VarPlot, aes(x=variance, y=rmax, col=factor(species, levels=SP
   geom_text(aes(x = -Inf, y = Inf,hjust = -0.5,vjust=1.4,
                 label = "B"),size = 5, colour = "black")+
   theme(legend.title = element_blank())+
-  geom_line(aes(variance,fit),VarPlot,size=0.35,col="#636363")
+  geom_line(aes(variance,fit),VarPlot,size=0.35,col="#636363")+
+  theme(axis.title.x = element_text(size=10),
+        axis.title.y = element_text(size=10))
 Var_rmax
 
 si1 <- ggarrange(Alp_rmax,Var_rmax,nrow=1,ncol=2,
@@ -243,7 +246,7 @@ Rear_alp <- ggplot(alp, aes(x=RearTemp, y=estimate)) +
                      expand = c(0, 0),
                      breaks=seq(0,50, by=1)
   )+
-  scale_y_continuous(expression(plain(paste(italic(T)[pk], " of Juvenile Development Rate (", alpha,")"))),
+  scale_y_continuous(expression(plain(paste(italic(T)[pk], " of Juvenile Development Rate (", italic(alpha),")"))),
                      limits =c(23,38),
                      expand = c(0, 0),
                      breaks=seq(0,50, by=2)
@@ -278,7 +281,7 @@ Rear_Bopt <- ggplot(Bopt, aes(x=RearTemp, y=estimate)) +
                      expand = c(0, 0),
                      breaks=seq(0,50, by=1)
   )+
-  scale_y_continuous(expression(plain(paste(italic(T)[pk], " of Fecundity (", B[pk],")"))),
+  scale_y_continuous(expression(plain(paste(italic(T)[pk], " of Fecundity (", italic(B[max]),")"))),
                      limits =c(20,32),
                      expand = c(0, 0),
                      breaks=seq(0,50, by=2)
@@ -311,7 +314,7 @@ Rear_Z <- ggplot(Z, aes(x=RearTemp, y=estimate)) +
                      expand = c(0, 0),
                      breaks=seq(0,50, by=1)
   )+
-  scale_y_continuous(expression(plain(paste(italic(T)[pk], " of Adult Mortality Rate (",Z,")"))),
+  scale_y_continuous(expression(plain(paste(italic(T)[pk], " of Adult Mortality Rate (",italic(z),")"))),
                      limits =c(13,32),
                      expand = c(0, 0),
                      breaks=seq(0,50, by=2)
@@ -346,7 +349,7 @@ Rear_Zj <- ggplot(Zj, aes(x=RearTemp, y=estimate)) +
                      expand = c(0, 0),
                      breaks=seq(0,50, by=1)
   )+
-  scale_y_continuous(expression(plain(paste(italic(T)[pk], " of Juvenile Mortality Rate (", Z[j],")"))),
+  scale_y_continuous(expression(plain(paste(italic(T)[pk], " of Juvenile Mortality Rate (", italic(z[j]),")"))),
                      limits =c(20,32),
                      expand = c(0, 0),
                      breaks=seq(0,50, by=2)
