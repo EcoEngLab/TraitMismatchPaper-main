@@ -1,14 +1,14 @@
 /results
 
 # R Files
- .Rhistory
-.Rapp.history
-.RData
+**/.Rhistory
+**/.Rapp.history
+**/.RData
 
 # Python
 __pycache__/
 *.py[cod]
 
 # Jupyter files
-.ipynb_checkpoints
+**/.ipynb_checkpoints
 */.ipynb_checkpoints/*
