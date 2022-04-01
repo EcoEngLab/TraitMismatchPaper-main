@@ -17,6 +17,8 @@ require('ggtext')
 rm(list=ls())
 graphics.off()
 
+setwd("~/Desktop/TraitMismatchPaper-main/data")
+
 ###Note: working directory is data directory
 
 
@@ -490,7 +492,6 @@ rmPeak <- rmpredictions %>% group_by(species) %>%
 rmPeakdata <- rmpredictions[rmPeak$`which(rmpredictions$estimate == max(estimate))`, ]
 rmPeakdata <- rmPeakdata %>% rename(rmax = estimate)
 
-
 Species <- rmPeakdata$species
 
 alpha  <- as_tibble(read.csv('alpha_Tpks.csv', header = TRUE)) %>%
@@ -522,9 +523,6 @@ OptVar <- AllOpt %>% group_by(species) %>%
 OptSum <- AllOpt %>% group_by(species) %>%
   summarise(sum = sum(estimate))
 
-
-
-
 ##changing order of df for plotting
 colors <- c("#d9d9d9","#bdbdbd","#969696","#737373","#525252","#252525")
 OrderCol <- colors[order(rmPeakdata$rmax)]
@@ -533,7 +531,7 @@ SPorder <- rmPeakdata$species[order(rmPeakdata$rmax)]
 ##Fig 5a: Rm Curves##
 fig6a <-  ggplot(rmpredictions, aes(temp,estimate,colour=factor(species, levels=SPorder)))+
   scale_x_continuous(expression(plain(paste(" Temperature (",degree,"C)"))))+
-  scale_y_continuous(expression(plain(paste("Maximal population growth rate (",italic(r[m]), ")"))),
+  scale_y_continuous(expression(plain(paste("Maximal population growth rate (",italic(r)[m], ")"))),
                      limits=c(-0.001,0.255),
                      expand = c(0.01, 0),
                      breaks=seq(0,0.25, by=0.05))+
@@ -549,7 +547,7 @@ fig6a <-  ggplot(rmpredictions, aes(temp,estimate,colour=factor(species, levels=
                                            title.hjust=0.5))+
   theme(text=element_text(family="Times"))+
   theme(legend.text=element_text(family="Times",face = 'italic', size = 7), 
-        legend.position = c(-0.4,0.68))+
+        legend.position = 'none')+
   geom_text(aes(x = -Inf, y = Inf,hjust = -0.5,vjust=1.4,
                 label = "A"),size = 5, colour = "black")+
   theme(legend.title = element_blank())+

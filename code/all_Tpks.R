@@ -20,7 +20,7 @@ require('cowplot')
 rm(list=ls())
 graphics.off()
 
-######1. Alpha######
+######1. Alpha ######
 
 df <- as_tibble(read.csv('mismatch_dat.csv'))
 
@@ -47,7 +47,7 @@ dv <- dv %>% arrange(dv, curve_ID)
 # fit TPC model for each species
 
 start_vals <- get_start_vals(dv$temp, dv$rate, model_name = 'pawar_2018')
-low_lims <- get_lower_lims(dv$temp, dv$rate, model_name = 'pawar_2018')
+low_lims <-   get_lower_lims(dv$temp, dv$rate, model_name = 'pawar_2018')
 upper_lims <- get_upper_lims(dv$temp, dv$rate, model_name = 'pawar_2018')
 
 
@@ -628,7 +628,7 @@ dv <- dv %>% arrange(dv, curve_ID)
 # fit TPC model for each species
 
 start_vals <- get_start_vals(dv$temp, dv$rate, model_name = 'pawar_2018')
-low_lims <- get_lower_lims(dv$temp, dv$rate, model_name = 'pawar_2018')
+low_lims   <- get_lower_lims(dv$temp, dv$rate, model_name = 'pawar_2018')
 upper_lims <- get_upper_lims(dv$temp, dv$rate, model_name = 'pawar_2018')
 
 dv_fits <- nest(dv, data = c(temp, rate)) %>%

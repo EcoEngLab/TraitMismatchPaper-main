@@ -1,6 +1,5 @@
 ######Growth rate prediction modelling for 6 species with all traits #######
 
-
 # load packages
 require('tidyverse')
 require('nls.multstart')
@@ -15,7 +14,7 @@ require('boot')
 rm(list=ls())
 graphics.off()
 
-# setwd("~/Dropbox/ph_thesis/Topt_paper/data")
+setwd("~/Desktop/TraitMismatchPaper-main/data")
 
 #read in the trait data
 
@@ -1832,8 +1831,8 @@ mzz_fits <- nest(mzz, data = c(temp, rate)) %>%
   mutate(pawar = map(data, ~nls_multstart(rate~pawar_2018(temp = temp, r_tref,e,eh,topt, tref = 15),
                                           data = .x,
                                           iter = c(3,3,3,3),
-                                          start_lower = start_vals - 10,
-                                          start_upper = start_vals + 10,
+                                          start_lower = start_vals - 1,
+                                          start_upper = start_vals + 1,
                                           supp_errors = 'Y',
                                           convergence_count = FALSE)))
 #____________________
