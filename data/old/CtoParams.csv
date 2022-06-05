@@ -1,0 +1,11 @@
+param,conf_lower,conf_upper,method,estimate,trait,species
+rmax,48.96507968437083,77.24514204114756,residual bootstrap,60.63152712238051,z,Clavigralla tomentosicollis
+topt,21.312,25.450961895177528,residual bootstrap,21.499,z,Clavigralla tomentosicollis
+ctmin,18.85265300663893,19.901000000000003,residual bootstrap,19.576,z,Clavigralla tomentosicollis
+ctmax,50.148825926231815,82.17258888987347,residual bootstrap,67.436,z,Clavigralla tomentosicollis
+thermal_safety_margin,29.928869820385923,61.845,residual bootstrap,45.93700000000001,z,Clavigralla tomentosicollis
+thermal_tolerance,31.031007703081624,62.925978630772725,residual bootstrap,47.86000000000001,z,Clavigralla tomentosicollis
+breadth,3.2270000000000003,5.685434411526013,residual bootstrap,4.303000000000001,z,Clavigralla tomentosicollis
+r_tref,64.83613232777503,229.6904419028794,residual bootstrap,102.94167423892932,z,Clavigralla tomentosicollis
+e,-0.9824663784086926,-0.34028062153786587,residual bootstrap,-0.5720094859452359,z,Clavigralla tomentosicollis
+eh,-31.696228917703916,-5.745241174970987,residual bootstrap,-26.976664401559063,z,Clavigralla tomentosicollis
