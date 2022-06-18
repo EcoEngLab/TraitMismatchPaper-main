@@ -1,6 +1,6 @@
 
 #=====================================================================
-#             Analysis of the 'hotter-is-better' theory              #
+#             Analysis of the 'hotter-is-better' pattern             #
 #=====================================================================
 
 # Load libraries
@@ -13,9 +13,11 @@ require(cowplot)
 rm(list=ls())
 graphics.off()
 
-setwd("~/Dropbox/TraitTesting/data")
+#±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±
 
-bodyMass <- as_tibble(read.csv('sizeMeans.csv')) %>% 
+# 1. Development time (a)
+
+bodyMass <- as_tibble(read.csv('../data/sizeMeans.csv')) %>% 
   rename(species = interactor1) %>%
   mutate(curve_ID = case_when(species == 'Aedes albopictus' ~ '1',
                               species == 'Aedes aegypti' ~ '2',
@@ -66,8 +68,7 @@ bodyMass <- as_tibble(read.csv('sizeMeans.csv')) %>%
   rename(massspecies = species, masscurve_ID = curve_ID) %>% 
   filter(masscurve_ID != 'NA')
 
-  
-Tc <- as_tibble(read.csv('alpha_Tpks_AllParams.csv')) %>%
+Tc <- as_tibble(read.csv('../data/alpha_Tpks_AllParams.csv')) %>%
   mutate(curve_ID = case_when(species == 'Aedes albopictus' ~ '1',
                               species == 'Aedes aegypti' ~ '2',
                               species == 'Anthonomus grandis' ~ '3',
@@ -130,7 +131,7 @@ Tc <- bind_cols(a_pk, T_pk, bodyMass)
 
 Tc <- Tc %>% rename(mass = avg) %>% select(-masscurve_ID)
 
-write_csv(Tc, 'a_pksT_pksMass.csv')
+write_csv(Tc, '../data/a_pksT_pksMass.csv')
 
 # linear model (note that alpha_pk is linear in log-log scale)
 TcLm <- lm(log(a_pk) ~ T_pk, data = Tc); summary(TcLm)
@@ -190,9 +191,9 @@ save_plot(MassCorrectedApkTpk, file="../results/MassCorrectedApkTpk.pdf",
 
 #±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±
 
-#2. Juvenile mortality rate (zj)
+# 2. Juvenile mortality rate (zj)
 
-bodyMass <- as_tibble(read.csv('sizeMeans.csv')) %>% 
+bodyMass <- as_tibble(read.csv('../data/sizeMeans.csv')) %>% 
   rename(species = interactor1) %>% 
   mutate(curve_ID = case_when(species == 'Thrips hawaiiensis' ~ '1',
                               species == 'Aedes aegypti' ~ '2',
@@ -270,7 +271,7 @@ zj_data <- bind_cols(zj_pk, T_pk, bodyMass)
 
 zj_data <- zj_data %>% rename(mass = avg) %>% select(-masscurve_ID)
 
-write_csv(zj_data, 'zj_pksT_pksMass.csv')
+write_csv(zj_data, '../data/zj_pksT_pksMass.csv')
 
 zj_model <- lm(log(zjpk) ~ T_pk, data = zj_data); summary(zj_model)
 
@@ -331,7 +332,7 @@ save_plot(MassCorrectedzjpkTpk, file="../results/MassCorrectedzjpkTpk.pdf",
 
 # 3. Adult mortality rate (z)
 
-bodyMass <- as_tibble(read.csv('sizeMeans.csv')) %>% 
+bodyMass <- as_tibble(read.csv('../data/sizeMeans.csv')) %>% 
   rename(species = interactor1) %>% 
   mutate(curve_ID = case_when(species == 'Culex pipiens' ~ '1',
                               species == 'Plutella xylostella' ~ '2',
@@ -366,7 +367,7 @@ bodyMass <- as_tibble(read.csv('sizeMeans.csv')) %>%
   filter(masscurve_ID != 'NA')
 
 
-zPk <- as_tibble(read.csv('z_Tpks_AllParams.csv')) %>%
+zPk <- as_tibble(read.csv('../data/z_Tpks_AllParams.csv')) %>%
   mutate(curve_ID = case_when(species == 'Culex pipiens' ~ '1',
                               species == 'Plutella xylostella' ~ '2',
                               species == 'Thrips hawaiiensis' ~ '3',
@@ -412,7 +413,7 @@ z_data <- bind_cols(z_pk, T_pk, bodyMass)
 
 z_data <- z_data %>% rename(mass = avg) %>% select(-masscurve_ID)
 
-write_csv(z_data, 'z_pksT_pksMass.csv')
+write_csv(z_data, '../data/z_pksT_pksMass.csv')
 
 z_model <- lm(log(zpk) ~ T_pk, data = z_data); summary(z_model)
 
@@ -471,7 +472,7 @@ save_plot(MassCorrectedzpkTpk, file="../results/MassCorrectedzpkTpk.pdf",
 #===============================================================
 # 4. Peak fecundity (bmax)
 
-bodyMass <- as_tibble(read.csv('sizeMeans.csv')) %>% 
+bodyMass <- as_tibble(read.csv('../data/sizeMeans.csv')) %>% 
   rename(species = interactor1) %>% 
   mutate(curve_ID = case_when(species == 'Aedes aegypti' ~ '2',
                               species == 'Anthonomus grandis' ~ '3',
@@ -514,7 +515,7 @@ bodyMass <- as_tibble(read.csv('sizeMeans.csv')) %>%
   rename(massspecies = species, masscurve_ID = curve_ID) 
 
 
-bPk <- as_tibble(read.csv('bmax_Tpks_AllParams.csv')) %>% 
+bPk <- as_tibble(read.csv('../data/bmax_Tpks_AllParams.csv')) %>% 
   mutate(curve_ID = case_when(species == 'Aedes aegypti' ~ '2',
                               species == 'Anthonomus grandis' ~ '3',
                               species == 'Paracoccus marginatus' ~ '4',
@@ -568,7 +569,7 @@ bpk_data <- bind_cols(b_pk, T_pk, bodyMass)
 
 bpk_data <- bpk_data %>% rename(mass = avg)  %>% select(-masscurve_ID)
 
-write_csv(bpk_data, 'bmaxT_pksMass.csv')
+write_csv(bpk_data, '../data/bmaxT_pksMass.csv')
 
 #bpk_model <- lm(log(bpk) ~ T_pk, data = bpk_data); summary(bpk_model)
 
@@ -626,7 +627,6 @@ save_plot(MassCorrectedBmaxTpk, file="../results/MassCorrectedBmaxTpk.pdf",
 #========= plot hotter-is-better panel 
 
 p1 <- (MassCorrectedApkTpk+MassCorrectedBmaxTpk)/(MassCorrectedzpkTpk+MassCorrectedzjpkTpk); p1
-
 
 save_plot(p1, file="../results/hotterIsbetter.pdf", 
           base_height=10,base_width = 12, base_asp = 0.75,units="cm")

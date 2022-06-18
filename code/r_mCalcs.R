@@ -1,7 +1,7 @@
 
 ###### Population growth rate (r_m) calculations #######
 
-# load packages
+# load libraries
 require('tidyverse')
 require('patchwork')
 require('forcats')
@@ -13,11 +13,9 @@ require('cowplot')
 rm(list=ls())
 graphics.off()
     
-setwd("~/Dropbox/TraitTesting/data")
+# Read in the trait data
 
-#read in the trait data
-
-alpha <- as_tibble(read.csv('AlphaPredictions.csv')) %>% 
+alpha <- as_tibble(read.csv('../data/alphaPredictions.csv')) %>% 
          select(species, temp, alpha, alphaLwr, alphaUpr) %>%
          mutate(curve_ID = case_when(species == 'Anoplophora glabripennis' ~ '1',
                               species == 'Halyomorpha halys' ~ '2',       
@@ -41,7 +39,7 @@ species <- alpha %>% distinct(species) %>% print(n=50)
 
 #±±±±±±±±±±±±±±±±±±±±±±±±±±±±±
 
-zj    <- as_tibble(read.csv('ZetaJPredictions.csv')) %>% 
+zj <- as_tibble(read.csv('../data/ZetaJPredictions.csv')) %>% 
          select(species, temp, zj, zjLwr, zjUpr) %>%
          mutate(curve_ID = case_when(species == 'Anoplophora glabripennis' ~ '1',
                               species == 'Halyomorpha halys' ~ '2',       
@@ -66,7 +64,7 @@ zj    <- as_tibble(read.csv('ZetaJPredictions.csv')) %>%
             
 #±±±±±±±±±±±±±±±±±±±±±±±±±±±±±
 
-z     <- as_tibble(read.csv('ZetaPredictions.csv'))  %>% 
+z <- as_tibble(read.csv('../data/ZetaPredictions.csv'))  %>% 
          select(species, temp, z, zLwr, zUpr) %>%
          mutate(curve_ID = case_when(species == 'Anoplophora glabripennis' ~ '1',
                               species == 'Halyomorpha halys' ~ '2',       
@@ -90,7 +88,7 @@ z     <- as_tibble(read.csv('ZetaPredictions.csv'))  %>%
 
 #±±±±±±±±±±±±±±±±±±±±±±±±±±±±±
 
-bmax  <- as_tibble(read.csv('BetaPredictions.csv'))  %>% 
+bmax <- as_tibble(read.csv('../data/BetaPredictions.csv'))  %>% 
   select(species, temp, bmax, bmaxLwr, bmaxUpr) %>%
   mutate(curve_ID = case_when(species == 'Anoplophora glabripennis' ~ '1',
                               species == 'Halyomorpha halys' ~ '2',       
@@ -149,7 +147,7 @@ k         <- df$kappa
 
 df <- df %>% mutate(rm_optUpr = (((k+z_upr)*((log(bmax_upr/(k+z_upr)))-(alpha_upr*zj_upr)))/(alpha_upr*(k+z_upr)+1)))
 
-write_csv(df, 'r_mCalcs.csv')
+write_csv(df, '../results/r_mCalcs.csv')
 
 # truncate data for plotting 
 
@@ -184,7 +182,7 @@ save_plot(rmPlot, file="../results/rmTPCs.pdf",
 #=======================================================================
 # plot mass corrected value of r_m at Topt against the peak temperature for r_m
 
-bodyMass <- as_tibble(read.csv('sizeMeans.csv')) %>% 
+bodyMass <- as_tibble(read.csv('../data/sizeMeans.csv')) %>% 
   rename(species = interactor1) %>% 
   mutate(curve_ID = case_when(species == 'Anoplophora glabripennis' ~ '1',
                               species == 'Halyomorpha halys' ~ '2',       
@@ -214,7 +212,7 @@ bodyMass <- bodyMass %>% select(avg, masscurve_ID)
 
 rm_data <- bind_cols(rmMass, bodyMass) %>% rename(mass = avg, rmTpk = temp) %>% select(-masscurve_ID)
 
-write_csv(rm_data, 'rm_optSizeScaling.csv')
+write_csv(rm_data, '../results/rm_optSizeScaling.csv')
 
 #===================================================
 # mass-corrected r_m opt vs r_m Tpks
@@ -298,14 +296,14 @@ save_plot(MassCorrectedrm_opt, file="../results/MassCorrectedrm_opt_Tpk.pdf",
 
 Species <- rm_data$species
 
-alphaTpks <- as_tibble(read.csv('alpha_Tpks_AllParams.csv')) %>% 
+alphaTpks <- as_tibble(read.csv('../data/alpha_Tpks_AllParams.csv')) %>% 
   filter(param=='topt') %>%
   filter(species %in% Species)%>%
   select(param,species,estimate, conf_lower, conf_upper,trait) %>%
   mutate(estimate = as.numeric(estimate), 
          conf_lower = as.numeric(conf_lower), conf_upper = as.numeric(conf_upper))
 
-zjTpks <- as_tibble(read.csv('zj_Tpks_AllParams.csv')) %>% 
+zjTpks <- as_tibble(read.csv('../data/zj_Tpks_AllParams.csv')) %>% 
   filter(param=='topt') %>%
   filter(species %in% Species)%>%
   select(param,species,estimate, conf_lower, conf_upper,trait) %>%
@@ -314,7 +312,7 @@ zjTpks <- as_tibble(read.csv('zj_Tpks_AllParams.csv')) %>%
          conf_upper = as.numeric(conf_upper))
 
 
-zTpks <- as_tibble(read.csv('z_Tpks_AllParams.csv')) %>% 
+zTpks <- as_tibble(read.csv('../data/z_Tpks_AllParams.csv')) %>% 
   filter(param=='topt') %>%
   filter(species %in% Species)%>%
   select(param,species,estimate, conf_lower, conf_upper,trait) %>%
@@ -322,7 +320,7 @@ zTpks <- as_tibble(read.csv('z_Tpks_AllParams.csv')) %>%
          conf_lower = as.numeric(conf_lower), 
          conf_upper = as.numeric(conf_upper))
 
-bmaxTpks <- as_tibble(read.csv('bmax_Tpks_AllParams.csv')) %>% 
+bmaxTpks <- as_tibble(read.csv('../data/bmax_Tpks_AllParams.csv')) %>% 
   filter(param=='topt') %>%
   filter(species %in% Species)%>%
   select(param,species,estimate, conf_lower, conf_upper,trait) %>%
@@ -333,7 +331,7 @@ bmaxTpks <- as_tibble(read.csv('bmax_Tpks_AllParams.csv')) %>%
   
 AllTpks <- bind_rows(alphaTpks,zjTpks,zTpks,bmaxTpks)
 
-write_csv(AllTpks, 'AllTpkParams.csv')
+write_csv(AllTpks, '../results/AllTpkParams.csv')
 
 #Calculate variance and Sum
 
@@ -408,7 +406,7 @@ SumTpks_plot <-
 #±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±
 #relationship between r_m opt and 1/alpha Tpk
 
-alphaMass <- as_tibble(read_csv('a_pksT_pksMass.csv')) %>% 
+alphaMass <- as_tibble(read_csv('../data/a_pksT_pksMass.csv')) %>% 
   select(species, a_pk, a_pkLwr, a_pkUpr, mass) %>%
   mutate(curve_ID = case_when(species == 'Anoplophora glabripennis' ~ '1',
                               species == 'Halyomorpha halys' ~ '2',       

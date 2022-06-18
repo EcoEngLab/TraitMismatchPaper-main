@@ -15,16 +15,14 @@ require('ggpubr')
 require('ggtext')
 require('cowplot')
 
-setwd("~/Desktop/TraitMismatchPaper-main/data")
-
 ###Fitting TPC for all species for all traits
 
 rm(list=ls())
 graphics.off()
 
-######1. juvenile development rate (1/alpha) ######
+######1. Juvenile development rate (1/alpha) ######
 
-df <- as_tibble(read.csv('TraitData.csv')) 
+df <- as_tibble(read.csv('../data/TraitData.csv')) 
       
 dv <- df %>% rename(temp = interactor1temp, species = interactor1, rate = standardisedtraitvalue) %>%
              select(species, temp, standardisedtraitname, rate) %>%
@@ -420,12 +418,12 @@ AlphaPredictions <- bind_rows(AalAlphaFits,
                     rename(alpha = .fitted, alphaLwr = conf_lower, alphaUpr = conf_upper) %>%
                     mutate(alpha = 1/alpha, alphaLwr = 1/alphaLwr, alphaUpr = 1/alphaUpr)
 
-write_csv(AlphaPredictions, 'AlphaPredictions.csv')
+write_csv(AlphaPredictions, '../data/AlphaPredictions.csv')
 
 # plot all TPCs
 
 #$$ load in raw data
-df <- as_tibble(read.csv('TraitData.csv')) 
+df <- as_tibble(read.csv('../data/TraitData.csv')) 
 dv <- df %>% select(interactor1, interactor1temp, standardisedtraitname, standardisedtraitvalue) %>%
   rename(species = interactor1, temp = interactor1temp, alpha = standardisedtraitvalue) %>%
   filter(standardisedtraitname == '1/alpha', alpha != 'NA') %>%
@@ -459,7 +457,7 @@ graphics.off()
 
 # 2. zj (juvenile mortality rate) ######
 
-df <- as_tibble(read.csv('TraitData.csv')) 
+df <- as_tibble(read.csv('../data/TraitData.csv')) 
 
 dv <- df %>% rename(temp = interactor1temp, species = interactor1, rate = standardisedtraitvalue) %>%
   select(species, temp, standardisedtraitname, rate) %>%
@@ -753,7 +751,7 @@ write_csv(ZetaJPredictions, 'ZetaJPredictions.csv')
 # plot fits
 
 # raw data
-df <- as_tibble(read.csv('TraitData.csv')) 
+df <- as_tibble(read.csv('../data/TraitData.csv')) 
 dv <- df %>% rename(temp = interactor1temp, species = interactor1, zj = standardisedtraitvalue) %>%
   select(species, temp, standardisedtraitname, zj) %>% 
   filter(standardisedtraitname == 'zj', zj != 'NA') %>%
@@ -796,7 +794,7 @@ save_plot(ZetaJPlot, file="../results/ZetaJFits.pdf",
 rm(list=ls())
 graphics.off()
 
-df <- as_tibble(read.csv('TraitData.csv')) 
+df <- as_tibble(read.csv('../data/TraitData.csv')) 
 
 dv <- df %>% rename(temp = interactor1temp, species = interactor1, rate = standardisedtraitvalue) %>%
   select(species, temp, standardisedtraitname, rate) %>%
@@ -1100,7 +1098,7 @@ write_csv(ZetaPredictions, 'ZetaPredictions.csv')
 # plot all TPCs
 
 # raw data
-df <- as_tibble(read.csv('TraitData.csv')) 
+df <- as_tibble(read.csv('../data/TraitData.csv')) 
 dv <- df %>% rename(temp = interactor1temp, species = interactor1, z = standardisedtraitvalue) %>%
   select(species, temp, standardisedtraitname, z) %>% 
   filter(standardisedtraitname == 'z', z != 'NA') %>%
@@ -1142,7 +1140,7 @@ save_plot(ZetaPlot, file="../results/ZetaFits.pdf",
 rm(list=ls())
 graphics.off()
 
-df <- as_tibble(read.csv('TraitData.csv')) 
+df <- as_tibble(read.csv('../data/TraitData.csv')) 
 
 dv <- df %>% rename(temp = interactor1temp, species = interactor1, rate = standardisedtraitvalue) %>%
   select(species, temp, standardisedtraitname, rate) %>%
@@ -1504,7 +1502,7 @@ write_csv(BetaPredictions, 'BetaPredictions.csv')
 # plot all TPCs
 
 #$$ load in raw data
-df <- as_tibble(read.csv('TraitData.csv')) 
+df <- as_tibble(read.csv('../data/TraitData.csv')) 
 dv <- df %>% select(interactor1, interactor1temp, standardisedtraitname, standardisedtraitvalue) %>%
   rename(species = interactor1, temp = interactor1temp, bmax = standardisedtraitvalue) %>%
   filter(standardisedtraitname == 'bmax', bmax != 'NA') %>%

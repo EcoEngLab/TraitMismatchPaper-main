@@ -5,9 +5,7 @@ require(car)
 require(forcats)
 require(cowplot)
 
-setwd("~/Dropbox/TraitTesting/data")
-
-speciesmass <- as_tibble(read_csv('TraitData.csv')) %>%
+speciesmass <- as_tibble(read_csv('../data/TraitData.csv')) %>%
   select(originaltraitname, originaltraitvalue, interactor1) %>%
   filter(originaltraitname == 'body size' & originaltraitvalue != 'NA')
       
@@ -17,7 +15,7 @@ sizeMeans <-
   summarise(avg = mean(originaltraitvalue), sd = sd(originaltraitvalue)) %>%
   arrange(avg)
   
-write_csv(sizeMeans, 'sizeMeans.csv')
+write_csv(sizeMeans, '../data/sizeMeans.csv')
 
 # plot means to get idea of size variation across species 
 sizeMeans %>%
