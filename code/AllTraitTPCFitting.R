@@ -420,36 +420,6 @@ AlphaPredictions <- bind_rows(AalAlphaFits,
 
 write_csv(AlphaPredictions, '../data/AlphaPredictions.csv')
 
-# plot all TPCs
-
-#$$ load in raw data
-df <- as_tibble(read.csv('../data/TraitData.csv')) 
-dv <- df %>% select(interactor1, interactor1temp, standardisedtraitname, standardisedtraitvalue) %>%
-  rename(species = interactor1, temp = interactor1temp, alpha = standardisedtraitvalue) %>%
-  filter(standardisedtraitname == '1/alpha', alpha != 'NA') %>%
-  mutate(temp = as.numeric(temp))
-
-#$$ load in predictions and invert alpha (1/alpha)
-
-AlphaPredictions <- as_tibble(read_csv('AlphaPredictions.csv')) %>% 
-  mutate(alpha = 1/alpha, alphaLwr = 1/alphaLwr, alphaUpr = 1/alphaUpr)
-
-AlphaPlot <- ggplot(AlphaPredictions) +
-  geom_line(aes(temp, alpha)) +
-  geom_point(aes(temp, alpha), dv, size = 0.75, alpha =0.3) +
-  facet_wrap(~species, scales = 'free_y', ncol = 4) +
-  theme_bw() +
-  geom_ribbon(aes(temp, ymin=alphaLwr, ymax=alphaUpr), AlphaPredictions, fill="#e66101",alpha=0.3,
-              inherit.aes = T)+
-  theme(text = element_text(size=6))+theme(strip.text = element_text(face = "italic"))+
-  labs(y=expression(italic(1/alpha)), x=expression(plain(paste(" Temperature, ",degree,"C"))))+
-  theme(legend.position = 'none'); AlphaPlot
-
-
-save_plot(AlphaPlot, file="../results/AlphaFits.pdf", 
-          base_height=18,base_width = 14, base_asp = 0.75,units="cm")
-
-
 #±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±
 
 rm(list=ls())
@@ -635,7 +605,6 @@ ModelOutDF$trait <- "juvenile mortality rate"
 write.csv(ModelOutDF, "../data/zj_Tpks_AllParams.csv")
 
 
-
 #$$$$ Compile dataset of fits for all species
 ThaZetaJCIs  <- ZetaJPlots[[1]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 ThaZetaJFits <- dv_preds %>% filter(species == 'Thrips hawaiiensis')   %>% bind_cols(ThaZetaJCIs)
@@ -745,47 +714,6 @@ ZetaJPredictions <- bind_rows(ThaZetaJFits,
                               mutate(zj = 1/zj, zjLwr = 1/zjLwr, zjUpr = 1/zjUpr) 
 
 write_csv(ZetaJPredictions, 'ZetaJPredictions.csv')
-
-#$$$$$$$$$$$$$$$$
-
-# plot fits
-
-# raw data
-df <- as_tibble(read.csv('../data/TraitData.csv')) 
-dv <- df %>% rename(temp = interactor1temp, species = interactor1, zj = standardisedtraitvalue) %>%
-  select(species, temp, standardisedtraitname, zj) %>% 
-  filter(standardisedtraitname == 'zj', zj != 'NA') %>%
-  filter(species != 'Amblyseius womersleyi' & species != 'Clavigralla tomentosicollis') %>%
-  mutate(temp = as.numeric(temp))
-
-# load in predictions
-ZetaJPredictions <- as_tibble(read_csv('ZetaJPredictions.csv'))
-
-# truncate fits for plotting 
-ZetaJPredictions <- ZetaJPredictions %>%
-  mutate_at(vars(c(zj)), 
-            ~ifelse(zj > 0.2, 0.2, .)) %>%
-  mutate_at(vars(c(zjLwr)), 
-            ~ifelse(zjLwr > 0.2, 0.2, .)) %>%
-  mutate_at(vars(c(zjUpr)), 
-            ~ifelse(zjUpr > 0.2, 0.2, .)) 
-
-ZetaJPredictions <- ZetaJPredictions %>% filter(zj < 0.2)
-
-ZetaJPlot <- ggplot(ZetaJPredictions) +
-  geom_line(aes(temp, zj)) +
-  geom_point(aes(temp, zj), dv, size = 0.75, alpha =0.3) +
-  scale_y_continuous(limits=c(-0.001,0.2))+
-  facet_wrap(~species, ncol = 4) +
-  theme_bw() +
-  geom_ribbon(aes(temp, ymin=zjLwr, ymax=zjUpr), ZetaJPredictions, fill="#1f78b4",alpha=0.3,
-              inherit.aes = F)+
-  theme(text = element_text(size=6))+theme(strip.text = element_text(face = "italic"))+
-  labs(y=expression(italic(z[J])), x=expression(plain(paste(" Temperature, ",degree,"C"))))+
-  theme(legend.position = 'none'); ZetaJPlot
-
-save_plot(ZetaJPlot, file="../results/ZetaJFits.pdf", 
-          base_height=18,base_width = 14, base_asp = 0.75,units="cm")
 
 #±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±
 
@@ -1095,43 +1023,6 @@ ZetaPredictions <- bind_rows(CpiZetaFits,
 
 write_csv(ZetaPredictions, 'ZetaPredictions.csv')
 
-# plot all TPCs
-
-# raw data
-df <- as_tibble(read.csv('../data/TraitData.csv')) 
-dv <- df %>% rename(temp = interactor1temp, species = interactor1, z = standardisedtraitvalue) %>%
-  select(species, temp, standardisedtraitname, z) %>% 
-  filter(standardisedtraitname == 'z', z != 'NA') %>%
-  mutate(temp = as.numeric(temp))
-
-#load in predictions
-ZetaPredictions <- as_tibble(read_csv('ZetaPredictions.csv'))
-
-# truncate for plotting 
-ZetaPredictions <- ZetaPredictions %>%
-  mutate_at(vars(c(z)), 
-            ~ifelse(z > 0.2, 0.2, .)) %>%
-  mutate_at(vars(c(zLwr)), 
-            ~ifelse(zLwr > 0.2, 0.2, .)) %>%
-  mutate_at(vars(c(zUpr)), 
-            ~ifelse(zUpr > 0.2, 0.2, .)) 
-
-ZetaPredictions <- ZetaPredictions %>% filter(z < 0.2)
-
-ZetaPlot <- ggplot(ZetaPredictions) +
-  geom_line(aes(temp, z)) +
-  geom_point(aes(temp, z), dv, size = 0.75, alpha =0.3) +
-  facet_wrap(~species, ncol = 4)+
-  scale_y_continuous(limits=c(-0.001,0.2))+
-  theme_bw() +
-  geom_ribbon(aes(temp, ymin=zLwr, ymax=zUpr), ZetaPredictions, fill="#a6cee3",alpha=0.5,
-              inherit.aes = T)+
-  theme(text = element_text(size=6))+theme(strip.text = element_text(face = "italic"))+
-  labs(y=expression(italic(z)), x=expression(plain(paste(" Temperature, ",degree,"C"))))+
-  theme(legend.position = 'none'); ZetaPlot
-
-save_plot(ZetaPlot, file="../results/ZetaFits.pdf", 
-          base_height=18,base_width = 14, base_asp = 0.75,units="cm")
 
 #±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±
 
@@ -1499,30 +1390,5 @@ BetaPredictions <- bind_rows(BtaBetaFits,
 
 write_csv(BetaPredictions, 'BetaPredictions.csv')
 
-# plot all TPCs
 
-#$$ load in raw data
-df <- as_tibble(read.csv('../data/TraitData.csv')) 
-dv <- df %>% select(interactor1, interactor1temp, standardisedtraitname, standardisedtraitvalue) %>%
-  rename(species = interactor1, temp = interactor1temp, bmax = standardisedtraitvalue) %>%
-  filter(standardisedtraitname == 'bmax', bmax != 'NA') %>%
-  mutate(temp = as.numeric(temp))
-
-# load in predictions
-BetaPredictions <- as_tibble(read_csv('BetaPredictions.csv'))
-
-BetaPlot <- ggplot(BetaPredictions) +
-  geom_line(aes(temp, bmax)) +
-  geom_point(aes(temp, bmax), dv, size = 0.75, alpha =0.3) +
-  facet_wrap(~species, scales = 'free_y', ncol = 4) +
-  theme_bw() +
-  geom_ribbon(aes(temp, ymin=bmaxLwr, ymax=bmaxUpr), BetaPredictions, fill="#fdb863",alpha=0.3,
-              inherit.aes = T)+
-  theme(text = element_text(size=6))+theme(strip.text = element_text(face = "italic"))+
-  labs(y=expression(italic(b)[max]), x=expression(plain(paste(" Temperature, ",degree,"C"))))+
-  theme(legend.position = 'none'); BetaPlot
-
-
-save_plot(BetaPlot, file="../results/BetaFits.pdf", 
-          base_height=18,base_width = 14, base_asp = 0.75,units="cm")
 
