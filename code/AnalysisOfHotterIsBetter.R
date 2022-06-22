@@ -185,8 +185,8 @@ MassCorrectedApkTpk <- a_data %>%
   theme_bw()+
   geom_point(size = 1, col="#000000",stroke=0.1, shape = 24, fill="#e66101")
   
-save_plot(MassCorrectedApkTpk, file="../results/MassCorrectedApkTpk.pdf", 
-          base_height=5,base_width = 6, base_asp = 0.75,units="cm")
+#save_plot(MassCorrectedApkTpk, file="../results/MassCorrectedApkTpk.pdf", 
+#          base_height=5,base_width = 6, base_asp = 0.75,units="cm")
 
 
 #±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±
@@ -324,8 +324,8 @@ MassCorrectedzjpkTpk <-
   geom_point(size = 1, col="#000000",stroke=0.1, shape = 21, fill="#1f78b4")
 
 
-save_plot(MassCorrectedzjpkTpk, file="../results/MassCorrectedzjpkTpk.pdf", 
-          base_height=5,base_width = 6, base_asp = 0.75,units="cm")
+#save_plot(MassCorrectedzjpkTpk, file="../results/MassCorrectedzjpkTpk.pdf", 
+#          base_height=5,base_width = 6, base_asp = 0.75,units="cm")
 
 
 #==================================================================
@@ -465,8 +465,8 @@ MassCorrectedzpkTpk <-
   geom_point(size = 1, col="#000000",stroke=0.1, shape = 22, fill="#a6cee3")
 
 
-save_plot(MassCorrectedzpkTpk, file="../results/MassCorrectedzpkTpk.pdf", 
-          base_height=5,base_width = 6, base_asp = 0.75,units="cm")
+#save_plot(MassCorrectedzpkTpk, file="../results/MassCorrectedzpkTpk.pdf", 
+#          base_height=5,base_width = 6, base_asp = 0.75,units="cm")
 
 
 #===============================================================
@@ -620,16 +620,16 @@ MassCorrectedBmaxTpk <-
   geom_point(size = 1, col="#000000",stroke=0.1, shape = 23, fill="#fdb863")
 
 
-save_plot(MassCorrectedBmaxTpk, file="../results/MassCorrectedBmaxTpk.pdf", 
-          base_height=5,base_width = 6, base_asp = 0.75,units="cm")
+#save_plot(MassCorrectedBmaxTpk, file="../results/MassCorrectedBmaxTpk.pdf", 
+#          base_height=5,base_width = 6, base_asp = 0.75,units="cm")
 
 
 #========= plot hotter-is-better panel 
 
-p1 <- (MassCorrectedApkTpk+MassCorrectedBmaxTpk)/(MassCorrectedzpkTpk+MassCorrectedzjpkTpk); p1
+#p1 <- (MassCorrectedApkTpk+MassCorrectedBmaxTpk)/(MassCorrectedzpkTpk+MassCorrectedzjpkTpk); p1
 
-save_plot(p1, file="../results/hotterIsbetter.pdf", 
-          base_height=10,base_width = 12, base_asp = 0.75,units="cm")
+#save_plot(p1, file="../results/hotterIsbetter.pdf", 
+#          base_height=10,base_width = 12, base_asp = 0.75,units="cm")
 
 
 

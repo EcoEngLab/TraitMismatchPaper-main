@@ -17,7 +17,7 @@ require('ggtext')
 rm(list=ls())
 graphics.off()
 
-# Figure 3: Tpks + activation energy  plot 
+# Figure 3: Tpks + activation energy plot 
 
 # Tpks for all species
 
@@ -64,7 +64,7 @@ toptz$species[which(toptz$species=="Acyrthosiphon pisum")] <- "**Acyrthosiphon p
 
 toptz <- toptz %>% filter(species != 'Plutella xylostella')
 
-#order by developement alpha
+#order by development rate alpha
 alp <- subset(toptz, toptz$trait=="juvenile development rate")
 SPorder <- alp$species[order(alp$estimate)]
 toptz$species <- factor(toptz$species, levels=SPorder)
@@ -83,7 +83,7 @@ fig3a <- ggplot(toptz, aes(estimate, species, shape=trait, colour=trait,fill=tra
   scale_fill_manual(labels = c(expression(plain(paste("Juvenile Mortality Rate (",italic(z[J]),")"))),
                                expression(plain(paste("Adult Mortality Rate (",italic(z),")"))),
                                expression(plain(paste("Fecundity (",italic(b[max]),")"))),
-                               expression(plain(paste("Juvenile Development Rate (",italic(alpha),")")))),
+                               expression(plain(paste("Juvenile Development Time (",italic(alpha),")")))),
                     values = c("#1f78b4","#a6cee3","#fdb863","#e66101"),
                     name=expression(bold("")),
                     guide = guide_legend(nrow = 1,ncol =4,
@@ -93,7 +93,7 @@ fig3a <- ggplot(toptz, aes(estimate, species, shape=trait, colour=trait,fill=tra
   scale_colour_manual(labels = c(expression(plain(paste("Juvenile Mortality Rate (",italic(z[J]),")"))),
                                  expression(plain(paste("Adult Mortality Rate (",italic(z),")"))),
                                  expression(plain(paste("Fecundity (",italic(b[max]),")"))),
-                                 expression(plain(paste("Juvenile Development Rate (",italic(alpha),")")))),
+                                 expression(plain(paste("Juvenile Development Time (",italic(alpha),")")))),
                       values = c("#1f78b4","#a6cee3","#fdb863","#e66101"),
                       name=expression(bold("")),
                       guide = guide_legend(nrow=1,ncol=4,
@@ -103,7 +103,7 @@ fig3a <- ggplot(toptz, aes(estimate, species, shape=trait, colour=trait,fill=tra
   scale_shape_manual(labels = c(expression(plain(paste("Juvenile Mortality Rate (",italic(z[J]),")"))),
                                 expression(plain(paste("Adult Mortality Rate (",italic(z),")"))),
                                 expression(plain(paste("Fecundity (",italic(b[max]),")"))),
-                                expression(plain(paste("Juvenile Development Rate (",italic(alpha),")")))),
+                                expression(plain(paste("Juvenile Development Time (",italic(alpha),")")))),
                      values = c(21,22,23,24),
                      name=expression(bold("")),
                      guide = guide_legend(nrow = 1,ncol =4,
@@ -124,15 +124,7 @@ fig3a
 #===============================================
 # Fig 3b: Activation energies 
 
-E <-  filter(topt, trait == 'juvenile development rate' | trait == 'fecundity rate', param =="e")  
-eh <- filter(topt, trait == 'juvenile mortality rate' | trait == 'adult mortality rate', param =="eh") %>%
-  mutate(param=replace(param, param=='eh', 'e')) %>%
-  filter(estimate > -8 & estimate < 50)
-
-eh[8,3] <- -7.36; eh[23,3] <- -4.97; eh[41,3] <- -4.55; eh[22,3] <- -4.97
-eh[16,4] <- 36.393048; eh[3,4] <- 30.027643
-
-activation_e <- bind_rows(E, eh) 
+activation_e <-  filter(topt, trait == 'juvenile development rate' | trait == 'fecundity rate', param =="e")  
 
 # change name to add asterisk to match next fig
 activation_e$species <- as.character(activation_e$species)
@@ -155,16 +147,13 @@ activation_e$species[which(activation_e$species=="Acyrthosiphon pisum")] <- "**A
 
 
 activation_e <- mutate(activation_e,
-                       trait = case_when(trait =="adult mortality rate" ~ "Adult Mortality Rate",
-                                         trait == "fecundity rate" ~ "Peak Fecundity",
-                                         trait == "juvenile development rate" ~ "Development Rate",
-                                         trait == "juvenile mortality rate" ~ "Juvenile Mortality Rate"))
+                       trait = case_when(trait == "fecundity rate" ~ "Peak Fecundity",
+                                         trait == "juvenile development rate" ~ "Development Time"))
+                                         
 
-
-
-TraitLevel <- c("Juvenile Mortality Rate", "Adult Mortality Rate","Peak Fecundity","Development Rate" )
-activation_e$trait <- as.character(activation_e$trait)
-activation_e$trait <- factor(activation_e$trait, levels = TraitLevel)
+TraitLevel <- c("Peak Fecundity", "Development Time" )
+activation_e$trait  <- as.character(activation_e$trait)
+activation_e$trait  <- factor(activation_e$trait, levels = TraitLevel)
 activation_e$species <- as.character(activation_e$species)
 activation_e$species <- factor(activation_e$species, levels=SPorder)
 activation_e <- na.omit(activation_e)
@@ -176,27 +165,28 @@ fig3b <- ggplot(activation_e, aes(estimate, species, shape=trait, colour=trait,f
   theme_bw(base_size = 12.5) +
   theme(axis.title.y = element_blank())+
   scale_x_continuous(expression(plain(paste("Activation Energy (",italic(E),")"))),
-                     limits =c(-10,38),
+                     limits =c(0,6),
                      expand = c(0, 0),
-                     breaks=seq(-8,32, by=8))+
-  scale_fill_manual(values = c("#1f78b4","#a6cee3","#fdb863","#e66101"),
+                     breaks=seq(0,6, by=1))+
+  scale_fill_manual(values = c("#fdb863","#e66101"),
                     name=expression(bold("")))+
-  scale_colour_manual(values = c("#1f78b4","#a6cee3","#fdb863","#e66101"),
+  scale_colour_manual(values = c("#fdb863","#e66101"),
                       name=expression(bold("")),
-                      guide = guide_legend(nrow=1,ncol=4,
+                      guide = guide_legend(nrow=1,ncol=2,
                                            direction = "vertical",
                                            title.position = "top",
                                            title.hjust=0.5))+
-  scale_shape_manual(values = c(21,22,23,24),
+  scale_shape_manual(values = c(23,24),
                      name=expression(bold("")),
-                     guide = guide_legend(nrow = 1,ncol =4,
+                     guide = guide_legend(nrow = 1,ncol =2,
                                           direction = "vertical",
                                           title.position = "top",
                                           title.hjust=0.5))+
-  theme(legend.position = c(0.35,-0.1),legend.text = element_text(size = 8.5),
+  theme(legend.position = 'none',legend.text = element_text(size = 8.5),
         axis.text.y = element_markdown(face = 'italic'))+
   theme(text=element_text(family="Times"))+
   theme(legend.margin=margin(t = -0.4, unit='cm'))+
+  geom_vline(xintercept=0.65, lty ='dashed')+
   theme(axis.text.y=element_blank())+
   theme(plot.margin=margin(l=-4,unit="cm"))+
   theme(aspect.ratio=2)+
@@ -204,7 +194,6 @@ fig3b <- ggplot(activation_e, aes(estimate, species, shape=trait, colour=trait,f
   theme(plot.title=element_text(face="bold", size = 15, vjust = -1))
 
 fig3b
-
 
 plotMain <- fig3a+theme(legend.position="none")+fig3b+theme(legend.position="none")
 # plotMain
@@ -257,29 +246,22 @@ anova(rm_model)
 
 #prepare data for plotting
 rm_data <- rm_data %>% 
-           mutate(rm_massCor_lwr = log(rm_optLwr/mass^coef(rm_model)[2]),
-           rm_massCor     = log(rm_opt/mass^coef(rm_model)[2]),
-           rm_massCor_upr = log(rm_optUpr/mass^coef(rm_model)[2])) %>%
-           mutate_at(vars(c(rm_massCor_lwr)), 
-            ~ifelse(rm_massCor_lwr == 'NaN', -2.8765094, .))
-
+           mutate(rm_massCor = log(rm_opt/mass^coef(rm_model)[2]))
+           
 #plot rm_opt in 1/kT, correcting for mass
 MassCorrectedrm_opt <- 
   rm_data %>%
   ggplot(aes(x = rmTpk, y = rm_massCor)) +
-  geom_smooth(method = 'lm', colour = '#000000', size=0.3, fill=NA)+
+  geom_smooth(method = 'lm', size=0.3, col='#636363', fill="#004225")+
   scale_y_continuous(expression(plain(paste("ln(",italic(r[paste(m,",", opt)])," / ",
                                             italic(M^-0.16),"))"))),
-                     limits=c(-3.8,-0.5),
+                     limits=c(-4.5,-0.5),
                      expand = c(0.01, 0),
-                     breaks=seq(-3,-1, by=1))+
+                     breaks=seq(-4,-1, by=1))+
   scale_x_continuous(expression(plain(paste(italic("T"[pk])))),
                      limits=c(19,34.5),
                      expand = c(0.01, 0),
                      breaks=seq(20,34, by=2))+
-  geom_linerange(aes(x=rmTpk, 
-                     ymin= rm_massCor_lwr, 
-                     ymax= rm_massCor_upr, colour=species), size=0.2)+
   geom_point(aes(shape = species, fill = species), size=2,stroke=0.25)+
   scale_shape_manual(values = c(21,21,21,21,
                                 22,22,22,22,
@@ -318,10 +300,13 @@ MassCorrectedrm_opt <-
         legend.key.size = unit(0.2, 'cm')) +
   geom_text(aes(x = -Inf, y = Inf,hjust = -0.5,vjust=1.4,
                 label = "A"),size = 5, colour = "black")+
-  theme(axis.title.y = element_blank())
+  theme(axis.title.y = element_blank(), panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank())
 
-save_plot(MassCorrectedrm_opt, file="../results/MassCorrectedrm_opt_Tpk.pdf", 
-           base_height=9,base_width = 9, base_asp = 0.75,units="cm")
+MassCorrectedrm_opt
+
+#save_plot(MassCorrectedrm_opt, file="../results/MassCorrectedrm_opt_Tpk.pdf", 
+#           base_height=9,base_width = 9, base_asp = 0.75,units="cm")
 
 
 #=======================================================
@@ -364,36 +349,25 @@ bmaxTpks <- as_tibble(read.csv('../data/bmax_Tpks_AllParams.csv')) %>%
 
 AllTpks <- bind_rows(alphaTpks,zjTpks,zTpks,bmaxTpks)
 
-write_csv(AllTpks, 'AllTpkParams.csv')
+#write_csv(AllTpks, 'AllTpkParams.csv')
 
-#Calculate variance and Sum
+# Calculate of Tpks
 
-OptVar <- AllTpks %>% group_by(species) %>%
-  summarise(variance = var(estimate))
 OptSum <- AllTpks %>% group_by(species) %>%
   summarise(sum = sum(estimate))
 
 SumPlot <- left_join(rm_data, OptSum) 
            
-  
-#mutate_at(vars(c(rm_massCor_lwr)), 
-#            ~ifelse(rm_massCor_lwr == 'NaN', -2.8765094, .))
-
-#SumPlot[4,5] <- 0.0573
-
 SumTpks_plot <-
   SumPlot %>%
   ggplot(aes(x = sum, y = rm_massCor))+
-  geom_smooth(method = 'lm', colour = '#636363', size=0.3, fill=NA)+
+  geom_smooth(method = 'lm', colour = '#636363', size=0.3, fill="#004225")+
   scale_y_continuous(expression(plain(paste("Log mass-corrected ",italic(r[m])," at its optimal temperature (ln(",italic(r[paste(m,",", opt)])," / ",
                                             italic(M^-0.16),"))"))),
                      limits=c(-3.8,-0.5),
                      expand = c(0.01, 0),
                      breaks=seq(-3,-1, by=1))+
   scale_x_continuous(expression(plain(paste("Sum of ",italic("T"[pk]),"'s"))))+
-  geom_linerange(aes(x=sum, 
-                     ymin=rm_massCor_lwr, 
-                     ymax=rm_massCor_upr, colour=species), size=0.2)+
   geom_point(aes(shape=species, 
                  fill=species),
              size=2,
@@ -435,13 +409,17 @@ SumTpks_plot <-
         legend.key.size = unit(0.3, 'cm'))+
   geom_text(aes(x = -Inf, y = Inf,hjust = -0.5,vjust=1.4,
                 label = "C"),size = 5, colour = "black")+
-  theme(axis.title.y = element_text(hjust=0.1))
+  theme(axis.title.y = element_text(hjust=0.1), panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank())
 
-save_plot(SumTpks_plot, file="../results/MassCorrectedrm_optSumTpks.pdf", 
-          base_height=9,base_width = 9, base_asp = 0.75,units="cm")
+SumTpks_plot
+
+#save_plot(SumTpks_plot, file="../results/MassCorrectedrm_optSumTpks.pdf", 
+#          base_height=9,base_width = 9, base_asp = 0.75,units="cm")
 
 
-#±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±
+#=======================================================================
+
 # Relationship between r_m opt and 1/alpha Tpk
 
 alphaMass <- as_tibble(read_csv('../data/a_pksT_pksMass.csv')) %>% 
@@ -479,19 +457,13 @@ anova(alpharm_model)
 MassCorrectedrm_optAlphaTpk <-
   alpharm_data %>%
   ggplot(aes(x=log(a_pk/mass^-0.265), y = log(rm_opt/mass^-0.16)))+
-  geom_linerange(aes(x=log(a_pk/mass^-0.265), 
-                     ymin=rm_massCor_lwr, 
-                     ymax=rm_massCor_upr, colour=species), size=0.2)+
-  geom_linerange(aes(y=rm_massCor, 
-                     xmin=log(a_pkLwr/mass^-0.265),
-                     xmax=log(a_pkUpr/mass^-0.265), colour=species), size=0.2)+
   geom_point()+
-  geom_smooth(method = 'lm', colour = '#636363', size=0.3, fill=NA)+
+  geom_smooth(method = 'lm', colour = '#636363', size=0.3, fill="#004225")+
   scale_y_continuous(expression(plain(paste("ln(",italic(r[paste(m,",", opt)])," / ",
                                             italic(M^-0.16),"))"))),
-                     limits=c(-3.8,-0.5),
+                     limits=c(-4.5,-0.5),
                      expand = c(0.01, 0),
-                     breaks=seq(-3,-1, by=1))+
+                     breaks=seq(-4,-1, by=1))+
   scale_x_continuous(expression(plain(paste("ln(", italic(1/alpha[pk])~")/",
                                             italic(M^-0.265),")"))))+
   geom_point(aes(shape=species, 
@@ -532,21 +504,22 @@ MassCorrectedrm_optAlphaTpk <-
         legend.text = element_text(size = 5, face = 'italic'),
         legend.background = element_rect(colour = "white", size = 0.125), 
         legend.margin=margin(t = 0.01, b = 0.1, r=0.1,l=0.1, unit='cm'),
-        legend.key.size = unit(0.3, 'cm'))+
+        legend.key.size = unit(0.3, 'cm'), 
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank())+
   geom_text(aes(x = -Inf, y = Inf,hjust = -0.5,vjust=1.4,
                 label = "B"),size = 5, colour = "black")+
   theme(axis.title.y = element_blank())
   
         
+#save_plot(MassCorrectedrm_optAlphaTpk, file="../results/MassCorrectedrm_optAlphaTpk.pdf", 
+#          base_height=5,base_width = 5, base_asp = 0.75,units="cm")
 
-save_plot(MassCorrectedrm_optAlphaTpk, file="../results/MassCorrectedrm_optAlphaTpk.pdf", 
-          base_height=5,base_width = 5, base_asp = 0.75,units="cm")
-
+MassCorrectedrm_optAlphaTpk
 
 
 # plotMain
 legend <- get_legend(MassCorrectedrm_optAlphaTpk+theme(legend.position = c(0.5,0.7)))
-
 
 Fig5 <- plot_grid(MassCorrectedrm_opt+MassCorrectedrm_optAlphaTpk+
                     SumTpks_plot+legend, nrow = 1, rel_widths = c(1,2,1,1))
@@ -588,24 +561,22 @@ anova(a_model)
 #plot a_pk in 1/kT, correcting for mass
 MassCorrectedApkTpk <- a_data %>%
   ggplot(aes(x = T_pk, y = log(a_pk/mass^coef(a_model)[2]))) +
-  geom_smooth(method = 'lm', colour = '#636363', size=0.15)+
+  geom_smooth(method = 'lm', colour = '#636363', size=0.15, fill="#004225")+
   scale_y_continuous(expression(plain(paste("ln((", italic(1/alpha[pk])~")/",italic(M^-0.265),")"))))+
   scale_x_continuous(expression(plain(paste(italic("T"[pk])))),
-                     limits =c(16.5,39),
+                     limits =c(16.5,36),
                      expand = c(0, 0),
                      breaks=seq(20,35, by=5))+
-  geom_linerange(aes(y=log(a_pk/mass^coef(a_model)[2]), xmin=T_pkLwr, xmax=T_pkUpr), 
-                 size=0.1,
-                 col="#e66101")+
-  geom_linerange(aes(x=T_pk, ymin=log(a_pkLwr/mass^coef(a_model)[2]), 
-                     ymax=log(a_pkUpr/mass^coef(a_model)[2])),
-                 size=0.1, col="#e66101")+
   theme_bw()+
-  theme(text=element_text(family="Times", size=8))+
+  theme(text=element_text(family="Times", size=8), 
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank())+
   geom_point(size = 1, col="#000000",stroke=0.1, shape = 24, fill="#e66101")
 
-save_plot(MassCorrectedApkTpk, file="../results/MassCorrectedApkTpk.pdf", 
-          base_height=5,base_width = 6, base_asp = 0.75,units="cm")
+MassCorrectedApkTpk
+
+#save_plot(MassCorrectedApkTpk, file="../results/MassCorrectedApkTpk.pdf", 
+#          base_height=5,base_width = 6, base_asp = 0.75,units="cm")
 
 #============================
 
@@ -639,24 +610,19 @@ anova(zj_model)
 MassCorrectedzjpkTpk <- 
   zj_data %>%
   ggplot(aes(x = T_pk, y = log(zjpk/mass^coef(zj_model)[2])))+
-  geom_smooth(method = 'lm', colour = '#636363', size=0.15)+
-  geom_linerange(aes(y=log(zjpk/mass^coef(zj_model)[2]), 
-                     xmin=T_pkLwr, xmax=T_pkUpr), 
-                 size=0.1,
-                 col="#1f78b4")+
-  geom_linerange(aes(x=T_pk, 
-                     ymin=log(zjpkLwr/mass^coef(zj_model)[2]), 
-                     ymax=log(zjpkUpr/mass^coef(zj_model)[2])),
-                 size=0.1, col="#1f78b4")+
+  geom_smooth(method = 'lm', colour = '#636363', size=0.15, fill = '#004225')+
   scale_y_continuous(expression(plain(paste("ln(", italic(z[J][pk])~"/",italic(M^-0.193),")"))))+
   scale_x_continuous(expression(plain(paste(italic("T"[pk])))))+
   theme_bw()+
   theme(text=element_text(family="Times", size=8))+
-  geom_point(size = 1, col="#000000",stroke=0.1, shape = 21, fill="#1f78b4")
+  geom_point(size = 1, col="#000000",stroke=0.1, shape = 21, fill="#1f78b4")+
+  theme(panel.grid.major = element_blank(),
+              panel.grid.minor = element_blank())
 
+MassCorrectedzjpkTpk
 
-save_plot(MassCorrectedzjpkTpk, file="../results/MassCorrectedzjpkTpk.pdf", 
-          base_height=5,base_width = 6, base_asp = 0.75,units="cm")
+#save_plot(MassCorrectedzjpkTpk, file="../results/MassCorrectedzjpkTpk.pdf", 
+#          base_height=5,base_width = 6, base_asp = 0.75,units="cm")
 
 
 #============================
@@ -691,27 +657,23 @@ anova(z_model)
 MassCorrectedzpkTpk <- 
   z_data %>%
   ggplot(aes(x = T_pk, y = log(zpk/mass^coef(z_model)[2]))) +
-  geom_smooth(method = 'lm', colour = '#636363', size=0.15)+
-  geom_linerange(aes(y=log(zpk/mass^coef(z_model)[2]), xmin=T_pkLwr, xmax=T_pkUpr), 
-                 size=0.1,
-                 col="#a6cee3")+
-  geom_linerange(aes(x=T_pk, ymin=log(zpkLwr/mass^coef(z_model)[2]), 
-                     ymax=log(zpkUpr/mass^coef(z_model)[2])),
-                 size=0.1, col="#a6cee3")+
+  geom_smooth(method = 'lm', colour = '#636363', size=0.15, fill='#004225')+
   scale_y_continuous(expression(plain(paste("ln(", italic(z[pk])~"/",italic(M^-0.124),")"))))+
   scale_x_continuous(expression(plain(paste(italic("T"[pk])))),
-                     limits=c(5,30),
+                     limits=c(8,27),
                      expand = c(0, 0),
                      breaks=seq(10,25, by=5))+
   theme_bw()+
   theme(text=element_text(family="Times", size=8))+
-  geom_point(size = 1, col="#000000",stroke=0.1, shape = 22, fill="#a6cee3")
+  geom_point(size = 1, col="#000000",stroke=0.1, shape = 22, fill="#a6cee3")+
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank())
 
 
-save_plot(MassCorrectedzpkTpk, file="../results/MassCorrectedzpkTpk.pdf", 
-          base_height=5,base_width = 6, base_asp = 0.75,units="cm")
+MassCorrectedzpkTpk
 
-
+#save_plot(MassCorrectedzpkTpk, file="../results/MassCorrectedzpkTpk.pdf", 
+#          base_height=5,base_width = 6, base_asp = 0.75,units="cm")
 
 # Fig. 6c -- bmax
 
@@ -743,22 +705,19 @@ anova(bpk_model)
 MassCorrectedBmaxTpk <- 
   bpk_data %>%
   ggplot(aes(x = T_pk, y = log(bpk/mass^coef(bpk_model)[2]))) +
-  geom_smooth(method = 'lm', colour = '#636363', size=0.15)+
+  geom_smooth(method = 'lm', colour = '#636363', size=0.15, fill='#004225')+
   scale_y_continuous(expression(plain(paste("ln(", italic(b[max])~"/",italic(M^0.08),")"))))+
   scale_x_continuous(expression(plain(paste(italic("T"[pk])))))+
-  geom_linerange(aes(y=log(bpk/mass^coef(bpk_model)[2]), xmin=T_pkLwr, xmax=T_pkUpr), 
-                 size=0.1,
-                 col="#fdb863")+
-  geom_linerange(aes(x=T_pk, ymin=log(bpkLwr/mass^coef(bpk_model)[2]), 
-                     ymax=log(bpkUpr/mass^coef(bpk_model)[2])),
-                 size=0.1, col="#fdb863")+
   theme_bw()+
   theme(text=element_text(family="Times", size=8))+
-  geom_point(size = 1, col="#000000",stroke=0.1, shape = 23, fill="#fdb863")
+  geom_point(size = 1, col="#000000",stroke=0.1, shape = 23, fill="#fdb863")+
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank())
 
+MassCorrectedBmaxTpk
 
-save_plot(MassCorrectedBmaxTpk, file="../results/MassCorrectedBmaxTpk.pdf", 
-          base_height=5,base_width = 6, base_asp = 0.75,units="cm")
+#save_plot(MassCorrectedBmaxTpk, file="../results/MassCorrectedBmaxTpk.pdf", 
+#          base_height=5,base_width = 6, base_asp = 0.75,units="cm")
 
 
 #========= plot hotter-is-better panel 
