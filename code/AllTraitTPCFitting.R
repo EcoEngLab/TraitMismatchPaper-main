@@ -20,7 +20,7 @@ require('cowplot')
 rm(list=ls())
 graphics.off()
 
-######1. Juvenile development rate (1/alpha) ######
+###### 1. Juvenile development rate (1/alpha) ######
 
 df <- as_tibble(read.csv('../data/TraitData.csv')) 
       
