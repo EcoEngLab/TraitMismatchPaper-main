@@ -996,7 +996,7 @@ RearZeta <- RearDF %>% filter(trait == 'z') %>%
 RearZeta %>% distinct(Rspecies) %>% print(n=60)
 
 
-zeta  <- as_tibble(read.csv('z_Tpks_AllParams.csv', header = TRUE)) %>%
+zeta  <- as_tibble(read.csv('../data/z_Tpks_AllParams.csv', header = TRUE)) %>%
   filter(param == 'topt') %>% 
   select(species, estimate, conf_lower, conf_upper, trait) %>%
   mutate(curve_ID = case_when(species == 'Plutella xylostella' ~ '1',
