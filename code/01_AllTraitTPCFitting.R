@@ -207,7 +207,7 @@ FitModel <- function(ID){
     labs(title=paste(df$GoodName[1], sep=""),
          y="Development rate", x=expression(plain(paste(" Temperature, ",degree,"C"))))
   
-  ggsave(plot,file=paste("../results/TPCs/Alpha_",ID,".pdf",sep=""), 
+  ggsave(plot,file=paste("../results/TPC/Alpha_",ID,".pdf",sep=""), 
          height=10,width=15,units="cm")
   
   AlphaPlots[[counter]] <<- plot
@@ -229,7 +229,7 @@ doMC::registerDoMC(cores = 4)
 ModelOutList <- foreach(ID = unique(dv$curve_ID)) %dopar%{ FitModel(ID)}
 ModelOutDF <- do.call(rbind, ModelOutList)
 ModelOutDF$trait <- "juvenile development rate"
-write.csv(ModelOutDF, "../data/alpha_Tpks_AllParams.csv")
+write.csv(ModelOutDF, '../data/alpha_Tpks_AllParams.csv')
 
 
 #compile dataset containing fits with confidence bounds
@@ -579,7 +579,7 @@ FitModel <- function(ID){
     labs(title=paste(df$GoodName[1], sep=""),
          y="zj", x=expression(plain(paste(" Temperature, ",degree,"C"))))
   
-  ggsave(plot,file=paste("../results/TPCs/zj_",ID,".pdf",sep=""), 
+  ggsave(plot,file=paste("../results/TPC/zj_",ID,".pdf",sep=""), 
          height=10,width=15,units="cm")
   
   zJPlots[[counter]] <<- plot
@@ -602,7 +602,7 @@ doMC::registerDoMC(cores = 4)
 ModelOutList <- foreach(ID = unique(dv$curve_ID)) %dopar%{ FitModel(ID)}
 ModelOutDF   <- do.call(rbind, ModelOutList)
 ModelOutDF$trait <- "juvenile mortality rate"
-write.csv(ModelOutDF, "../data/zj_Tpks_AllParams.csv")
+write.csv(ModelOutDF, '../data/zj_Tpks_AllParams.csv')
 
 
 #$$$$ Compile dataset of fits for all species
@@ -878,7 +878,7 @@ FitModel <- function(ID){
     labs(title=paste(df$GoodName[1], sep=""),
          y="z", x=expression(plain(paste(" Temperature, ",degree,"C"))))
   
-  ggsave(plot,file=paste("../results/TPCs/z_",ID,".pdf",sep=""), 
+  ggsave(plot,file=paste("../results/TPC/z_",ID,".pdf",sep=""), 
          height=10,width=15,units="cm")
   
   zPlots[[counter]] <<- plot
@@ -1211,7 +1211,7 @@ FitModel <- function(ID){
     labs(title=paste(df$GoodName[1], sep=""),
          y="bmax", x=expression(plain(paste(" Temperature, ",degree,"C"))))
   
-  ggsave(plot,file=paste("../results/TPCs/Bopt_",ID,".pdf",sep=""), 
+  ggsave(plot,file=paste("../results/TPC/Bopt_",ID,".pdf",sep=""), 
          height=10,width=15,units="cm")
   
   BetaPlots[[counter]] <<- plot
