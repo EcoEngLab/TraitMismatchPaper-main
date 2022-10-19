@@ -1,0 +1,20 @@
+originaltraitname,originaltraitunit,originaltraitvalue,interactor1,ambienttemp,ambienttempunit,interactor2,stressor
+Transition rate,days/1,0,Aedes aegypti,10,celsius,.,.
+Transition rate,days/2,0,Aedes aegypti,10.41176471,celsius,.,.
+Transition rate,days/3,0.015522388,Aedes aegypti,14.65847234,celsius,.,.
+Transition rate,days/4,0.010746269,Aedes aegypti,14.89025461,celsius,.,.
+Transition rate,days/5,0.024477612,Aedes aegypti,14.78270413,celsius,.,.
+Transition rate,days/6,0.060298507,Aedes aegypti,19.1619842,celsius,.,.
+Transition rate,days/7,0.062089552,Aedes aegypti,19.04565408,celsius,.,.
+Transition rate,days/8,0.066268657,Aedes aegypti,18.87225637,celsius,.,.
+Transition rate,days/9,0.099701493,Aedes aegypti,26.60272169,celsius,.,.
+Transition rate,days/10,0.108656716,Aedes aegypti,26.90342406,celsius,.,.
+Transition rate,days/11,0.120597015,Aedes aegypti,26.91220369,celsius,.,.
+Transition rate,days/12,0.134925373,Aedes aegypti,31.74626866,celsius,.,.
+Transition rate,days/13,0.15880597,Aedes aegypti,30.94029851,celsius,.,.
+Transition rate,days/14,0.195820896,Aedes aegypti,35.08516242,celsius,.,.
+Transition rate,days/15,0.16,Aedes aegypti,36.76470588,celsius,.,.
+Transition rate,days/16,0.122985075,Aedes aegypti,36.61984197,celsius,.,.
+Transition rate,days/17,0,Aedes aegypti,40,celsius,.,.
+Transition rate,days/18,0,Aedes aegypti,40.23485514,celsius,.,.
+Transition rate,days/19,0,Aedes aegypti,40.64661984,celsius,.,.

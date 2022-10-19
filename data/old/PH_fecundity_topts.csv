@@ -1,0 +1,18 @@
+,param,conf_lower,conf_upper,method,estimate,species,trait
+1,topt,25.87100316,31.89182861,residual bootstrap,28.18,Aedes albopictus,fecundity
+2,topt,23.76834916,24.74315659,residual bootstrap,24.201,Aedes krombeini,fecundity
+3,topt,25.725,28.71677361,residual bootstrap,27.489,Anthonomus grandis,fecundity
+4,topt,21.83924841,24.85937313,residual bootstrap,23.493,Aphis gossypii,fecundity
+5,topt,18.21072143,21.47433066,residual bootstrap,19.511,Aphis nasturtii,fecundity
+6,topt,17.69,22.42059295,residual bootstrap,21.254,Bemisia tabaci,fecundity
+7,topt,28.261,31.87616092,residual bootstrap,30.987,Corythucha ciliata,fecundity
+8,topt,24.881891,27.41693005,residual bootstrap,26.386,Helicoverpa armigera,fecundity
+9,topt,27.61071044,30.52257612,residual bootstrap,29.308,Liposcelis bostrychophila,fecundity
+10,topt,26.69821737,32.01687609,residual bootstrap,28.515,Muscidifurax zaraptor,fecundity
+11,topt,22.16017878,23.67770424,residual bootstrap,22.853,Paracoccus marginatu,fecundity
+12,topt,24.172,26.17702845,residual bootstrap,25.496,Planococcus citri,fecundity
+13,topt,18.72925046,20.13164807,residual bootstrap,19.371,Rhopalosiphum maidis,fecundity
+14,topt,20.715,22.42791354,residual bootstrap,21.097,Stethorus punctillum,fecundity
+15,topt,22.24146627,27.08030052,residual bootstrap,25.201,Telenomus isis,fecundity
+16,topt,26.763,28.866,residual bootstrap,28.08,Tetraneura nigriabdominalis,fecundity
+17,topt,25.06804732,25.67109421,residual bootstrap,25.364,Tetranychus mcdanieli,fecundity

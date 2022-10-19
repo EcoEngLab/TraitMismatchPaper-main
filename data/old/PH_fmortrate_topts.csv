@@ -1,0 +1,29 @@
+,param,conf_lower,conf_upper,method,estimate,species,trait
+1,rmax,29.6738643,40.60312071,residual bootstrap,34.38749307,Aedes aegypti,adult mortality rate
+2,topt,22.08567413,29.39849745,residual bootstrap,26.579,Aedes aegypti,adult mortality rate
+3,rmax,95.27454583,115.4493348,residual bootstrap,102.8228634,Aedes albopictus,adult mortality rate
+4,topt,19.31800611,22.53144816,residual bootstrap,21.42,Aedes albopictus,adult mortality rate
+5,rmax,77.27197847,90.65432986,residual bootstrap,81.90316233,Aedes krombeini,adult mortality rate
+6,topt,23.98312695,24.72340215,residual bootstrap,24.331,Aedes krombeini,adult mortality rate
+7,rmax,24.24635704,32.57570529,residual bootstrap,26.8832551,Anopheles gambiae s.s.,adult mortality rate
+8,topt,18.93071819,23.32819759,residual bootstrap,21.653,Anopheles gambiae s.s.,adult mortality rate
+9,rmax,49.07448682,69.45466216,residual bootstrap,58.18810092,Anthonomus grandis,adult mortality rate
+10,topt,13.06743366,16.6725184,residual bootstrap,15.412,Anthonomus grandis,adult mortality rate
+11,rmax,26.0596014,34.02995732,residual bootstrap,28.47988868,Aphis nasturtii,adult mortality rate
+12,topt,17.57897216,19.19400796,residual bootstrap,18.587,Aphis nasturtii,adult mortality rate
+13,rmax,23.81728672,27.59001966,residual bootstrap,25.36790285,Bemisia tabaci,adult mortality rate
+14,topt,19.86852416,22.37622252,residual bootstrap,21.215,Bemisia tabaci,adult mortality rate
+15,rmax,38.09508401,65.65068497,residual bootstrap,48.15990536,Corythucha ciliata,adult mortality rate
+16,topt,17.14744877,22.93059705,residual bootstrap,20.009,Corythucha ciliata,adult mortality rate
+17,rmax,20.20743791,34.86744475,residual bootstrap,25.82239016,Helicoverpa armigera,adult mortality rate
+18,topt,19.48073386,25.59809663,residual bootstrap,22.311,Helicoverpa armigera,adult mortality rate
+19,rmax,12.61580856,16.86305157,residual bootstrap,15.61790215,Muscidifurax zaraptor,adult mortality rate
+20,topt,15.9115661,16.64001618,residual bootstrap,16.186,Muscidifurax zaraptor,adult mortality rate
+21,rmax,36.96346097,52.53538408,residual bootstrap,41.38374129,Paracoccus marginatu,adult mortality rate
+22,topt,17.5275074,19.34438411,residual bootstrap,18.652,Paracoccus marginatu,adult mortality rate
+23,rmax,24.57178107,27.43612954,residual bootstrap,26.49816439,Rhopalosiphum maidis,adult mortality rate
+24,topt,14.5822866,16.57532862,residual bootstrap,15.559,Rhopalosiphum maidis,adult mortality rate
+25,rmax,25.26798073,29.82983715,residual bootstrap,27.58757779,Tetraneura nigri abdominalis,adult mortality rate
+26,topt,11.084,11.97678602,residual bootstrap,11.207,Tetraneura nigriabdominalis,adult mortality rate
+27,rmax,22.66990633,43.58297397,residual bootstrap,36.39004277,Tetranychus mcdanieli,adult mortality rate
+28,topt,17.57158148,24.87812807,residual bootstrap,20.764,Tetranychus mcdanieli,adult mortality rate

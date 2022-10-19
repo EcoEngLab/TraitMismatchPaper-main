@@ -1,0 +1,35 @@
+,param,conf_lower,conf_upper,method,estimate,species,trait
+1,rmax,43.21786337,59.8247696,residual bootstrap,48.10208075,Aedes aegypti,juvenile mortality rate
+2,topt,11.80332749,15.93490363,residual bootstrap,14.901,Aedes aegypti,juvenile mortality rate
+3,rmax,74.88795088,110.0676831,residual bootstrap,86.36901014,Aedes albopictus,juvenile mortality rate
+4,topt,15.7693395,17.48214198,residual bootstrap,16.631,Aedes albopictus,juvenile mortality rate
+5,rmax,69.91094021,85.02841982,residual bootstrap,77.75032598,Anopheles gambiae s.s.,juvenile mortality rate
+6,topt,20.84942368,22.22880263,residual bootstrap,21.445,Anopheles gambiae s.s.,juvenile mortality rate
+7,rmax,75.48770701,115.2883569,residual bootstrap,86.56807516,Anthonomus grandis,juvenile mortality rate
+8,topt,15.54181795,17.159,residual bootstrap,16.26,Anthonomus grandis,juvenile mortality rate
+9,rmax,178.8014938,281.3945966,residual bootstrap,223.5836526,Aphis gossypii,juvenile mortality rate
+10,topt,30.67541178,33.13624184,residual bootstrap,31.555,Aphis gossypii,juvenile mortality rate
+11,rmax,973.4361404,1476.664194,residual bootstrap,973.6583597,Aphis nasturtii,juvenile mortality rate
+12,topt,16.96,17.263,residual bootstrap,16.96,Aphis nasturtii,juvenile mortality rate
+13,rmax,62.58977164,87.5895972,residual bootstrap,74.27236221,Bemisia tabaci,juvenile mortality rate
+14,topt,16,23.03367902,residual bootstrap,20.458,Bemisia tabaci,juvenile mortality rate
+15,rmax,84.52459737,155.2965435,residual bootstrap,120.9609909,Corythucha ciliata,juvenile mortality rate
+16,topt,19.71651609,24.67459506,residual bootstrap,22.692,Corythucha ciliata,juvenile mortality rate
+17,rmax,72.86221701,114.7649133,residual bootstrap,88.82891098,Helicoverpa armigera,juvenile mortality rate
+18,topt,17.40124066,19.676,residual bootstrap,18.264,Helicoverpa armigera,juvenile mortality rate
+19,rmax,108.4613022,145.3435989,residual bootstrap,128.4984648,Liposcelis bostrychophila,juvenile mortality rate
+20,topt,26.34052667,29.16101763,residual bootstrap,27.93,Liposcelis bostrychophila,juvenile mortality rate
+21,rmax,425.0208531,510.3214256,residual bootstrap,467.5124805,Muscidifurax zaraptor,juvenile mortality rate
+22,topt,25.64542482,27.35031479,residual bootstrap,26.397,Muscidifurax zaraptor,juvenile mortality rate
+23,rmax,189.9347026,193.0030875,residual bootstrap,191.7130985,Paracoccus marginatu,juvenile mortality rate
+24,topt,18.61952262,19.156,residual bootstrap,18.866,Paracoccus marginatu,juvenile mortality rate
+25,rmax,64.39004074,176.387322,residual bootstrap,141.3085683,Rhopalosiphum maidis,juvenile mortality rate
+26,topt,24.47001602,27.81331926,residual bootstrap,26.595,Rhopalosiphum maidis,juvenile mortality rate
+27,rmax,88.82583651,124.3647555,residual bootstrap,104.3791828,Stethorus punctillum,juvenile mortality rate
+28,topt,14.43692965,16.29265035,residual bootstrap,15.238,Stethorus punctillum,juvenile mortality rate
+29,rmax,118.541304,167.5976475,residual bootstrap,136.0178384,Telenomus isis,juvenile mortality rate
+30,topt,18.39656496,19.64484213,residual bootstrap,18.955,Telenomus isis,juvenile mortality rate
+31,rmax,2061.818999,3924.655617,residual bootstrap,2963.172183,Tetraneura nigriabdominalis,juvenile mortality rate
+32,topt,27.43717007,28.22295303,residual bootstrap,27.829,Tetraneura nigriabdominalis,juvenile mortality rate
+33,rmax,82.11797545,139.4582016,residual bootstrap,108.5393955,Tetranychus mcdanieli,juvenile mortality rate
+34,topt,16.96205838,19.48826007,residual bootstrap,17.82637398,Tetranychus mcdanieli,juvenile mortality rate
