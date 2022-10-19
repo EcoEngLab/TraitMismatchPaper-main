@@ -22,7 +22,7 @@ graphics.off()
 
 ###### 1. Juvenile development rate (1/alpha) ######
 
-df <- as_tibble(read.csv('../data/TraitData.csv')) 
+df <- as_tibble(read.csv('data/TraitData.csv')) 
       
 dv <- df %>% rename(temp = interactor1temp, species = interactor1, rate = standardisedtraitvalue) %>%
              select(species, temp, standardisedtraitname, rate) %>%
@@ -31,50 +31,56 @@ dv <- df %>% rename(temp = interactor1temp, species = interactor1, rate = standa
                                          species == 'Aedes aegypti' ~ '2',
                                          species == 'Anthonomus grandis' ~ '3',
                                          species == 'Paracoccus marginatus' ~ '4',
-                                         species == 'Acyrthosiphon pisum' ~ '5',
-                                         species == 'Aphis gossypii' ~ '6',
-                                         species == 'Harmonia axyridis' ~ '7',
-                                         species == 'Tribolium castaneum' ~ '8',
-                                         species == 'Aedes krombeini' ~ '9',
-                                         species == 'Bemisia tabaci' ~ '10',
-                                         species == 'Tetraneura nigriabdominalis' ~ '11',
-                                         species == 'Stethorus punctillum' ~ '12',
-                                         species == 'Tetranychus mcdanieli' ~ '13',
-                                         species == 'Tetranychus urticae' ~ '14',
-                                         species == 'Clavigralla tomentosicollis' ~ '15',
-                                         species == 'Planococcus citri' ~ '16',
-                                         species == 'Muscidifurax zaraptor' ~ '17',
-                                         species == 'Aphis nasturtii' ~ '18',
-                                         species == 'Rhopalosiphum maidis' ~ '19',
-                                         species == 'Anopheles gambiae' ~ '20',
-                                         species == 'Anoplophora glabripennis' ~ '21',
-                                         species == 'Amblyseius womersleyi' ~ '22',
-                                         species == 'Trichogramma sp. nr. Lutea' ~ '23',
-                                         species == 'Trichogramma bruni' ~ '24',
-                                         species == 'Culex annulirostris' ~ '25',
-                                         species == 'Macrocentrus iridescens' ~ '26',
-                                         species == 'Otiorhynchus sulcatus' ~ '27',
-                                         species == 'Drosophila suzukii' ~ '28',
-                                         species == 'Gastrolina depressa' ~ '29',
-                                         species == 'Laricobius nigrinus' ~ '30',
-                                         species == 'Aubeonymus mariaefranciscae' ~ '31',
-                                         species == 'Iphiseius degenerans' ~ '32',
-                                         species == 'Amblyseius swirskii' ~ '33',
-                                         species == 'Macrosiphum euphorbia' ~ '34',
-                                         species == 'Myzus persicae' ~ '35',
-                                         species == 'Tetranychus evansi' ~ '36',
-                                         species == 'Helicoverpa armigera' ~ '37',
-                                         species == 'Antestiopsis thunbergii' ~ '38',
-                                         species == 'Monochamus leuconotus' ~ '39',
-                                         species == 'Kampimodromus aberrans' ~ '40',
-                                         species == 'Phenacoccus solenopsis' ~ '41',
-                                         species == 'Leptinotarsa decemlineata' ~ '42',
-                                         species == 'Halyomorpha halys' ~ '43',
-                                         species == 'Muscidifurax raptorellus' ~ '44',
-                                         species == 'Thrips hawaiiensis' ~ '45')) %>%
+                                         species == 'Aphis gossypii' ~ '5',
+                                         species == 'Harmonia axyridis' ~ '6',
+                                         species == 'Tribolium castaneum' ~ '7',
+                                         species == 'Aedes krombeini' ~ '8',
+                                         species == 'Bemisia tabaci' ~ '9',
+                                         species == 'Tetraneura nigriabdominalis' ~ '10',
+                                         species == 'Stethorus punctillum' ~ '11',
+                                         species == 'Tetranychus mcdanieli' ~ '12',
+                                         species == 'Tetranychus urticae' ~ '13',
+                                         species == 'Clavigralla tomentosicollis' ~ '14',
+                                         species == 'Planococcus citri' ~ '15',
+                                         species == 'Muscidifurax zaraptor' ~ '16',
+                                         species == 'Aphis nasturtii' ~ '17',
+                                         species == 'Rhopalosiphum maidis' ~ '18',
+                                         species == 'Anopheles gambiae' ~ '19',
+                                         species == 'Anoplophora glabripennis' ~ '20',
+                                         species == 'Amblyseius womersleyi' ~ '21',
+                                         species == 'Trichogramma sp. nr. Lutea' ~ '22',
+                                         species == 'Trichogramma bruni' ~ '23',
+                                         species == 'Culex annulirostris' ~ '24',
+                                         species == 'Macrocentrus iridescens' ~ '25',
+                                         species == 'Otiorhynchus sulcatus' ~ '26',
+                                         species == 'Drosophila suzukii' ~ '27',
+                                         species == 'Gastrolina depressa' ~ '28',
+                                         species == 'Laricobius nigrinus' ~ '29',
+                                         species == 'Aubeonymus mariaefranciscae' ~ '30',
+                                         species == 'Iphiseius degenerans' ~ '31',
+                                         species == 'Amblyseius swirskii' ~ '32',
+                                         species == 'Macrosiphum euphorbia' ~ '33',
+                                         species == 'Myzus persicae' ~ '34',
+                                         species == 'Tetranychus evansi' ~ '35',
+                                         species == 'Helicoverpa armigera' ~ '36',
+                                         species == 'Antestiopsis thunbergii' ~ '37',
+                                         species == 'Monochamus leuconotus' ~ '38',
+                                         species == 'Kampimodromus aberrans' ~ '39',
+                                         species == 'Phenacoccus solenopsis' ~ '40',
+                                         species == 'Leptinotarsa decemlineata' ~ '41',
+                                         species == 'Halyomorpha halys' ~ '42',
+                                         species == 'Muscidifurax raptorellus' ~ '43',
+                                         species == 'Thrips hawaiiensis' ~ '44',
+                                         species == 'Scapsipedus icipe' ~ '45',
+                                         species == 'Hyperaspis notata' ~ '46',
+                                         species == 'Toxoptera citricida' ~ '47',
+                                         species == 'Ophraella communa' ~ '48',
+                                         species == 'Bemisia argentifolii' ~ '49',
+                                         species == 'Dactylopius austrinus' ~ '50',
+                                         species == 'Aulacorthum solani' ~ '51')) %>%
              arrange(curve_ID) %>% mutate(temp = as.numeric(temp))
              
-dv %>% distinct(species, curve_ID) %>% print(n=60)
+dv %>% distinct(species) %>% print(n=60)
 
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -207,7 +213,7 @@ FitModel <- function(ID){
     labs(title=paste(df$GoodName[1], sep=""),
          y="Development rate", x=expression(plain(paste(" Temperature, ",degree,"C"))))
   
-  ggsave(plot,file=paste("../results/TPC/Alpha_",ID,".pdf",sep=""), 
+  ggsave(plot,file=paste("results/TPC/Alpha_",ID,".pdf",sep=""), 
          height=10,width=15,units="cm")
   
   AlphaPlots[[counter]] <<- plot
@@ -226,152 +232,170 @@ ModelOutDF$trait <- "juvenile development rate"
 
 #run in parallel:
 doMC::registerDoMC(cores = 4)
-ModelOutList <- foreach(ID = unique(dv$curve_ID)) %dopar%{ FitModel(ID)}
+ModelOutList <- foreach(ID = unique(dv$curve_ID)) %dopar%{FitModel(ID)}
 ModelOutDF <- do.call(rbind, ModelOutList)
 ModelOutDF$trait <- "juvenile development rate"
-write.csv(ModelOutDF, '../data/alpha_Tpks_AllParams.csv')
+write.csv(ModelOutDF, 'data/alpha_Tpks_AllParams.csv')
 
 
-#compile dataset containing fits with confidence bounds
+# Compile dataset containing fits with confidence bounds
  
 AalAlphaCIs  <- AlphaPlots[[1]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 AalAlphaFits <- dv_preds %>% filter(species == 'Aedes albopictus') %>% bind_cols(AalAlphaCIs)
 #$$ 
-BtaAlphaCIs  <- AlphaPlots[[2]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
-BtaAlphaFits <- dv_preds %>% filter(species == 'Bemisia tabaci')   %>% bind_cols(BtaAlphaCIs)
-#$$ 
-TniAlphaCIs  <- AlphaPlots[[3]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+TniAlphaCIs  <- AlphaPlots[[2]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 TniAlphaFits <- dv_preds %>% filter(species == 'Tetraneura nigriabdominalis') %>% bind_cols(TniAlphaCIs)
 #$$
-SpuAlphaCIs  <- AlphaPlots[[4]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+SpuAlphaCIs  <- AlphaPlots[[3]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 SpuAlphaFits <- dv_preds %>% filter(species == 'Stethorus punctillum')   %>% bind_cols(SpuAlphaCIs)
 #$$
-TmcAlphaCIs  <- AlphaPlots[[5]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+TmcAlphaCIs  <- AlphaPlots[[4]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 TmcAlphaFits <- dv_preds %>% filter(species == 'Tetranychus mcdanieli')   %>% bind_cols(TmcAlphaCIs)
 #$$
-TeuAlphaCIs  <- AlphaPlots[[6]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+TeuAlphaCIs  <- AlphaPlots[[5]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 TeuAlphaFits <- dv_preds %>% filter(species == 'Tetranychus urticae')   %>% bind_cols(TeuAlphaCIs)
 #$$
-CtoAlphaCIs  <- AlphaPlots[[7]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+CtoAlphaCIs  <- AlphaPlots[[6]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 CtoAlphaFits <- dv_preds %>% filter(species == 'Clavigralla tomentosicollis') %>% bind_cols(CtoAlphaCIs)
 #$$
-PciAlphaCIs  <- AlphaPlots[[8]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+PciAlphaCIs  <- AlphaPlots[[7]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 PciAlphaFits <- dv_preds %>% filter(species == 'Planococcus citri')   %>% bind_cols(PciAlphaCIs)
 #$$
-MzaAlphaCIs  <- AlphaPlots[[9]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+MzaAlphaCIs  <- AlphaPlots[[8]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 MzaAlphaFits <- dv_preds %>% filter(species == 'Muscidifurax zaraptor')   %>% bind_cols(MzaAlphaCIs)
 #$$
-AnaAlphaCIs  <- AlphaPlots[[10]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+AnaAlphaCIs  <- AlphaPlots[[9]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 AnaAlphaFits <- dv_preds %>% filter(species == 'Aphis nasturtii')   %>% bind_cols(AnaAlphaCIs)
 #$$
-RmaAlphaCIs  <- AlphaPlots[[11]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+RmaAlphaCIs  <- AlphaPlots[[10]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 RmaAlphaFits <- dv_preds %>% filter(species == 'Rhopalosiphum maidis')   %>% bind_cols(RmaAlphaCIs)
+#$$
+AgaAlphaCIs  <- AlphaPlots[[11]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+AgaAlphaFits <- dv_preds %>% filter(species == 'Anopheles gambiae')   %>% bind_cols(AgaAlphaCIs)
 #$$
 AaeAlphaCIs  <- AlphaPlots[[12]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 AaeAlphaFits <- dv_preds %>% filter(species == 'Aedes aegypti')   %>% bind_cols(AaeAlphaCIs)
 #$$
-AgaAlphaCIs  <- AlphaPlots[[13]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
-AgaAlphaFits <- dv_preds %>% filter(species == 'Anopheles gambiae')   %>% bind_cols(AgaAlphaCIs)
-#$$
-AglAlphaCIs  <- AlphaPlots[[14]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+AglAlphaCIs  <- AlphaPlots[[13]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 AglAlphaFits <- dv_preds %>% filter(species == 'Anoplophora glabripennis')   %>% bind_cols(AglAlphaCIs)
 #$$
-AwoAlphaCIs  <- AlphaPlots[[15]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+AwoAlphaCIs  <- AlphaPlots[[14]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 AwoAlphaFits <- dv_preds %>% filter(species == 'Amblyseius womersleyi')   %>% bind_cols(AwoAlphaCIs)
 #$$
-TluAlphaCIs  <- AlphaPlots[[16]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+TluAlphaCIs  <- AlphaPlots[[15]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 TluAlphaFits <- dv_preds %>% filter(species == 'Trichogramma sp. nr. Lutea')   %>% bind_cols(TluAlphaCIs)
 #$$
-TbrAlphaCIs  <- AlphaPlots[[17]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+TbrAlphaCIs  <- AlphaPlots[[16]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 TbrAlphaFits <- dv_preds %>% filter(species == 'Trichogramma bruni')   %>% bind_cols(TbrAlphaCIs)
 #$$
-CanAlphaCIs  <- AlphaPlots[[18]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+CanAlphaCIs  <- AlphaPlots[[17]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 CanAlphaFits <- dv_preds %>% filter(species == 'Culex annulirostris')   %>% bind_cols(CanAlphaCIs)
 #$$
-MirAlphaCIs  <- AlphaPlots[[19]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+MirAlphaCIs  <- AlphaPlots[[18]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 MirAlphaFits <- dv_preds %>% filter(species == 'Macrocentrus iridescens')   %>% bind_cols(MirAlphaCIs)
 #$$
-OsuAlphaCIs  <- AlphaPlots[[20]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+OsuAlphaCIs  <- AlphaPlots[[19]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 OsuAlphaFits <- dv_preds %>% filter(species == 'Otiorhynchus sulcatus')   %>% bind_cols(OsuAlphaCIs)
 #$$
-DsuAlphaCIs  <- AlphaPlots[[21]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+DsuAlphaCIs  <- AlphaPlots[[20]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 DsuAlphaFits <- dv_preds %>% filter(species == 'Drosophila suzukii')   %>% bind_cols(DsuAlphaCIs)
 #$$
-GdeAlphaCIs  <- AlphaPlots[[22]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+GdeAlphaCIs  <- AlphaPlots[[21]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 GdeAlphaFits <- dv_preds %>% filter(species == 'Gastrolina depressa')   %>% bind_cols(GdeAlphaCIs)
 #$$
+LniAlphaCIs  <- AlphaPlots[[22]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+LniAlphaFits <- dv_preds %>% filter(species == 'Laricobius nigrinus')   %>% bind_cols(LniAlphaCIs)
+#
 AgrAlphaCIs  <- AlphaPlots[[23]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 AgrAlphaFits <- dv_preds %>% filter(species == 'Anthonomus grandis')   %>% bind_cols(AgrAlphaCIs)
-#$$
-LniAlphaCIs  <- AlphaPlots[[24]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
-LniAlphaFits <- dv_preds %>% filter(species == 'Laricobius nigrinus')   %>% bind_cols(LniAlphaCIs)
-#$$
-AmaAlphaCIs  <- AlphaPlots[[25]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+AmaAlphaCIs  <- AlphaPlots[[24]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 AmaAlphaFits <- dv_preds %>% filter(species == 'Aubeonymus mariaefranciscae')   %>% bind_cols(AmaAlphaCIs)
 #$$
-IdeAlphaCIs  <- AlphaPlots[[26]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+IdeAlphaCIs  <- AlphaPlots[[25]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 IdeAlphaFits <- dv_preds %>% filter(species == 'Iphiseius degenerans')   %>% bind_cols(IdeAlphaCIs)
 #$$
-AswAlphaCIs  <- AlphaPlots[[27]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+AswAlphaCIs  <- AlphaPlots[[26]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 AswAlphaFits <- dv_preds %>% filter(species == 'Amblyseius swirskii')   %>% bind_cols(AswAlphaCIs)
 #$$
-MeuAlphaCIs  <- AlphaPlots[[28]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+MeuAlphaCIs  <- AlphaPlots[[27]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 MeuAlphaFits <- dv_preds %>% filter(species == 'Macrosiphum euphorbia')   %>% bind_cols(MeuAlphaCIs)
 #$$
-MpeAlphaCIs  <- AlphaPlots[[29]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+MpeAlphaCIs  <- AlphaPlots[[28]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 MpeAlphaFits <- dv_preds %>% filter(species == 'Myzus persicae')   %>% bind_cols(MpeAlphaCIs)
 #$$
-TevAlphaCIs  <- AlphaPlots[[30]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+TevAlphaCIs  <- AlphaPlots[[29]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 TevAlphaFits <- dv_preds %>% filter(species == 'Tetranychus evansi')   %>% bind_cols(TevAlphaCIs)
 #$$
-HarAlphaCIs  <- AlphaPlots[[31]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+HarAlphaCIs  <- AlphaPlots[[30]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 HarAlphaFits <- dv_preds %>% filter(species == 'Helicoverpa armigera')   %>% bind_cols(HarAlphaCIs)
 #$$
-AthAlphaCIs  <- AlphaPlots[[32]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+AthAlphaCIs  <- AlphaPlots[[31]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 AthAlphaFits <- dv_preds %>% filter(species == 'Antestiopsis thunbergii')   %>% bind_cols(AthAlphaCIs)
 #$$
-MleAlphaCIs  <- AlphaPlots[[33]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+MleAlphaCIs  <- AlphaPlots[[32]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 MleAlphaFits <- dv_preds %>% filter(species == 'Monochamus leuconotus')   %>% bind_cols(MleAlphaCIs)
+#
+KabAlphaCIs  <- AlphaPlots[[33]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+KabAlphaFits <- dv_preds %>% filter(species == 'Kampimodromus aberrans')   %>% bind_cols(KabAlphaCIs)
 #$$
 PmaAlphaCIs  <- AlphaPlots[[34]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 PmaAlphaFits <- dv_preds %>% filter(species == 'Paracoccus marginatus')   %>% bind_cols(PmaAlphaCIs)
 #$$
-KabAlphaCIs  <- AlphaPlots[[35]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
-KabAlphaFits <- dv_preds %>% filter(species == 'Kampimodromus aberrans')   %>% bind_cols(KabAlphaCIs)
-#$$
-PsoAlphaCIs  <- AlphaPlots[[36]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+PsoAlphaCIs  <- AlphaPlots[[35]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 PsoAlphaFits <- dv_preds %>% filter(species == 'Phenacoccus solenopsis')   %>% bind_cols(PsoAlphaCIs)
 #$$
-LdeAlphaCIs  <- AlphaPlots[[37]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+LdeAlphaCIs  <- AlphaPlots[[36]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 LdeAlphaFits <- dv_preds %>% filter(species == 'Leptinotarsa decemlineata')   %>% bind_cols(LdeAlphaCIs)
 #$$
-HhaAlphaCIs  <- AlphaPlots[[38]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+HhaAlphaCIs  <- AlphaPlots[[37]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 HhaAlphaFits <- dv_preds %>% filter(species == 'Halyomorpha halys')   %>% bind_cols(HhaAlphaCIs)
 #$$
-MraAlphaCIs  <- AlphaPlots[[39]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+MraAlphaCIs  <- AlphaPlots[[38]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 MraAlphaFits <- dv_preds %>% filter(species == 'Muscidifurax raptorellus')   %>% bind_cols(MraAlphaCIs)
 #$$
-ThaAlphaCIs  <- AlphaPlots[[40]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+ThaAlphaCIs  <- AlphaPlots[[39]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 ThaAlphaFits <- dv_preds %>% filter(species == 'Thrips hawaiiensis')   %>% bind_cols(ThaAlphaCIs)
-#$$
-ApiAlphaCIs  <- AlphaPlots[[41]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
-ApiAlphaFits <- dv_preds %>% filter(species == 'Acyrthosiphon pisum')   %>% bind_cols(ApiAlphaCIs)
-#$$
-AgoAlphaCIs  <- AlphaPlots[[42]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+SicAlphaCIs  <- AlphaPlots[[40]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+SicAlphaFits <- dv_preds %>% filter(species == 'Scapsipedus icipe') %>% bind_cols(SicAlphaCIs)
+#
+HynAlphaCIs  <- AlphaPlots[[41]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+HynAlphaFits <- dv_preds %>% filter(species == 'Hyperaspis notata') %>% bind_cols(HynAlphaCIs)
+#
+ToxAlphaCIs  <- AlphaPlots[[42]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+ToxAlphaFits <- dv_preds %>% filter(species == 'Toxoptera citricida') %>% bind_cols(ToxAlphaCIs)
+#
+OpcAlphaCIs  <- AlphaPlots[[43]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+OpcAlphaFits <- dv_preds %>% filter(species == 'Ophraella communa') %>% bind_cols(OpcAlphaCIs)
+#
+BeaAlphaCIs  <- AlphaPlots[[44]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+BeaAlphaFits <- dv_preds %>% filter(species == 'Bemisia argentifolii') %>% bind_cols(BeaAlphaCIs)
+#
+AgoAlphaCIs  <- AlphaPlots[[45]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 AgoAlphaFits <- dv_preds %>% filter(species == 'Aphis gossypii')   %>% bind_cols(AgoAlphaCIs)
-#$$
-HaxAlphaCIs  <- AlphaPlots[[43]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+DauAlphaCIs  <- AlphaPlots[[46]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+DauAlphaFits <- dv_preds %>% filter(species == 'Dactylopius austrinus') %>% bind_cols(DauAlphaCIs)
+#
+AusAlphaCIs  <- AlphaPlots[[47]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+AusAlphaFits <- dv_preds %>% filter(species == 'Aulacorthum solani') %>% bind_cols(AusAlphaCIs)
+#
+HaxAlphaCIs  <- AlphaPlots[[48]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 HaxAlphaFits <- dv_preds %>% filter(species == 'Harmonia axyridis')   %>% bind_cols(HaxAlphaCIs)
 #$$
-TcaAlphaCIs  <- AlphaPlots[[44]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+TcaAlphaCIs  <- AlphaPlots[[49]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 TcaAlphaFits <- dv_preds %>% filter(species == 'Tribolium castaneum')   %>% bind_cols(TcaAlphaCIs)
 #$$
-AkrAlphaCIs  <- AlphaPlots[[45]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+AkrAlphaCIs  <- AlphaPlots[[50]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 AkrAlphaFits <- dv_preds %>% filter(species == 'Aedes krombeini')   %>% bind_cols(AkrAlphaCIs)
-#$$
+#$$ 
+BtaAlphaCIs  <- AlphaPlots[[51]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+BtaAlphaFits <- dv_preds %>% filter(species == 'Bemisia tabaci')   %>% bind_cols(BtaAlphaCIs)
+
+
 
 AlphaPredictions <- bind_rows(AalAlphaFits, 
-                              BtaAlphaFits, 
                               TniAlphaFits, 
                               SpuAlphaFits, 
                               TmcAlphaFits,
@@ -381,8 +405,8 @@ AlphaPredictions <- bind_rows(AalAlphaFits,
                               MzaAlphaFits, 
                               AnaAlphaFits,
                               RmaAlphaFits, 
+                              AgaAlphaFits,
                               AaeAlphaFits, 
-                              AgaAlphaFits, 
                               AglAlphaFits,
                               AwoAlphaFits,
                               TluAlphaFits,
@@ -392,8 +416,8 @@ AlphaPredictions <- bind_rows(AalAlphaFits,
                               OsuAlphaFits,
                               DsuAlphaFits,
                               GdeAlphaFits,
-                              AgrAlphaFits, 
                               LniAlphaFits,
+                              AgrAlphaFits,
                               AmaAlphaFits,
                               IdeAlphaFits,
                               AswAlphaFits,
@@ -403,65 +427,82 @@ AlphaPredictions <- bind_rows(AalAlphaFits,
                               HarAlphaFits,
                               AthAlphaFits,
                               MleAlphaFits,
-                              PmaAlphaFits,
                               KabAlphaFits,
+                              PmaAlphaFits,
                               PsoAlphaFits,
                               LdeAlphaFits,
                               HhaAlphaFits,
                               MraAlphaFits,
                               ThaAlphaFits,
-                              ApiAlphaFits, 
+                              SicAlphaFits,
+                              HynAlphaFits,
+                              ToxAlphaFits,
+                              OpcAlphaFits,
+                              BeaAlphaFits,
                               AgoAlphaFits, 
+                              DauAlphaFits,
+                              AusAlphaFits,
                               HaxAlphaFits, 
                               TcaAlphaFits, 
-                              AkrAlphaFits) %>%
+                              AkrAlphaFits,
+                              BtaAlphaFits) %>%
                     rename(alpha = .fitted, alphaLwr = conf_lower, alphaUpr = conf_upper) %>%
                     mutate(alpha = 1/alpha, alphaLwr = 1/alphaLwr, alphaUpr = 1/alphaUpr)
 
-write_csv(AlphaPredictions, '../data/AlphaPredictions.csv')
+write_csv(AlphaPredictions, 'data/AlphaPredictions.csv')
 
-#±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±
+distinct(AlphaPredictions, species) %>% print(n=51)
+
+#__________________________________
 
 rm(list=ls())
 graphics.off()
 
 # 2. zj (juvenile mortality rate) ######
 
-df <- as_tibble(read.csv('../data/TraitData.csv')) 
+df <- as_tibble(read.csv('data/TraitData.csv')) 
 
 dv <- df %>% rename(temp = interactor1temp, species = interactor1, rate = standardisedtraitvalue) %>%
   select(species, temp, standardisedtraitname, rate) %>%
-  filter(standardisedtraitname == 'zj', rate != 'NA') %>%
-  mutate(curve_ID = case_when(species == 'Thrips hawaiiensis' ~ '1',
-                              species == 'Aedes aegypti' ~ '2',
-                              species == 'Anthonomus grandis' ~ '3',
-                              species == 'Paracoccus marginatus' ~ '4',
-                              species == 'Acyrthosiphon pisum' ~ '5',
-                              species == 'Aphis gossypii' ~ '6',
-                              species == 'Harmonia axyridis' ~ '7',
-                              species == 'Tribolium castaneum' ~ '8',
-                              species == 'Tetranychus mcdanieli' ~ '9',
-                              species == 'Bemisia tabaci' ~ '10',
-                              species == 'Tetraneura nigriabdominalis' ~ '11',
-                              species == 'Stethorus punctillum' ~ '12',
+  filter(standardisedtraitname == 'zj', rate !='NA') %>%
+  mutate(curve_ID = case_when(species == 'Toxoptera citricida' ~ '1',
+                              species == 'Thrips hawaiiensis' ~ '2',
+                              species == 'Aedes aegypti' ~ '3',
+                              species == 'Anthonomus grandis' ~ '4',
+                              species == 'Paracoccus marginatus' ~ '5',
+                              species == 'Acyrthosiphon pisum' ~ '6',
+                              species == 'Aphis gossypii' ~ '7',
+                              species == 'Harmonia axyridis' ~ '8',
+                              species == 'Tribolium castaneum' ~ '9',
+                              species == 'Tetranychus mcdanieli' ~ '10',
+                              species == 'Bemisia tabaci' ~ '11',
+                              species == 'Tetraneura nigriabdominalis' ~ '12',
+                              species == 'Stethorus punctillum' ~ '13',
                               species == 'Tetranychus urticae' ~ '14',
-                              species == 'Planococcus citri' ~ '16',
-                              species == 'Muscidifurax zaraptor' ~ '17',
-                              species == 'Aphis nasturtii' ~ '18',
-                              species == 'Rhopalosiphum maidis' ~ '19',
-                              species == 'Anopheles gambiae' ~ '20',
-                              species == 'Anoplophora glabripennis' ~ '21',
-                              species == 'Culex annulirostris' ~ '25',
-                              species == 'Laricobius nigrinus' ~ '30',
-                              species == 'Aubeonymus mariaefranciscae' ~ '31',
-                              species == 'Helicoverpa armigera' ~ '37',
-                              species == 'Halyomorpha halys' ~ '43',
-                              species == 'Muscidifurax raptorellus' ~ '44',
-                              species == 'Aedes albopictus' ~ '45')) %>%
-  arrange(curve_ID) %>% filter(curve_ID != 'NA') %>%
+                              species == 'Planococcus citri' ~ '15',
+                              species == 'Muscidifurax zaraptor' ~ '16',
+                              species == 'Aphis nasturtii' ~ '17',
+                              species == 'Rhopalosiphum maidis' ~ '18',
+                              species == 'Anopheles gambiae' ~ '19',
+                              species == 'Anoplophora glabripennis' ~ '20',
+                              species == 'Culex annulirostris' ~ '21',
+                              species == 'Laricobius nigrinus' ~ '22',
+                              species == 'Aubeonymus mariaefranciscae' ~ '23',
+                              species == 'Helicoverpa armigera' ~ '24',
+                              species == 'Halyomorpha halys' ~ '25',
+                              species == 'Muscidifurax raptorellus' ~ '26',
+                              species == 'Aedes albopictus' ~ '27',
+                              species == 'Scapsipedus icipe' ~ '28',
+                              species == 'Hyperaspis notata' ~ '29',
+                              species == 'Ophraella communa' ~ '30',
+                              species == 'Bemisia argentifolii' ~ '31',
+                              species == 'Dactylopius austrinus' ~ '32',
+                              species == 'Aulacorthum solani' ~ '33',
+                              species == 'Amblyseius womersleyi' ~ '34')) %>%
+  arrange(curve_ID) %>%
   mutate(temp = as.numeric(temp), rate = 1/rate)
 
-dv %>% distinct(species, curve_ID) %>% print(n=50)
+dv %>% distinct(species,curve_ID) %>% print(n=55)
 
 # fit TPC model for each species
 start_vals <- get_start_vals(dv$temp, dv$rate, model_name = 'pawar_2018')
@@ -579,7 +620,7 @@ FitModel <- function(ID){
     labs(title=paste(df$GoodName[1], sep=""),
          y="zj", x=expression(plain(paste(" Temperature, ",degree,"C"))))
   
-  ggsave(plot,file=paste("../results/TPC/zj_",ID,".pdf",sep=""), 
+  ggsave(plot,file=paste("results/TPC/zj_",ID,".pdf",sep=""), 
          height=10,width=15,units="cm")
   
   zJPlots[[counter]] <<- plot
@@ -587,8 +628,7 @@ FitModel <- function(ID){
   return(topt)
 }
 
-## Run everything:
-#  run using apply:
+## Run everything using apply:
 
 zJPlots <- vector(mode="list", length=length(unique(dv$curve_ID)))
 
@@ -602,118 +642,155 @@ doMC::registerDoMC(cores = 4)
 ModelOutList <- foreach(ID = unique(dv$curve_ID)) %dopar%{ FitModel(ID)}
 ModelOutDF   <- do.call(rbind, ModelOutList)
 ModelOutDF$trait <- "juvenile mortality rate"
-write.csv(ModelOutDF, '../data/zj_Tpks_AllParams.csv')
+write.csv(ModelOutDF, 'data/zj_Tpks_AllParams.csv')
 
 
-#$$$$ Compile dataset of fits for all species
-ThazJCIs  <- zJPlots[[1]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
-ThazJFits <- dv_preds %>% filter(species == 'Thrips hawaiiensis')   %>% bind_cols(ThazJCIs)
-#$$
-BtazJCIs  <- zJPlots[[2]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+# Compile dataset of fits for all species
+ToxzJCIs  <- zJPlots[[1]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+ToxzJFits <- dv_preds %>% filter(species == 'Toxoptera citricida') %>% bind_cols(ToxzJCIs)
+#
+TmczJCIs  <- zJPlots[[2]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+TmczJFits <- dv_preds %>% filter(species == 'Tetranychus mcdanieli')   %>% bind_cols(TmczJCIs)
+#
+BtazJCIs  <- zJPlots[[3]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 BtazJFits <- dv_preds %>% filter(species == 'Bemisia tabaci')   %>% bind_cols(BtazJCIs)
-#$$ 
-TnizJCIs  <- zJPlots[[3]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+# 
+TnizJCIs  <- zJPlots[[4]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 TnizJFits <- dv_preds %>% filter(species == 'Tetraneura nigriabdominalis') %>% bind_cols(TnizJCIs)
-#$$ 
-SpuzJCIs  <- zJPlots[[4]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+SpuzJCIs  <- zJPlots[[5]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 SpuzJFits <- dv_preds %>% filter(species == 'Stethorus punctillum')   %>% bind_cols(SpuzJCIs)
-#$$
-TeuzJCIs  <- zJPlots[[5]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+
+TeuzJCIs  <- zJPlots[[6]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 TeuzJFits <- dv_preds %>% filter(species == 'Tetranychus urticae')   %>% bind_cols(TeuzJCIs)
-#$$
-PcizJCIs  <- zJPlots[[6]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+PcizJCIs  <- zJPlots[[7]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 PcizJFits <- dv_preds %>% filter(species == 'Planococcus citri')   %>% bind_cols(PcizJCIs)
-#$$
-MzazJCIs  <- zJPlots[[7]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+MzazJCIs  <- zJPlots[[8]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 MzazJFits <- dv_preds %>% filter(species == 'Muscidifurax zaraptor')   %>% bind_cols(MzazJCIs)
-#$$
-AnazJCIs  <- zJPlots[[8]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+AnazJCIs  <- zJPlots[[9]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 AnazJFits <- dv_preds %>% filter(species == 'Aphis nasturtii')   %>% bind_cols(AnazJCIs)
-#$$ 
-RmazJCIs  <- zJPlots[[9]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+# 
+RmazJCIs  <- zJPlots[[10]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 RmazJFits <- dv_preds %>% filter(species == 'Rhopalosiphum maidis') %>% bind_cols(RmazJCIs)
-#$$
-AaezJCIs  <- zJPlots[[10]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
-AaezJFits <- dv_preds %>% filter(species == 'Aedes aegypti')   %>% bind_cols(AaezJCIs)
-#$$
+#
 AgazJCIs  <- zJPlots[[11]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 AgazJFits <- dv_preds %>% filter(species == 'Anopheles gambiae')   %>% bind_cols(AgazJCIs)
-#$$
-AglzJCIs  <- zJPlots[[12]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+ThazJCIs  <- zJPlots[[12]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+ThazJFits <- dv_preds %>% filter(species == 'Thrips hawaiiensis')   %>% bind_cols(ThazJCIs)
+#
+AglzJCIs  <- zJPlots[[13]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 AglzJFits <- dv_preds %>% filter(species == 'Anoplophora glabripennis')   %>% bind_cols(AglzJCIs)
-#$$
-CanzJCIs  <- zJPlots[[13]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+CanzJCIs  <- zJPlots[[14]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 CanzJFits <- dv_preds %>% filter(species == 'Culex annulirostris')   %>% bind_cols(CanzJCIs)
-#$$
-AgrzJCIs  <- zJPlots[[14]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
-AgrzJFits <- dv_preds %>% filter(species == 'Anthonomus grandis')   %>% bind_cols(AgrzJCIs)
-#$$
+#
 LnizJCIs  <- zJPlots[[15]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 LnizJFits <- dv_preds %>% filter(species == 'Laricobius nigrinus')  %>% bind_cols(LnizJCIs)
-#$$
+#
 AmazJCIs  <- zJPlots[[16]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 AmazJFits <- dv_preds %>% filter(species == 'Aubeonymus mariaefranciscae')  %>% bind_cols(AmazJCIs)
-#$$
+#
 HarzJCIs  <- zJPlots[[17]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 HarzJFits <- dv_preds %>% filter(species == 'Helicoverpa armigera')  %>% bind_cols(HarzJCIs)
-#$$
-PmazJCIs  <- zJPlots[[18]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
-PmazJFits <- dv_preds %>% filter(species == 'Paracoccus marginatus')  %>% bind_cols(PmazJCIs)
-#$$
-HhazJCIs  <- zJPlots[[19]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+HhazJCIs  <- zJPlots[[18]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 HhazJFits <- dv_preds %>% filter(species == 'Halyomorpha halys')  %>% bind_cols(HhazJCIs)
-#$$
-MrazJCIs  <- zJPlots[[20]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+MrazJCIs  <- zJPlots[[19]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 MrazJFits <- dv_preds %>% filter(species == 'Muscidifurax raptorellus')  %>% bind_cols(MrazJCIs)
-#$$ 
-AalzJCIs  <- zJPlots[[21]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+AalzJCIs  <- zJPlots[[20]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 AalzJFits <- dv_preds %>% filter(species == 'Aedes albopictus') %>% bind_cols(AalzJCIs)
-#$$
-ApizJCIs  <- zJPlots[[22]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+SiczJCIs  <- zJPlots[[21]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+SiczJFits <- dv_preds %>% filter(species == 'Scapsipedus icipe') %>% bind_cols(SiczJCIs)
+#
+HynzJCIs  <- zJPlots[[22]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+HynzJFits <- dv_preds %>% filter(species == 'Hyperaspis notata') %>% bind_cols(HynzJCIs)
+#
+AaezJCIs  <- zJPlots[[23]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+AaezJFits <- dv_preds %>% filter(species == 'Aedes aegypti')   %>% bind_cols(AaezJCIs)
+#
+OpczJCIs  <- zJPlots[[24]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+OpczJFits <- dv_preds %>% filter(species == 'Ophraella communa') %>% bind_cols(OpczJCIs)
+#
+BeazJCIs  <- zJPlots[[25]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+BeazJFits <- dv_preds %>% filter(species == 'Bemisia argentifolii') %>% bind_cols(BeazJCIs)
+#
+DauzJCIs  <- zJPlots[[26]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+DauzJFits <- dv_preds %>% filter(species == 'Dactylopius austrinus')   %>% bind_cols(DauzJCIs)
+#
+AuszJCIs  <- zJPlots[[27]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+AuszJFits <- dv_preds %>% filter(species == 'Aulacorthum solani') %>% bind_cols(AuszJCIs)
+#
+AmwzJCIs  <- zJPlots[[28]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+AmwzJFits <- dv_preds %>% filter(species == 'Amblyseius womersleyi')   %>% bind_cols(AmwzJCIs)
+#
+AgrzJCIs  <- zJPlots[[29]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+AgrzJFits <- dv_preds %>% filter(species == 'Anthonomus grandis')   %>% bind_cols(AgrzJCIs)
+#
+PmazJCIs  <- zJPlots[[30]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+PmazJFits <- dv_preds %>% filter(species == 'Paracoccus marginatus')  %>% bind_cols(PmazJCIs)
+#
+ApizJCIs  <- zJPlots[[31]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 ApizJFits <- dv_preds %>% filter(species == 'Acyrthosiphon pisum')   %>% bind_cols(ApizJCIs)
-#$$
-AgozJCIs  <- zJPlots[[23]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+AgozJCIs  <- zJPlots[[32]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 AgozJFits <- dv_preds %>% filter(species == 'Aphis gossypii')   %>% bind_cols(AgozJCIs)
-#$$
-HaxzJCIs  <- zJPlots[[24]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+HaxzJCIs  <- zJPlots[[33]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 HaxzJFits <- dv_preds %>% filter(species == 'Harmonia axyridis')   %>% bind_cols(HaxzJCIs)
-#$$
-TcazJCIs  <- zJPlots[[25]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+TcazJCIs  <- zJPlots[[34]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 TcazJFits <- dv_preds %>% filter(species == 'Tribolium castaneum')   %>% bind_cols(TcazJCIs)
-#$$
-TmczJCIs  <- zJPlots[[26]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
-TmczJFits <- dv_preds %>% filter(species == 'Tetranychus mcdanieli')   %>% bind_cols(TmczJCIs)
 
-zJPredictions <- bind_rows(ThazJFits,
-                              BtazJFits, 
-                              TnizJFits,
-                              SpuzJFits, 
-                              TeuzJFits,
-                              PcizJFits,
-                              MzazJFits, 
-                              AnazJFits,
-                              RmazJFits,
-                              AaezJFits,
-                              AgazJFits,
-                              AglzJFits,
-                              CanzJFits,
-                              AgrzJFits,
-                              LnizJFits,
-                              AmazJFits,
-                              HarzJFits,
-                              PmazJFits,
-                              HhazJFits,
-                              MrazJFits,
-                              AalzJFits,
-                              ApizJFits,
-                              AgozJFits, 
-                              HaxzJFits,
-                              TcazJFits,
-                              TmczJFits) %>%
-                              rename(zj = .fitted, zjLwr = conf_lower, zjUpr = conf_upper) %>%
+
+
+
+zJPredictions <- bind_rows(ToxzJFits,
+                           TmczJFits,
+                           BtazJFits,
+                           TnizJFits,
+                           SpuzJFits,
+                           TeuzJFits,
+                           PcizJFits,
+                           MzazJFits,
+                           AnazJFits,
+                           RmazJFits,
+                           AgazJFits,
+                           ThazJFits,
+                           AglzJFits,
+                           CanzJFits,
+                           LnizJFits,
+                           AmazJFits,
+                           HarzJFits,
+                           HhazJFits,
+                           MrazJFits,
+                           AalzJFits,
+                           SiczJFits,
+                           HynzJFits,
+                           AaezJFits,
+                           OpczJFits,
+                           BeazJFits,
+                           DauzJFits,
+                           AuszJFits,
+                           AmwzJFits,
+                           AgrzJFits,
+                           PmazJFits,
+                           ApizJFits,
+                           AgozJFits,
+                           HaxzJFits,
+                           TcazJFits) %>%
+                           rename(zj = .fitted, zjLwr = conf_lower, zjUpr = conf_upper) %>%
                               mutate(zj = 1/zj, zjLwr = 1/zjLwr, zjUpr = 1/zjUpr) 
 
-write_csv(zJPredictions, '../data/zJPredictions.csv')
+zJPredictions %>% distinct(species) %>% print(n=35)
+
+write_csv(zJPredictions, 'data/zJPredictions.csv')
 
 #±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±
 
@@ -722,43 +799,49 @@ write_csv(zJPredictions, '../data/zJPredictions.csv')
 rm(list=ls())
 graphics.off()
 
-df <- as_tibble(read.csv('../data/TraitData.csv')) 
+df <- as_tibble(read.csv('data/TraitData.csv')) 
 
 dv <- df %>% rename(temp = interactor1temp, species = interactor1, rate = standardisedtraitvalue) %>%
   select(species, temp, standardisedtraitname, rate) %>%
   filter(standardisedtraitname == 'z', rate != 'NA') %>%
   mutate(curve_ID = case_when(species == 'Culex pipiens' ~ '1',
-                              species == 'Plutella xylostella' ~ '2',
-                              species == 'Thrips hawaiiensis' ~ '3',
-                              species == 'Phenacoccus solenopsis' ~ '4',
-                              species == 'Antestiopsis thunbergii' ~ '5',
-                              species == 'Culex quinquefasciatus' ~ '6',
-                              species == 'Halyomorpha halys' ~ '7',
-                              species == 'Monochamus leuconotus' ~ '8',
-                              species == 'Anthonomus grandis' ~ '9',
-                              species == 'Paracoccus marginatus' ~ '10',
-                              species == 'Acyrthosiphon pisum' ~ '11',
-                              species == 'Aphis gossypii' ~ '12',
-                              species == 'Tribolium castaneum' ~ '14',
-                              species == 'Tetranychus mcdanieli' ~ '15',
-                              species == 'Bemisia tabaci' ~ '16',
-                              species == 'Tetraneura nigriabdominalis' ~ '17',
-                              species == 'Stethorus punctillum' ~ '18',
-                              species == 'Aedes krombeini' ~ '19',
-                              species == 'Muscidifurax zaraptor' ~ '21',
-                              species == 'Aphis nasturtii' ~ '22',
-                              species == 'Rhopalosiphum maidis' ~ '23',
-                              species == 'Anopheles gambiae' ~ '24',
-                              species == 'Anoplophora glabripennis' ~ '25',
-                              species == 'Helicoverpa armigera' ~ '26',
-                              species == 'Aedes albopictus' ~ '27',
-                              species == 'Trichogramma bruni' ~ '28',
-                              species == 'Trichogramma sp. nr. Lutea' ~ '29',
-                              species == 'Aedes aegypti' ~ '30')) %>%
+                              species == 'Paracoccus marginatus' ~ '2',
+                              species == 'Aphis gossypii' ~ '3',
+                              species == 'Tribolium castaneum' ~ '4',
+                              species == 'Tetranychus mcdanieli' ~ '5',
+                              species == 'Bemisia tabaci' ~ '6',
+                              species == 'Tetraneura nigriabdominalis' ~ '7',
+                              species == 'Stethorus punctillum' ~ '8',
+                              species == 'Aedes krombeini' ~ '9',
+                              species == 'Plutella xylostella' ~ '10',
+                              species == 'Muscidifurax zaraptor' ~ '11',
+                              species == 'Aphis nasturtii' ~ '12',
+                              species == 'Rhopalosiphum maidis' ~ '13',
+                              species == 'Anopheles gambiae' ~ '14',
+                              species == 'Anoplophora glabripennis' ~ '15',
+                              species == 'Helicoverpa armigera' ~ '16',
+                              species == 'Aedes albopictus' ~ '17',
+                              species == 'Trichogramma bruni' ~ '18',
+                              species == 'Trichogramma sp. nr. Lutea' ~ '19',
+                              species == 'Thrips hawaiiensis' ~ '20',
+                              species == 'Aedes aegypti' ~ '21',
+                              species == 'Phenacoccus solenopsis' ~ '22',
+                              species == 'Scapsipedus icipe' ~ '23',
+                              species == 'Hyperaspis notata' ~ '24',
+                              species == 'Toxoptera citricida' ~ '25',
+                              species == 'Ophraella communa' ~ '26',
+                              species == 'Antestiopsis thunbergii' ~ '27',
+                              species == 'Bemisia argentifolii' ~ '28',
+                              species == 'Dactylopius austrinus' ~ '29',
+                              species == 'Aulacorthum solani' ~ '30', 
+                              species == 'Culex quinquefasciatus' ~ '31',
+                              species == 'Halyomorpha halys' ~ '32',
+                              species == 'Monochamus leuconotus' ~ '33',
+                              species == 'Anthonomus grandis' ~ '34')) %>%
   arrange(curve_ID) %>% filter(curve_ID != 'NA') %>%
   mutate(temp = as.numeric(temp), rate = 1/rate)
 
-dv %>% distinct(species,curve_ID) %>% print(n=50)
+dv %>% distinct(species, curve_ID) %>% print(n=50)
 
 
 # fit TPC model for each species
@@ -878,7 +961,7 @@ FitModel <- function(ID){
     labs(title=paste(df$GoodName[1], sep=""),
          y="z", x=expression(plain(paste(" Temperature, ",degree,"C"))))
   
-  ggsave(plot,file=paste("../results/TPC/z_",ID,".pdf",sep=""), 
+  ggsave(plot,file=paste("results/TPC/z_",ID,".pdf",sep=""), 
          height=10,width=15,units="cm")
   
   zPlots[[counter]] <<- plot
@@ -900,184 +983,215 @@ doMC::registerDoMC(cores = 4)
 ModelOutList <- foreach(ID = unique(dv$curve_ID)) %dopar%{ FitModel(ID)}
 ModelOutDF   <- do.call(rbind, ModelOutList)
 ModelOutDF$trait <- "adult mortality rate"
-write.csv(ModelOutDF, "../data/z_Tpks_AllParams.csv")
+write.csv(ModelOutDF, "data/z_Tpks_AllParams.csv")
 
 
-#$$$$ Compile dataset containing fits for all other species
+#Compile dataset containing fits for all other species
 
 CpizCIs  <- zPlots[[1]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 CpizFits <- dv_preds %>% filter(species == 'Culex pipiens')   %>% bind_cols(CpizCIs)
-#$$
-PmazCIs  <- zPlots[[2]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
-PmazFits <- dv_preds %>% filter(species == 'Paracoccus marginatus')  %>% bind_cols(PmazCIs)
-#$$
-ApizCIs  <- zPlots[[3]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
-ApizFits <- dv_preds %>% filter(species == 'Acyrthosiphon pisum')   %>% bind_cols(ApizCIs)
-#$$
-AgozCIs  <- zPlots[[4]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
-AgozFits <- dv_preds %>% filter(species == 'Aphis gossypii')   %>% bind_cols(AgozCIs)
-#$$
-TcazCIs  <- zPlots[[5]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
-TcazFits <- dv_preds %>% filter(species == 'Tribolium castaneum')   %>% bind_cols(TcazCIs)
-#$$
-TmczCIs  <- zPlots[[6]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
-TmczFits <- dv_preds %>% filter(species == 'Tetranychus mcdanieli')   %>% bind_cols(TmczCIs)
-#$$
-BtazCIs  <- zPlots[[7]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
-BtazFits <- dv_preds %>% filter(species == 'Bemisia tabaci')   %>% bind_cols(BtazCIs)
-#$$ 
-TnizCIs  <- zPlots[[8]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
-TnizFits <- dv_preds %>% filter(species == 'Tetraneura nigriabdominalis')   %>% bind_cols(TnizCIs)
-#$$
-SpuzCIs  <- zPlots[[9]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
-SpuzFits <- dv_preds %>% filter(species == 'Stethorus punctillum')   %>% bind_cols(SpuzCIs)
-#$$
-AkrzCIs  <- zPlots[[10]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
-AkrzFits <- dv_preds %>% filter(species == 'Aedes krombeini')   %>% bind_cols(AkrzCIs)
-#$$
-PxyzCIs  <- zPlots[[11]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+PxyzCIs  <- zPlots[[2]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 PxyzFits <- dv_preds %>% filter(species == 'Plutella xylostella')   %>% bind_cols(PxyzCIs)
-#$$
-MzazCIs  <- zPlots[[12]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+MzazCIs  <- zPlots[[3]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 MzazFits <- dv_preds %>% filter(species == 'Muscidifurax zaraptor')   %>% bind_cols(MzazCIs)
-#$$
-AnazCIs  <- zPlots[[13]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+AnazCIs  <- zPlots[[4]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 AnazFits <- dv_preds %>% filter(species == 'Aphis nasturtii')   %>% bind_cols(AnazCIs)
-#$$
-RmazCIs  <- zPlots[[14]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+RmazCIs  <- zPlots[[5]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 RmazFits <- dv_preds %>% filter(species == 'Rhopalosiphum maidis')   %>% bind_cols(RmazCIs)
-#$$
-AgazCIs  <- zPlots[[15]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+AgazCIs  <- zPlots[[6]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 AgazFits <- dv_preds %>% filter(species == 'Anopheles gambiae')   %>% bind_cols(AgazCIs)
-#$$
-AglzCIs  <- zPlots[[16]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+AglzCIs  <- zPlots[[7]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 AglzFits <- dv_preds %>% filter(species == 'Anoplophora glabripennis')   %>% bind_cols(AglzCIs)
-#$$
-HarzCIs  <- zPlots[[17]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+HarzCIs  <- zPlots[[8]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 HarzFits <- dv_preds %>% filter(species == 'Helicoverpa armigera')   %>% bind_cols(HarzCIs)
-#$$ 
-AalzCIs  <- zPlots[[18]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+# 
+AalzCIs  <- zPlots[[9]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 AalzFits <- dv_preds %>% filter(species == 'Aedes albopictus') %>% bind_cols(AalzCIs)
-#$$
-TbrzCIs  <- zPlots[[19]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+TbrzCIs  <- zPlots[[10]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 TbrzFits <- dv_preds %>% filter(species == 'Trichogramma bruni')   %>% bind_cols(TbrzCIs)
-#$$
-TluzCIs  <- zPlots[[20]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+TluzCIs  <- zPlots[[11]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 TluzFits <- dv_preds %>% filter(species == 'Trichogramma sp. nr. Lutea')   %>% bind_cols(TluzCIs)
-#$$
-ThazCIs  <- zPlots[[21]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+PmazCIs  <- zPlots[[12]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+PmazFits <- dv_preds %>% filter(species == 'Paracoccus marginatus')  %>% bind_cols(PmazCIs)
+#
+ThazCIs  <- zPlots[[13]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 ThazFits <- dv_preds %>% filter(species == 'Thrips hawaiiensis')   %>% bind_cols(ThazCIs)
-#$$
-AaezCIs  <- zPlots[[22]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+AaezCIs  <- zPlots[[14]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 AaezFits <- dv_preds %>% filter(species == 'Aedes aegypti')   %>% bind_cols(AaezCIs)
-#$$
-PsozCIs  <- zPlots[[23]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+PsozCIs  <- zPlots[[15]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 PsozFits <- dv_preds %>% filter(species == 'Phenacoccus solenopsis')   %>% bind_cols(PsozCIs)
-#$$
-AthzCIs  <- zPlots[[24]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+SiczCIs  <- zPlots[[16]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+SiczFits <- dv_preds %>% filter(species == 'Scapsipedus icipe')   %>% bind_cols(SiczCIs)
+#
+HynzCIs  <- zPlots[[17]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+HynzFits <- dv_preds %>% filter(species == 'Hyperaspis notata')   %>% bind_cols(HynzCIs)
+#
+ToxzCIs  <- zPlots[[18]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+ToxzFits <- dv_preds %>% filter(species == 'Toxoptera citricida')   %>% bind_cols(ToxzCIs)
+#
+OpczCIs  <- zPlots[[19]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+OpczFits <- dv_preds %>% filter(species == 'Ophraella communa')   %>% bind_cols(OpczCIs)
+#
+AthzCIs  <- zPlots[[20]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 AthzFits <- dv_preds %>% filter(species == 'Antestiopsis thunbergii')   %>% bind_cols(AthzCIs)
-#$$
+#
+BeazCIs  <- zPlots[[21]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+BeazFits <- dv_preds %>% filter(species == 'Bemisia argentifolii')   %>% bind_cols(BeazCIs)
+#
+DauzCIs  <- zPlots[[22]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+DauzFits <- dv_preds %>% filter(species == 'Dactylopius austrinus')   %>% bind_cols(DauzCIs)
+#
+AgozCIs  <- zPlots[[23]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+AgozFits <- dv_preds %>% filter(species == 'Aphis gossypii')   %>% bind_cols(AgozCIs)
+#
+AuszCIs  <- zPlots[[24]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+AuszFits <- dv_preds %>% filter(species == 'Aulacorthum solani')   %>% bind_cols(AuszCIs)
+#
 CquzCIs  <- zPlots[[25]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 CquzFits <- dv_preds %>% filter(species == 'Culex quinquefasciatus')   %>% bind_cols(CquzCIs)
-#$$
+#
 HhazCIs  <- zPlots[[26]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 HhazFits <- dv_preds %>% filter(species == 'Halyomorpha halys')   %>% bind_cols(HhazCIs)
-#$$
+#
 MlezCIs  <- zPlots[[27]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 MlezFits <- dv_preds %>% filter(species == 'Monochamus leuconotus')   %>% bind_cols(MlezCIs)
-#$$
+#
 AgrzCIs  <- zPlots[[28]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 AgrzFits <- dv_preds %>% filter(species == 'Anthonomus grandis')   %>% bind_cols(AgrzCIs)
+#
+TcazCIs  <- zPlots[[29]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+TcazFits <- dv_preds %>% filter(species == 'Tribolium castaneum')   %>% bind_cols(TcazCIs)
+#
+TmczCIs  <- zPlots[[30]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+TmczFits <- dv_preds %>% filter(species == 'Tetranychus mcdanieli')   %>% bind_cols(TmczCIs)
+#
+BtazCIs  <- zPlots[[31]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+BtazFits <- dv_preds %>% filter(species == 'Bemisia tabaci')   %>% bind_cols(BtazCIs)
+# 
+TnizCIs  <- zPlots[[32]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+TnizFits <- dv_preds %>% filter(species == 'Tetraneura nigriabdominalis')   %>% bind_cols(TnizCIs)
+#
+SpuzCIs  <- zPlots[[33]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+SpuzFits <- dv_preds %>% filter(species == 'Stethorus punctillum')   %>% bind_cols(SpuzCIs)
+#
+AkrzCIs  <- zPlots[[34]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+AkrzFits <- dv_preds %>% filter(species == 'Aedes krombeini')   %>% bind_cols(AkrzCIs)
 
+#
 zPredictions <- bind_rows(CpizFits,
-                             PmazFits,
-                             ApizFits,
-                             AgozFits,
-                             TcazFits,
-                             TmczFits,
-                             BtazFits,
-                             TnizFits,
-                             SpuzFits,
-                             AkrzFits,
-                             PxyzFits,
-                             CpizFits,
-                             MzazFits,
-                             AnazFits,
-                             RmazFits,
-                             AgazFits,
-                             AglzFits,
-                             HarzFits,
-                             AalzFits,
-                             TbrzFits,
-                             TluzFits,
-                             ThazFits,
-                             AaezFits,
-                             PsozFits,
-                             AthzFits,
-                             CquzFits,
-                             HhazFits,
-                             MlezFits,
-                             AgrzFits) %>%
+                          PxyzFits,
+                          MzazFits,
+                          AnazFits,
+                          RmazFits,
+                          AgazFits,
+                          AglzFits,
+                          HarzFits,
+                          AalzFits,
+                          TbrzFits,
+                          TluzFits,
+                          PmazFits,
+                          ThazFits,
+                          AaezFits,
+                          PsozFits,
+                          SiczFits,
+                          HynzFits,
+                          ToxzFits,
+                          OpczFits,
+                          AthzFits,
+                          BeazFits,
+                          DauzFits,
+                          AgozFits,
+                          AuszFits,
+                          CquzFits,
+                          HhazFits,
+                          MlezFits,
+                          AgrzFits,
+                          TcazFits,
+                          TmczFits,
+                          BtazFits,
+                          TnizFits,
+                          SpuzFits,
+                          AkrzFits) %>%
   rename(z = .fitted, zLwr = conf_lower, zUpr = conf_upper) %>%
   mutate(z = 1/z, zLwr = 1/zLwr, zUpr = 1/zUpr)
 
-write_csv(zPredictions, '../data/zPredictions.csv')
+write_csv(zPredictions, 'data/zPredictions.csv')
 
 
 #±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±±
 
-# 4. bmax (daily fecundity rate) ######
+# 4. bmax (daily fecundity rate)
 
 rm(list=ls())
 graphics.off()
 
-df <- as_tibble(read.csv('../data/TraitData.csv')) 
+df <- as_tibble(read.csv('data/TraitData.csv')) 
 
 dv <- df %>% rename(temp = interactor1temp, species = interactor1, rate = standardisedtraitvalue) %>%
   select(species, temp, standardisedtraitname, rate) %>%
   filter(standardisedtraitname == "bmax", rate != 'NA') %>% 
-  mutate(curve_ID = case_when(species == 'Aedes aegypti' ~ '2',
-                              species == 'Anthonomus grandis' ~ '3',
-                              species == 'Paracoccus marginatus' ~ '4',
-                              species == 'Acyrthosiphon pisum' ~ '5',
-                              species == 'Aphis gossypii' ~ '6',
-                              species == 'Aedes krombeini' ~ '9',
-                              species == 'Bemisia tabaci' ~ '10',
-                              species == 'Tetraneura nigriabdominalis' ~ '11',
-                              species == 'Stethorus punctillum' ~ '12',
-                              species == 'Tetranychus mcdanieli' ~ '13',
-                              species == 'Clavigralla tomentosicollis' ~ '15',
-                              species == 'Planococcus citri' ~ '16',
-                              species == 'Muscidifurax zaraptor' ~ '17',
-                              species == 'Aphis nasturtii' ~ '18',
-                              species == 'Rhopalosiphum maidis' ~ '19',
-                              species == 'Anoplophora glabripennis' ~ '21',
-                              species == 'Amblyseius womersleyi' ~ '22',
-                              species == 'Trichogramma sp. nr. Lutea' ~ '23',
-                              species == 'Trichogramma bruni' ~ '24',
-                              species == 'Drosophila suzukii' ~ '28',
-                              species == 'Iphiseius degenerans' ~ '32',
-                              species == 'Tetranychus evansi' ~ '36',
-                              species == 'Helicoverpa armigera' ~ '37',
-                              species == 'Antestiopsis thunbergii' ~ '38',
-                              species == 'Monochamus leuconotus' ~ '39',
-                              species == 'Kampimodromus aberrans' ~ '40',
-                              species == 'Phenacoccus solenopsis' ~ '41',
-                              species == 'Halyomorpha halys' ~ '43',
-                              species == 'Muscidifurax raptorellus' ~ '44',
-                              species == 'Thrips hawaiiensis' ~ '45',
-                              species == 'Hylobius transversovittatus' ~ '46',
-                              species == 'Callosobruchus maculatus' ~ '47',   
-                              species == 'Callosobruchus chinensis' ~ '48',   
-                              species == 'Callosobruchus analis' ~ '49',      
-                              species == 'Callosobruchus rhodesianus' ~ '50',
-                              species == 'Sepedon spinipes' ~ '51',
-                              species == 'Plutella xylostella' ~ '52')) %>%
+  mutate(curve_ID = case_when(species == 'Bemisia tabaci' ~ '1',
+                              species == 'Tetraneura nigriabdominalis' ~ '2',
+                              species == 'Stethorus punctillum' ~ '3',
+                              species == 'Tetranychus mcdanieli' ~ '4',
+                              species == 'Clavigralla tomentosicollis' ~ '5',
+                              species == 'Planococcus citri' ~ '6',
+                              species == 'Muscidifurax zaraptor' ~ '7',
+                              species == 'Aphis nasturtii' ~ '8',
+                              species == 'Rhopalosiphum maidis' ~ '9',
+                              species == 'Aedes aegypti' ~ '10',
+                              species == 'Anoplophora glabripennis' ~ '11',
+                              species == 'Amblyseius womersleyi' ~ '12',
+                              species == 'Trichogramma sp. nr. Lutea' ~ '13',
+                              species == 'Trichogramma bruni' ~ '14',
+                              species == 'Drosophila suzukii' ~ '15',
+                              species == 'Anthonomus grandis' ~ '16',
+                              species == 'Iphiseius degenerans' ~ '17',
+                              species == 'Tetranychus evansi' ~ '18',
+                              species == 'Helicoverpa armigera' ~ '19',
+                              species == 'Antestiopsis thunbergii' ~ '20',
+                              species == 'Monochamus leuconotus' ~ '21',
+                              species == 'Paracoccus marginatus' ~ '22',
+                              species == 'Kampimodromus aberrans' ~ '23',
+                              species == 'Phenacoccus solenopsis' ~ '24',
+                              species == 'Halyomorpha halys' ~ '25',
+                              species == 'Muscidifurax raptorellus' ~ '26',
+                              species == 'Thrips hawaiiensis' ~ '27',
+                              species == 'Hylobius transversovittatus' ~ '28',
+                              species == 'Callosobruchus maculatus' ~ '29',   
+                              species == 'Callosobruchus chinensis' ~ '30',   
+                              species == 'Callosobruchus analis' ~ '31',      
+                              species == 'Acyrthosiphon pisum' ~ '32',
+                              species == 'Callosobruchus rhodesianus' ~ '33',
+                              species == 'Sepedon spinipes' ~ '34',
+                              species == 'Plutella xylostella' ~ '35',
+                              species == 'Scapsipedus icipe' ~ '36',
+                              species == 'Hyperaspis notata' ~ '37',
+                              species == 'Toxoptera citricida' ~ '38',
+                              species == 'Ophraella communa' ~ '39',
+                              species == 'Bemisia argentifolii' ~ '40',
+                              species == 'Dactylopius austrinus' ~ '41',
+                              species == 'Aulacorthum solani' ~ '42',
+                              species == 'Aphis gossypii' ~ '43',
+                              species == 'Aedes krombeini' ~ '44')) %>%
                               arrange(curve_ID) %>% 
                               mutate(temp = as.numeric(temp)) %>%
                               filter(curve_ID != 'NA')
    
-#dv %>% distinct(species) %>% print(n=40)
+dv %>% distinct(species, curve_ID) %>% print(n=50)
 
 
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1211,7 +1325,7 @@ FitModel <- function(ID){
     labs(title=paste(df$GoodName[1], sep=""),
          y="bmax", x=expression(plain(paste(" Temperature, ",degree,"C"))))
   
-  ggsave(plot,file=paste("../results/TPC/Bopt_",ID,".pdf",sep=""), 
+  ggsave(plot,file=paste("results/TPC/Bopt_",ID,".pdf",sep=""), 
          height=10,width=15,units="cm")
   
   BetaPlots[[counter]] <<- plot
@@ -1219,8 +1333,7 @@ FitModel <- function(ID){
   return(topt)
 }
 
-##Run everything:
-#run using apply:
+# Run everything using apply:
 BetaPlots <- vector(mode="list", length=length(unique(dv$curve_ID)))
 
 ModelOut       <- sapply(unique(dv$curve_ID), FitModel)
@@ -1233,131 +1346,144 @@ doMC::registerDoMC(cores = 4)
 ModelOutList <- foreach(ID = unique(dv$curve_ID)) %dopar%{ FitModel(ID)}
 ModelOutDF <- do.call(rbind, ModelOutList)
 ModelOutDF$trait <- "fecundity rate"
-write.csv(ModelOutDF, "../data/bmax_Tpks_AllParams.csv")
+write.csv(ModelOutDF, "data/bmax_Tpks_AllParams.csv")
 
-#$$$$ Compile dataset containing fits with confidence bounds
-
-#$$ 
+# Compile dataset containing fits with confidence bounds
 BtaBetaCIs  <- BetaPlots[[1]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 BtaBetaFits <- dv_preds %>% filter(species == 'Bemisia tabaci')   %>% bind_cols(BtaBetaCIs)
-#$$ 
-TniBetaCIs  <- BetaPlots[[2]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
-TniBetaFits <- dv_preds %>% filter(species == 'Tetraneura nigriabdominalis')   %>% bind_cols(TniBetaCIs)
-#$$
-SpuBetaCIs  <- BetaPlots[[3]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
-SpuBetaFits <- dv_preds %>% filter(species == 'Stethorus punctillum')   %>% bind_cols(SpuBetaCIs)
-#$$
-TmcBetaCIs  <- BetaPlots[[4]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
-TmcBetaFits <- dv_preds %>% filter(species == 'Tetranychus mcdanieli')   %>% bind_cols(TmcBetaCIs)
-#$$
-CtoBetaCIs  <- BetaPlots[[5]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
-CtoBetaFits <- dv_preds %>% filter(species == 'Clavigralla tomentosicollis') %>% bind_cols(CtoBetaCIs)
-#$$
-PciBetaCIs  <- BetaPlots[[6]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
-PciBetaFits <- dv_preds %>% filter(species == 'Planococcus citri')   %>% bind_cols(PciBetaCIs)
-#$$
-MzaBetaCIs  <- BetaPlots[[7]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
-MzaBetaFits <- dv_preds %>% filter(species == 'Muscidifurax zaraptor')   %>% bind_cols(MzaBetaCIs)
-#$$
-AnaBetaCIs  <- BetaPlots[[8]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
-AnaBetaFits <- dv_preds %>% filter(species == 'Aphis nasturtii')   %>% bind_cols(AnaBetaCIs)
-#$$
-RmaBetaCIs  <- BetaPlots[[9]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
-RmaBetaFits <- dv_preds %>% filter(species == 'Rhopalosiphum maidis')   %>% bind_cols(RmaBetaCIs)
-#$$
-AaeBetaCIs  <- BetaPlots[[10]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+AaeBetaCIs  <- BetaPlots[[2]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 AaeBetaFits <- dv_preds %>% filter(species == 'Aedes aegypti')   %>% bind_cols(AaeBetaCIs)
-#$$ 
-AglBetaCIs  <- BetaPlots[[11]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+AglBetaCIs  <- BetaPlots[[3]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 AglBetaFits <- dv_preds %>% filter(species == 'Anoplophora glabripennis') %>% bind_cols(AglBetaCIs)
-#$$ 
-AwoBetaCIs  <- BetaPlots[[12]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+AwoBetaCIs  <- BetaPlots[[4]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 AwoBetaFits <- dv_preds %>% filter(species == 'Amblyseius womersleyi') %>% bind_cols(AwoBetaCIs)
-#$$
-TluBetaCIs  <- BetaPlots[[13]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+TluBetaCIs  <- BetaPlots[[5]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 TluBetaFits <- dv_preds %>% filter(species == 'Trichogramma sp. nr. Lutea')   %>% bind_cols(TluBetaCIs)
-#$$
-TbrBetaCIs  <- BetaPlots[[14]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+TbrBetaCIs  <- BetaPlots[[6]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 TbrBetaFits <- dv_preds %>% filter(species == 'Trichogramma bruni')   %>% bind_cols(TbrBetaCIs)
-#$$
-DsuBetaCIs  <- BetaPlots[[15]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+DsuBetaCIs  <- BetaPlots[[7]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 DsuBetaFits <- dv_preds %>% filter(species == 'Drosophila suzukii')   %>% bind_cols(DsuBetaCIs)
-#$$
-AgrBetaCIs  <- BetaPlots[[16]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+AgrBetaCIs  <- BetaPlots[[8]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 AgrBetaFits <- dv_preds %>% filter(species == 'Anthonomus grandis')   %>% bind_cols(AgrBetaCIs)
-#$$
-IdeBetaCIs  <- BetaPlots[[17]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+IdeBetaCIs  <- BetaPlots[[9]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 IdeBetaFits <- dv_preds %>% filter(species == 'Iphiseius degenerans')   %>% bind_cols(IdeBetaCIs)
-#$$
-TevBetaCIs  <- BetaPlots[[18]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+TevBetaCIs  <- BetaPlots[[10]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 TevBetaFits <- dv_preds %>% filter(species == 'Tetranychus evansi')   %>% bind_cols(TevBetaCIs)
-#$$
-HarBetaCIs  <- BetaPlots[[19]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+HarBetaCIs  <- BetaPlots[[11]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 HarBetaFits <- dv_preds %>% filter(species == 'Helicoverpa armigera')   %>% bind_cols(HarBetaCIs)
-#$$
-AthBetaCIs  <- BetaPlots[[20]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+TniBetaCIs  <- BetaPlots[[12]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+TniBetaFits <- dv_preds %>% filter(species == 'Tetraneura nigriabdominalis')   %>% bind_cols(TniBetaCIs)
+#
+AthBetaCIs  <- BetaPlots[[13]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 AthBetaFits <- dv_preds %>% filter(species == 'Antestiopsis thunbergii')   %>% bind_cols(AthBetaCIs)
-#$$
-MleBetaCIs  <- BetaPlots[[21]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+MleBetaCIs  <- BetaPlots[[14]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 MleBetaFits <- dv_preds %>% filter(species == 'Monochamus leuconotus')   %>% bind_cols(MleBetaCIs)
-#$$
-PmaBetaCIs  <- BetaPlots[[22]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+PmaBetaCIs  <- BetaPlots[[15]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 PmaBetaFits <- dv_preds %>% filter(species == 'Paracoccus marginatus')   %>% bind_cols(PmaBetaCIs)
-#$$
-KabBetaCIs  <- BetaPlots[[23]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+KabBetaCIs  <- BetaPlots[[16]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 KabBetaFits <- dv_preds %>% filter(species == 'Kampimodromus aberrans')   %>% bind_cols(KabBetaCIs)
-#$$
-PsoBetaCIs  <- BetaPlots[[24]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+PsoBetaCIs  <- BetaPlots[[17]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 PsoBetaFits <- dv_preds %>% filter(species == 'Phenacoccus solenopsis')   %>% bind_cols(PsoBetaCIs)
-#$$
-HhaBetaCIs  <- BetaPlots[[25]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+HhaBetaCIs  <- BetaPlots[[18]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 HhaBetaFits <- dv_preds %>% filter(species == 'Halyomorpha halys')   %>% bind_cols(HhaBetaCIs)
-#$$
-MraBetaCIs  <- BetaPlots[[26]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+MraBetaCIs  <- BetaPlots[[19]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 MraBetaFits <- dv_preds %>% filter(species == 'Muscidifurax raptorellus')   %>% bind_cols(MraBetaCIs)
-#$$
-ThaBetaCIs  <- BetaPlots[[27]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+ThaBetaCIs  <- BetaPlots[[20]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 ThaBetaFits <- dv_preds %>% filter(species == 'Thrips hawaiiensis')   %>% bind_cols(ThaBetaCIs)
-#$$
-HtrBetaCIs  <- BetaPlots[[28]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+HtrBetaCIs  <- BetaPlots[[21]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 HtrBetaFits <- dv_preds %>% filter(species == 'Hylobius transversovittatus')   %>% bind_cols(HtrBetaCIs)
-#$$
-CmaBetaCIs  <- BetaPlots[[29]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+CmaBetaCIs  <- BetaPlots[[22]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 CmaBetaFits <- dv_preds %>% filter(species == 'Callosobruchus maculatus')   %>% bind_cols(CmaBetaCIs)
-#$$
-CchBetaCIs  <- BetaPlots[[30]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+SpuBetaCIs  <- BetaPlots[[23]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+SpuBetaFits <- dv_preds %>% filter(species == 'Stethorus punctillum')   %>% bind_cols(SpuBetaCIs)
+#
+CchBetaCIs  <- BetaPlots[[24]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 CchBetaFits <- dv_preds %>% filter(species == 'Callosobruchus chinensis')   %>% bind_cols(CchBetaCIs)
-#$$
-CanBetaCIs  <- BetaPlots[[31]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+CanBetaCIs  <- BetaPlots[[25]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 CanBetaFits <- dv_preds %>% filter(species == 'Callosobruchus analis')   %>% bind_cols(CanBetaCIs)
-#$$
-ApiBetaCIs  <- BetaPlots[[32]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+ApiBetaCIs  <- BetaPlots[[26]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 ApiBetaFits <- dv_preds %>% filter(species == 'Acyrthosiphon pisum')   %>% bind_cols(ApiBetaCIs)
-#$$
-CrhBetaCIs  <- BetaPlots[[33]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+CrhBetaCIs  <- BetaPlots[[27]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 CrhBetaFits <- dv_preds %>% filter(species == 'Callosobruchus rhodesianus')   %>% bind_cols(CrhBetaCIs)
-#$$
-SspBetaCIs  <- BetaPlots[[34]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+SspBetaCIs  <- BetaPlots[[28]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 SspBetaFits <- dv_preds %>% filter(species == 'Sepedon spinipes')   %>% bind_cols(SspBetaCIs)
-#$$
-PxyBetaCIs  <- BetaPlots[[35]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+PxyBetaCIs  <- BetaPlots[[29]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 PxyBetaFits <- dv_preds %>% filter(species == 'Plutella xylostella')   %>% bind_cols(PxyBetaCIs)
-#$$
-AgoBetaCIs  <- BetaPlots[[36]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+SicBetaCIs  <- BetaPlots[[30]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+SicBetaFits <- dv_preds %>% filter(species == 'Scapsipedus icipe')   %>% bind_cols(SicBetaCIs)
+#
+HynBetaCIs  <- BetaPlots[[31]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+HynBetaFits <- dv_preds %>% filter(species == 'Hyperaspis notata')   %>% bind_cols(HynBetaCIs)
+#
+ToxBetaCIs  <- BetaPlots[[32]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+ToxBetaFits <- dv_preds %>% filter(species == 'Toxoptera citricida')   %>% bind_cols(ToxBetaCIs)
+#
+OpcBetaCIs  <- BetaPlots[[33]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+OpcBetaFits <- dv_preds %>% filter(species == 'Ophraella communa')   %>% bind_cols(OpcBetaCIs)
+#
+TmcBetaCIs  <- BetaPlots[[34]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+TmcBetaFits <- dv_preds %>% filter(species == 'Tetranychus mcdanieli')   %>% bind_cols(TmcBetaCIs)
+#
+BeaBetaCIs  <- BetaPlots[[35]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+BeaBetaFits <- dv_preds %>% filter(species == 'Bemisia argentifolii')   %>% bind_cols(BeaBetaCIs)
+#
+DauBetaCIs  <- BetaPlots[[36]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+DauBetaFits <- dv_preds %>% filter(species == 'Dactylopius austrinus')   %>% bind_cols(DauBetaCIs)
+#
+AusBetaCIs  <- BetaPlots[[37]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+AusBetaFits <- dv_preds %>% filter(species == 'Aulacorthum solani')   %>% bind_cols(AusBetaCIs)
+#
+AgoBetaCIs  <- BetaPlots[[38]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 AgoBetaFits <- dv_preds %>% filter(species == 'Aphis gossypii')   %>% bind_cols(AgoBetaCIs)
-#$$
-AkrBetaCIs  <- BetaPlots[[37]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+#
+AkrBetaCIs  <- BetaPlots[[39]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
 AkrBetaFits <- dv_preds %>% filter(species == 'Aedes krombeini')   %>% bind_cols(AkrBetaCIs)
+#
+CtoBetaCIs  <- BetaPlots[[40]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+CtoBetaFits <- dv_preds %>% filter(species == 'Clavigralla tomentosicollis') %>% bind_cols(CtoBetaCIs)
+#
+PciBetaCIs  <- BetaPlots[[41]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+PciBetaFits <- dv_preds %>% filter(species == 'Planococcus citri')   %>% bind_cols(PciBetaCIs)
+#
+MzaBetaCIs  <- BetaPlots[[42]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+MzaBetaFits <- dv_preds %>% filter(species == 'Muscidifurax zaraptor')   %>% bind_cols(MzaBetaCIs)
+#
+AnaBetaCIs  <- BetaPlots[[43]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+AnaBetaFits <- dv_preds %>% filter(species == 'Aphis nasturtii')   %>% bind_cols(AnaBetaCIs)
+#
+RmaBetaCIs  <- BetaPlots[[44]][["plot_env"]][["boot_conf_preds"]] %>% select(conf_lower, conf_upper)
+RmaBetaFits <- dv_preds %>% filter(species == 'Rhopalosiphum maidis')   %>% bind_cols(RmaBetaCIs)
 
+
+#
 BetaPredictions <- bind_rows(BtaBetaFits,
-                             TniBetaFits,
-                             SpuBetaFits,
-                             TmcBetaFits,
-                             CtoBetaFits,
-                             PciBetaFits,
-                             MzaBetaFits,
-                             AnaBetaFits,
-                             RmaBetaFits,
                              AaeBetaFits,
                              AglBetaFits,
                              AwoBetaFits,
@@ -1368,6 +1494,7 @@ BetaPredictions <- bind_rows(BtaBetaFits,
                              IdeBetaFits,
                              TevBetaFits,
                              HarBetaFits,
+                             TniBetaFits,
                              AthBetaFits,
                              MleBetaFits,
                              PmaBetaFits,
@@ -1378,14 +1505,28 @@ BetaPredictions <- bind_rows(BtaBetaFits,
                              ThaBetaFits,
                              HtrBetaFits,
                              CmaBetaFits,
+                             SpuBetaFits,
                              CchBetaFits,
                              CanBetaFits,
                              ApiBetaFits,
                              CrhBetaFits,
                              SspBetaFits,
                              PxyBetaFits,
+                             SicBetaFits,
+                             HynBetaFits,
+                             ToxBetaFits,
+                             OpcBetaFits,
+                             TmcBetaFits,
+                             BeaBetaFits,
+                             DauBetaFits,
+                             AusBetaFits,
                              AgoBetaFits,
-                             AkrBetaFits) %>%
+                             AkrBetaFits,
+                             CtoBetaFits,
+                             PciBetaFits,
+                             MzaBetaFits,
+                             AnaBetaFits,
+                             RmaBetaFits) %>%
   rename(bmax = .fitted, bmaxLwr = conf_lower, bmaxUpr = conf_upper)
 
-write_csv(BetaPredictions, '../data/BetaPredictions.csv')
+write_csv(BetaPredictions, 'data/BetaPredictions.csv')
